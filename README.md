@@ -20,15 +20,22 @@ points people at the TestFlight beta now and the App Store listings at launch.
 
 ## Launch-day link swap
 
-Every URL that changes at release is tagged `data-launch-link` in
-`site/index.html`, with the full list in a comment at the top of `<head>`:
+Every anchor that changes at release is tagged `data-launch-link` in
+`site/index.html`, with the full list in a comment at the top of `<head>`.
+While a link is pending, its anchor ships with **no `href`** and
+`aria-disabled="true"`, so nothing on the page can 404. To take a link live:
 
-| tag | now (placeholder) | replace with |
+1. add its `href` to every anchor carrying that tag,
+2. delete the `aria-disabled="true"` (and `role="link"`) attributes,
+3. delete any `· link soon` meta text inside those anchors.
+
+| tag | pending URL (recorded in the head comment) | replace with |
 |---|---|---|
 | `testflight-ios` | `testflight.apple.com/join/XXXXXXXX` | the iOS public TestFlight invite |
 | `testflight-mac` | `testflight.apple.com/join/YYYYYYYY` | the macOS public TestFlight invite |
 | `appstore-ios` | `apps.apple.com/app/iceberg/id0000000000` | the real App Store URL |
 | `appstore-mac` | same, `?platform=mac` | the real Mac App Store URL |
 
-When the App Store listing is live, also delete the "before launch" warn
-callout in section 03 (it's marked with a comment).
+When the TestFlight links go live, reword the "before launch" status callout
+at the top of the "Get it" section (it's marked with a comment); when the App
+Store listing is live, delete it.

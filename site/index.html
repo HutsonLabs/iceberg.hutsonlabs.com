@@ -9,17 +9,22 @@
 
   <!-- ============================================================ -->
   <!-- LAUNCH LINKS — the only URLs on this page that ever change.  -->
-  <!-- Search for data-launch-link to find every occurrence:        -->
-  <!--   testflight-ios : https://testflight.apple.com/join/XXXXXXXX          (PLACEHOLDER) -->
-  <!--   testflight-mac : https://testflight.apple.com/join/YYYYYYYY          (PLACEHOLDER) -->
-  <!--   appstore-ios   : https://apps.apple.com/app/iceberg/id0000000000     (PLACEHOLDER id) -->
-  <!--   appstore-mac   : https://apps.apple.com/app/iceberg/id0000000000?platform=mac (PLACEHOLDER id) -->
-  <!-- When the App Store listing is live, also delete the warn     -->
-  <!-- callout in the "Get it" section.                             -->
+  <!-- Search for data-launch-link to find every occurrence. While  -->
+  <!-- a link is pending, its anchor ships with NO href and         -->
+  <!-- aria-disabled="true", so nothing on this page can 404.       -->
+  <!-- To take one live: add its href, delete aria-disabled, and    -->
+  <!-- delete any " · link soon" meta text inside that anchor.      -->
+  <!--   testflight-ios : https://testflight.apple.com/join/XXXXXXXX          (PENDING invite) -->
+  <!--   testflight-mac : https://testflight.apple.com/join/YYYYYYYY          (PENDING invite) -->
+  <!--   appstore-ios   : https://apps.apple.com/app/iceberg/id0000000000     (PENDING id) -->
+  <!--   appstore-mac   : https://apps.apple.com/app/iceberg/id0000000000?platform=mac (PENDING id) -->
+  <!-- When the TestFlight links go live, reword the status callout -->
+  <!-- in the "Get it" section; when the App Store listing is live, -->
+  <!-- delete it.                                                   -->
   <!-- ============================================================ -->
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/AvenirNext-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/AvenirNext-DemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -28,8 +33,11 @@
   <meta property="og:title" content="Iceberg — a knowledge system for a human and an agent">
   <meta property="og:description" content="Notes, journal, and a typed knowledge graph that you and your agent share. Native on iPhone, iPad, and Mac. Beta open on TestFlight.">
   <meta property="og:url" content="https://iceberg.hutsonlabs.com/">
-  <meta property="og:image" content="https://iceberg.hutsonlabs.com/assets/og.svg">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://iceberg.hutsonlabs.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Iceberg — a knowledge system for a human and an agent. iceberg.hutsonlabs.com">
+  <meta name="twitter:card" content="summary_large_image">
 
   <style>
     /* Page layout only. Every value is a design-system token; anything reusable
@@ -126,9 +134,9 @@
 
       <div class="row">
         <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-ios"
-           href="https://testflight.apple.com/join/XXXXXXXX">Join the beta — iOS<span class="ice-btn__meta">TestFlight</span></a>
+           role="link" aria-disabled="true">Join the beta — iOS<span class="ice-btn__meta">TestFlight · link soon</span></a>
         <a class="ice-btn ice-btn--secondary ice-btn--lg" data-launch-link="testflight-mac"
-           href="https://testflight.apple.com/join/YYYYYYYY">Join the beta — macOS<span class="ice-btn__meta">TestFlight</span></a>
+           role="link" aria-disabled="true">Join the beta — macOS<span class="ice-btn__meta">TestFlight · link soon</span></a>
       </div>
 
       <div class="row row--tight">
@@ -141,7 +149,7 @@
     <!-- The graph as the app draws it: flat content-type circles, opaque typed
          edges from RelationPalette, labels at rest, chromeless. -->
     <svg class="hero-graph ice-graph" viewBox="0 0 520 440" role="img"
-         aria-label="A small knowledge graph: a journal entry cites a book, the book supports a note, and a captured conversation links them together.">
+         aria-label="A small knowledge graph: a journal entry cites a book, the book supports one note and contradicts another, and a captured conversation links them together.">
       <g class="ice-graph__edge" fill="none">
         <line x1="330" y1="84"  x2="146" y2="152" stroke="var(--rel-cites)"/>
         <line x1="146" y1="152" x2="326" y2="266" stroke="var(--rel-supports)"/>
@@ -275,6 +283,17 @@
       <h2 class="ice-sechead__title">Get it</h2>
     </div>
 
+    <!-- Status callout. When the TestFlight links go live, reword it;
+         when the App Store listing is live, delete it. -->
+    <div class="ice-callout ice-callout--warn">
+      <span class="ice-callout__label ice-eyebrow">Before launch</span>
+      <p class="ice-callout__body">The TestFlight beta is open, but the public
+      invite links are still being generated — so every install button on this
+      page is switched off rather than pointing you at a 404. The join buttons
+      light up the moment the links are real; the App Store buttons follow at
+      launch.</p>
+    </div>
+
     <div class="grid-2">
       <div class="ice-card">
         <h3 class="ice-feature__title">iOS</h3>
@@ -284,9 +303,9 @@
         The App Store listing goes live at launch.</p>
         <div class="card-actions">
           <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-ios"
-             href="https://testflight.apple.com/join/XXXXXXXX">Join TestFlight beta</a>
+             role="link" aria-disabled="true">Join TestFlight beta</a>
           <a class="ice-btn ice-btn--secondary ice-btn--sm" data-launch-link="appstore-ios"
-             href="https://apps.apple.com/app/iceberg/id0000000000">App Store</a>
+             role="link" aria-disabled="true">App Store</a>
         </div>
       </div>
 
@@ -298,9 +317,9 @@
         via TestFlight for Mac; Mac App Store at launch.</p>
         <div class="card-actions">
           <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-mac"
-             href="https://testflight.apple.com/join/YYYYYYYY">Join TestFlight beta</a>
+             role="link" aria-disabled="true">Join TestFlight beta</a>
           <a class="ice-btn ice-btn--secondary ice-btn--sm" data-launch-link="appstore-mac"
-             href="https://apps.apple.com/app/iceberg/id0000000000?platform=mac">Mac App Store</a>
+             role="link" aria-disabled="true">Mac App Store</a>
         </div>
       </div>
     </div>
@@ -315,20 +334,12 @@
       Import · Ask AI to Gather.</p>
       <div class="ice-cta__actions">
         <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-ios"
-           href="https://testflight.apple.com/join/XXXXXXXX">iOS beta</a>
+           role="link" aria-disabled="true">iOS beta</a>
         <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-mac"
-           href="https://testflight.apple.com/join/YYYYYYYY">macOS beta</a>
+           role="link" aria-disabled="true">macOS beta</a>
       </div>
     </div>
 
-    <!-- Delete this callout when the App Store listing is live. -->
-    <div class="ice-callout ice-callout--warn">
-      <span class="ice-callout__label ice-eyebrow">Before launch</span>
-      <p class="ice-callout__body">Iceberg hasn't shipped to the App Store yet —
-      the App Store buttons point at the listing that goes live at launch, so
-      until then they'll come up empty. The TestFlight beta is the way in
-      today.</p>
-    </div>
   </section>
 
 </main>
@@ -342,8 +353,8 @@
   <div class="ice-footer__cols">
     <div class="ice-footer__col">
       <span class="ice-footer__head ice-eyebrow">Get it</span>
-      <a class="ice-footer__link" data-launch-link="testflight-ios" href="https://testflight.apple.com/join/XXXXXXXX">TestFlight — iOS</a>
-      <a class="ice-footer__link" data-launch-link="testflight-mac" href="https://testflight.apple.com/join/YYYYYYYY">TestFlight — macOS</a>
+      <a class="ice-footer__link" data-launch-link="testflight-ios" role="link" aria-disabled="true">TestFlight — iOS</a>
+      <a class="ice-footer__link" data-launch-link="testflight-mac" role="link" aria-disabled="true">TestFlight — macOS</a>
       <a class="ice-footer__link" href="#get">App Store</a>
     </div>
     <div class="ice-footer__col">

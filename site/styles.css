@@ -177,6 +177,8 @@
 .ice-btn--inverse:active{background:rgb(255 255 255 / .8);transform:translateY(var(--press-shift))}
 .ice-btn--inverse:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ice-btn:disabled,.ice-btn[aria-disabled=true]{background:transparent;border:1px solid var(--hairline);color:var(--ink-decor);cursor:not-allowed;transform:none}
+/* Disabled on the gradient card: chrome gray vanishes there, so speak in white. */
+.ice-cta .ice-btn[aria-disabled=true]{border-color:rgb(255 255 255 / .4);color:rgb(255 255 255 / .65)}
 
 /* --- label (the app's signature eyebrow) -------------------------------- */
 /* 11pt semibold uppercase, +0.08em tracking, text.tertiary — everywhere the
@@ -256,6 +258,7 @@
 .ice-footer__col{display:flex;flex-direction:column;gap:8px}
 .ice-footer__link{color:var(--ink-muted);text-decoration:none;transition:color var(--dur-hover) var(--ease)}
 .ice-footer__link:hover{color:var(--ink)}
+.ice-footer__link[aria-disabled=true],.ice-footer__link[aria-disabled=true]:hover{color:var(--ink-decor);cursor:not-allowed}
 
 /* --- skip link ----------------------------------------------------------- */
 .ice-skiplink{position:absolute;left:-9999px;top:0;z-index:50}
