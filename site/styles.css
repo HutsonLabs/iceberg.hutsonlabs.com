@@ -1,0 +1,211 @@
+/* Iceberg design system — tokens transcribed from the app's canonical palette
+   (IcebergKit Sources/Core/Theme/DesignPalette.swift, "the only palette" of
+   DESIGN_RULES.md §1) so the site and the app are literally the same colors.
+   Do not invent a hex here: extend the app's palette first, then mirror it. */
+
+/* ==== tokens/palette.css ==== */
+:root{
+  /* Chrome — DesignPalette.stock, verbatim. Dark only, like the app's stock theme. */
+  --window:#131419;          /* window background */
+  --raised:#191B22;          /* raised surface / card */
+  --inspector:#16181F;       /* inspector surface / well */
+  --abyss:#0E0F13;           /* site-only: the ground gradient's floor, below window */
+  --border-subtle:#23252D;
+  --border-card:#262933;
+  --text-primary:#E8E9EC;
+  --text-body:#D5D8E0;
+  --text-secondary:#8A8D98;
+  --text-tertiary:#6B6F7C;
+  --text-faint:#565A66;
+  --accent:#3478F6;          /* ONE accent means "selected / primary" everywhere */
+  --accent-hover:#4E8AF8;    /* site-only hover step off --accent */
+  --accent-active:#2B67D6;   /* site-only pressed step off --accent */
+  --link:#7AA2FF;
+  --link-hover:#A3BFFF;
+  --hero-card:#23252D;
+  --reflection:#B0502F;      /* the journal reflection prompt's ember */
+  --audio:#A18DF0;           /* the voice-memo lavender — media affordance, not a type */
+
+  /* The four meaning-bearing content-type colors (ContentTypeColor.swift).
+     "Never decorative" in the app; here they appear only as the legend chips. */
+  --type-note:#5B8DEF;
+  --type-journal:#8B7CF6;
+  --type-book:#F0A35E;
+  --type-capture:#2FA79A;
+
+  /* The mark's glacial blue — the fill of favicon.svg. It is the mark, not a
+     palette slot; nothing else on the page uses it. */
+  --mark-blue:#4682C2;
+
+  /* Site-only status hues for badges/callouts. The app's palette has no status
+     colors (state is chrome + accent there), so these exist only on this page. */
+  --ok:#3EBD85;
+  --warn:#E0A458;
+}
+
+/* ==== tokens/semantic.css ==== */
+:root{
+  --page:var(--window);
+  --card:var(--raised);
+  --well:var(--inspector);
+
+  --ink:var(--text-primary);
+  --ink-body:var(--text-body);
+  --ink-muted:var(--text-secondary);
+  --ink-dim:var(--text-tertiary);
+  --ink-decor:var(--text-faint);
+  --ink-on-accent:#FFFFFF;
+
+  --hairline:var(--border-subtle);
+  --hairline-strong:var(--border-card);
+  --focus:var(--link);
+  --selection:rgb(52 120 246 / .30);
+
+  /* The two approved gradients. Nothing else gets one. */
+  --grad-ground:linear-gradient(180deg,var(--window) 0%,var(--abyss) 100%);
+  --grad-bloom:radial-gradient(60% 100% at 50% 0%,rgb(52 120 246 / .10) 0%,transparent 70%);
+}
+::selection{background:var(--selection)}
+
+/* ==== tokens/typography.css ==== */
+/* No webfont: the app is SF Pro / SF Mono, so the system stack IS brand-correct
+   on Apple devices — which is who a TestFlight page is for — and everyone else
+   falls to their own UI face. Nothing to host, no layout shift. */
+:root{
+  --font-ui:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Helvetica,sans-serif;
+  --font-mono:'SF Mono',ui-monospace,Menlo,monospace;
+
+  --display-xl:72px;  --display-xl-lh:1.12; --display-xl-ls:-0.025em;
+  --display-l:44px;   --display-l-lh:1.1;   --display-l-ls:-0.02em;
+  --title-l:28px;     --title-l-lh:1.2;     --title-l-ls:-0.01em;
+  --title-s:19px;
+  --body-lead:19px;   --body-lead-lh:1.55;
+  --body:16px;        --body-lh:1.65;
+  --body-s:15px;      --body-xs:14px;
+  --mono-s:13px;      --mono-xs:12px;
+  --micro:11px;       --micro-ls:0.08em;
+
+  --weight-body:400;  --weight-strong:600;
+  --measure-lead:62ch;
+
+  /* Mobile (<768). Body copy never shrinks below 16. */
+  --display-xl-mobile:38px; --display-l-mobile:30px;
+}
+
+/* ==== tokens/space.css ==== */
+:root{
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-6:24px;
+  --s-10:40px; --s-16:64px;
+
+  --pad-card:24px;
+  --gap-card:12px;
+  --gutter:24px;
+  --rhythm-section:96px;
+  --rhythm-hero:120px;
+  --rhythm-section-mobile:56px;
+
+  --page-pad:40px; --page-pad-md:32px; --page-pad-sm:20px;
+  --content-max:1120px;
+
+  --r-chip:5px; --r-button:8px; --r-card:12px; --r-pill:999px;
+  --target-min:44px;
+}
+
+/* ==== tokens/motion.css ==== */
+:root{
+  --ease:cubic-bezier(.2,0,.2,1);
+  --dur-hover:120ms;
+  --press-shift:1px;
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ==== components ==== */
+/* Interaction states live here because hover/active/focus cannot be expressed
+   inline. One curve, one duration, no delays. */
+
+/* --- links ------------------------------------------------------------- */
+.ice-link{color:var(--link);text-decoration:none;border-bottom:1px solid rgb(122 162 255 / .35);transition:color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease)}
+.ice-link:hover{color:var(--link-hover);border-bottom-color:var(--link-hover)}
+.ice-link:visited{color:var(--link)}
+
+/* --- button ------------------------------------------------------------ */
+.ice-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-ui);font-weight:var(--weight-strong);border-radius:var(--r-button);border:0;background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap;transition:background var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),transform var(--dur-hover) var(--ease)}
+.ice-btn--lg{height:52px;padding:0 24px;font-size:16px}
+.ice-btn--sm{height:44px;padding:0 16px;font-size:15px}
+.ice-btn__meta{font-family:var(--font-mono);font-size:var(--mono-xs);font-weight:400;opacity:.75}
+.ice-btn--primary{background:var(--accent);color:var(--ink-on-accent)}
+.ice-btn--primary:hover{background:var(--accent-hover)}
+.ice-btn--primary:active{background:var(--accent-active);transform:translateY(var(--press-shift))}
+.ice-btn--primary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.ice-btn--secondary{border:1px solid var(--hairline-strong);color:var(--ink)}
+.ice-btn--secondary:hover{background:var(--card);border-color:var(--ink-decor)}
+.ice-btn--secondary:active{background:var(--well);transform:translateY(var(--press-shift))}
+.ice-btn--secondary:focus-visible{outline:none;border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
+.ice-btn:disabled,.ice-btn[aria-disabled=true]{background:transparent;border:1px solid var(--hairline);color:var(--ink-decor);cursor:not-allowed;transform:none}
+
+/* --- badge ------------------------------------------------------------- */
+.ice-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:var(--micro);padding:5px 10px;border-radius:var(--r-pill);background:var(--well);border:1px solid var(--hairline);color:var(--ink-muted)}
+.ice-badge--ok{background:rgb(62 189 133 / .12);border-color:rgb(62 189 133 / .3);color:var(--ok)}
+.ice-badge--warn{background:rgb(224 164 88 / .12);border-color:rgb(224 164 88 / .3);color:var(--warn)}
+.ice-badge--info{background:rgb(122 162 255 / .12);border-color:rgb(122 162 255 / .3);color:var(--link)}
+
+/* --- content-type legend chip ------------------------------------------ */
+/* The app's graph legend chips: dot + label, one per content type. */
+.ice-typechip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:var(--mono-xs);padding:5px 12px;border-radius:var(--r-pill);background:var(--well);border:1px solid var(--hairline);color:var(--ink-body)}
+.ice-typechip::before{content:"";width:9px;height:9px;border-radius:var(--r-pill);background:var(--dot,var(--ink-dim))}
+.ice-typechip--note{--dot:var(--type-note)}
+.ice-typechip--journal{--dot:var(--type-journal)}
+.ice-typechip--book{--dot:var(--type-book)}
+.ice-typechip--capture{--dot:var(--type-capture)}
+
+/* --- eyebrow / section head -------------------------------------------- */
+.ice-eyebrow{font-family:var(--font-mono);font-size:var(--micro);letter-spacing:var(--micro-ls);text-transform:uppercase;color:var(--ink-dim)}
+.ice-sechead{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--hairline);padding-bottom:12px}
+.ice-sechead__num{font-family:var(--font-mono);font-size:var(--mono-xs);color:var(--accent)}
+.ice-sechead__title{margin:0;font-family:var(--font-ui);font-size:var(--title-l);line-height:var(--title-l-lh);letter-spacing:var(--title-l-ls);font-weight:var(--weight-strong);color:var(--ink)}
+.ice-sechead__note{margin-left:auto;font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-dim);text-align:right}
+
+/* --- card --------------------------------------------------------------- */
+.ice-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:var(--gap-card)}
+
+/* --- feature card ------------------------------------------------------- */
+.ice-feature{background:var(--card);border:1px solid var(--border-card);border-radius:var(--r-card);padding:var(--pad-card);display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:10px;row-gap:var(--gap-card)}
+.ice-feature>*{grid-column:1/-1}
+.ice-feature__num{grid-column:1;grid-row:1;font-family:var(--font-mono);font-size:var(--micro);color:var(--accent)}
+.ice-feature__title{grid-column:2;grid-row:1;margin:0;font-family:var(--font-ui);font-size:var(--title-s);font-weight:var(--weight-strong);line-height:1.3;color:var(--ink)}
+.ice-feature__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.6;color:var(--ink-muted)}
+
+/* --- callout ------------------------------------------------------------ */
+.ice-callout{border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.ice-callout__label{font-family:var(--font-mono);font-size:var(--mono-xs);flex:none}
+.ice-callout__body{margin:0;font-family:var(--font-ui);font-size:var(--body-xs);line-height:1.6;color:var(--ink-muted)}
+.ice-callout--info{background:rgb(122 162 255 / .08);border:1px solid rgb(122 162 255 / .28)}
+.ice-callout--info .ice-callout__label{color:var(--link)}
+.ice-callout--ok{background:rgb(62 189 133 / .08);border:1px solid rgb(62 189 133 / .3)}
+.ice-callout--ok .ice-callout__label{color:var(--ok)}
+.ice-callout--warn{background:rgb(224 164 88 / .08);border:1px solid rgb(224 164 88 / .3)}
+.ice-callout--warn .ice-callout__label{color:var(--warn)}
+
+/* --- note block (the transcript analog: a mono note card) --------------- */
+.ice-code{background:var(--well);border:1px solid var(--hairline);border-radius:10px;overflow:hidden;min-width:0}
+.ice-code__bar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--hairline);font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-dim)}
+.ice-code__body{margin:0;padding:16px;font-family:var(--font-mono);font-size:var(--mono-s);line-height:1.8;color:var(--ink-body);overflow-x:auto}
+.ice-wikilink{color:var(--link)}
+.ice-cmt{color:var(--text-faint);font-style:italic}
+
+/* --- footer -------------------------------------------------------------- */
+.ice-footer{background:var(--well);border-top:1px solid var(--hairline);padding:28px var(--page-pad);display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.ice-footer__meta{font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-dim);line-height:1.7}
+.ice-footer__repo{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-muted);text-decoration:none;min-height:var(--target-min);transition:color var(--dur-hover) var(--ease)}
+.ice-footer__repo:hover{color:var(--link)}
+.ice-footer__cols{display:flex;gap:48px;margin-left:auto;font-family:var(--font-ui);font-size:var(--body-xs);flex-wrap:wrap}
+.ice-footer__col{display:flex;flex-direction:column;gap:8px}
+.ice-footer__head{font-family:var(--font-mono);font-size:10px;letter-spacing:var(--micro-ls);text-transform:uppercase;color:var(--ink-dim)}
+.ice-footer__link{color:var(--ink-muted);text-decoration:none;transition:color var(--dur-hover) var(--ease)}
+.ice-footer__link:hover{color:var(--ink)}
+
+/* --- skip link ----------------------------------------------------------- */
+.ice-skiplink{position:absolute;left:-9999px;top:0;z-index:50}
+.ice-skiplink:focus{left:12px;top:12px;padding:10px 16px;border-radius:var(--r-pill);background:var(--accent);color:var(--ink-on-accent);font-family:var(--font-ui);font-size:var(--body-xs);font-weight:var(--weight-strong);text-decoration:none}

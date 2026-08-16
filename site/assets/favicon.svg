@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-48 -185 123 -32 179 429.7)">
+      <stop stop-color="#fff" stop-opacity=".4"/>
+      <stop offset="1" stop-opacity=".1"/>
+    </radialGradient>
+    <radialGradient id="c" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(41 -310 229 30 341.6 351.3)">
+      <stop stop-color="#fff" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".1"/>
+    </radialGradient>
+    <radialGradient id="d" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(57 -261 178 39 190.5 296.3)">
+      <stop stop-color="#fff" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".4"/>
+    </radialGradient>
+    <radialGradient id="e" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-79 -133 153 -90 321.4 464.2)">
+      <stop stop-color="#fff" stop-opacity=".3"/>
+      <stop offset="1" stop-opacity=".3"/>
+    </radialGradient>
+    <radialGradient id="f" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-29 136 -92 -20 300.7 149.9)">
+      <stop stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".2"/>
+    </radialGradient>
+    <radialGradient id="g" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(72 73 -155 153 137.8 225.2)">
+      <stop stop-color="#fff" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".4"/>
+    </radialGradient>
+    <radialGradient id="h" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20 118 -251 43 215.1 273.7)">
+      <stop stop-color="#fff" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".3"/>
+    </radialGradient>
+    <radialGradient id="i" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-162 -85 268 -510 374.4 371.7)">
+      <stop stop-color="#fff" stop-opacity=".2"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".3"/>
+    </radialGradient>
+    <filter id="a" x="80.1" y="37" width="351.1" height="443.2" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="6.5" result="effect1_foregroundBlur_744_9191"/>
+    </filter>
+  </defs>
+  <path d="m 406.03563,122.62683 a 1406.9232,1406.76 0 0 1 37.9031,60.26144 16.523958,16.523958 0 0 1 -1.2648,18.35994 c -10.52637,13.97398 -30.68152,42.3299 -41.65669,68.58464 -11.28117,26.94833 -12.97436,68.84983 -13.05596,89.29056 a 34.822711,34.822711 0 0 1 -7.30319,21.41994 l -65.23902,82.90541 a 76.377404,76.377404 0 0 0 -1.55039,-11.07719 c -2.16241,-10.26117 -6.2628,-20.48154 -10.93438,-30.59991 -2.7336,-5.91598 -5.91599,-12.23998 -9.09838,-18.64556 l -6.32398,-12.77037 c -10.52638,-21.78714 -20.33874,-45.43068 -23.09275,-73.2358 -2.52959,-25.70394 0.93841,-55.69186 16.62597,-91.41217 2.61119,-0.2244 5.24277,-0.51 7.87437,-0.89759 a 129.80487,129.80487 0 0 0 67.85023,-30.70193 c 18.68635,-16.11596 35.57752,-39.20869 49.26587,-71.39981 z M 178.45382,40.394635 c 1.4892,-0.244799 2.9784,-0.407994 4.48799,-0.407994 15.91196,-0.489598 42.73789,-1.876799 64.46384,-5.915985 17.74793,-3.263989 52.89705,-13.055965 81.80378,-21.521943 22.09315,-6.4463857 44.83909,11.179165 48.04187,33.945517 2.32559,16.60555 6.73198,35.393906 14.78997,52.631864 l -0.204,-0.10207 C 378.1693,137.17192 360.78855,161.81506 342.551,177.54342 a 108.01772,108.01772 0 0 1 -56.67106,25.64274 c -31.41592,4.40639 -60.22065,-3.876 -78.3358,-9.17997 10.85278,-45.24709 7.50719,-98.511354 -29.06992,-153.632008 z M 124.06755,298.06637 c -0.46919,-2.03999 -1.14238,-4.01878 -1.99919,-5.91598 L 68.722501,173.1983 a 32.680716,32.680716 0 0 1 6.385182,-36.1487 L 159.07388,50.553817 c 42.90108,63.260233 36.63829,122.807683 17.05436,169.319563 -14.85118,35.2919 -37.37272,62.85224 -52.01988,78.15219 z m 77.2546,-83.06858 c 12.54597,3.73319 32.76233,9.48598 55.99787,10.89356 -13.93318,35.18991 -17.29917,65.95304 -14.60636,93.37057 3.14159,31.66072 14.27995,58.07866 25.19393,80.57979 2.30519,4.794 4.54919,9.26158 6.69119,13.54556 3.03958,6.05879 5.87518,11.77078 8.54756,17.54396 4.4268,9.58798 7.73159,18.05396 9.38398,25.90794 1.632,7.75198 1.632,14.68797 -0.2856,21.27714 -1.93799,6.62999 -6.05879,13.76998 -13.87196,21.62395 a 32.639916,32.639916 0 0 1 -30.08992,-7.34398 L 147.3031,401.57571 a 32.680716,32.680716 0 0 1 -10.46516,-19.42076 l -8.71079,-57.73185 c 13.70876,-12.03596 47.49108,-47.24628 68.03382,-96.10414 1.83599,-4.28399 3.56999,-8.77199 5.16118,-13.32117 z" fill="#4682c2"/>
+</svg>

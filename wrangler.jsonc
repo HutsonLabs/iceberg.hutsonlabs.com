@@ -1,0 +1,21 @@
+{
+  // Cloudflare config for the iceberg-website Worker, which serves site/ as
+  // static assets — the same setup as termhut-website in term.hut-releases.
+  // Workers Builds is connected to this repo, and its deploy step
+  // (`wrangler deploy`) reads this file — without it a push to main builds
+  // nothing, so the live site would keep serving whatever was last uploaded
+  // by hand. Keep "name" identical to the dashboard project name.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "iceberg-website",
+  "compatibility_date": "2026-08-16",
+
+  // No "main": this is an assets-only Worker. Every request is served from
+  // site/ and nothing is billed as a Worker invocation.
+  "assets": {
+    "directory": "./site",
+
+    // One page, no client-side router: unknown paths should 404 rather than
+    // silently render index.html.
+    "not_found_handling": "none"
+  }
+}

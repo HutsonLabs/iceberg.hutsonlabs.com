@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Iceberg — a knowledge system for a human and an agent</title>
+  <meta name="description" content="Iceberg — notes, journal, and a typed knowledge graph that you and your agent share. Native on iPhone, iPad, and Mac. Beta open on TestFlight.">
+
+  <!-- ============================================================ -->
+  <!-- LAUNCH LINKS — the only URLs on this page that ever change.  -->
+  <!-- Search for data-launch-link to find every occurrence:        -->
+  <!--   testflight-ios : https://testflight.apple.com/join/XXXXXXXX          (PLACEHOLDER) -->
+  <!--   testflight-mac : https://testflight.apple.com/join/YYYYYYYY          (PLACEHOLDER) -->
+  <!--   appstore-ios   : https://apps.apple.com/app/iceberg/id0000000000     (PLACEHOLDER id) -->
+  <!--   appstore-mac   : https://apps.apple.com/app/iceberg/id0000000000?platform=mac (PLACEHOLDER id) -->
+  <!-- When the App Store listing is live, also delete the warn     -->
+  <!-- callout in section 03.                                       -->
+  <!-- ============================================================ -->
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Iceberg — a knowledge system for a human and an agent">
+  <meta property="og:description" content="Notes, journal, and a typed knowledge graph that you and your agent share. Native on iPhone, iPad, and Mac. Beta open on TestFlight.">
+  <meta property="og:url" content="https://iceberg.hutsonlabs.com/">
+  <meta property="og:image" content="https://iceberg.hutsonlabs.com/assets/og.svg">
+  <meta name="twitter:card" content="summary">
+
+  <style>
+    /* Page layout only. Every value is a design-system token; anything reusable
+       lives in styles.css, whose tokens are transcribed from the app's
+       DesignPalette.swift. */
+    *, *::before, *::after { box-sizing: border-box; }
+    body, h1, h2, h3, p, ul, figure { margin: 0; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: var(--grad-ground) no-repeat;
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-size: var(--body);
+      line-height: var(--body-lh);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 var(--page-pad); }
+
+    main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding-bottom: var(--rhythm-section); }
+
+    /* ---- hero — gradient bloom, once per site ---- */
+    .hero { background: var(--grad-bloom); padding: var(--rhythm-hero) 0 var(--s-16); }
+    .hero .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-6); }
+    /* Mark and wordmark on one row; the wordmark's line box is the mark's own height. */
+    .mark { display: flex; align-items: center; gap: var(--s-3); }
+    .mark img { display: block; width: 56px; height: 56px; flex: none; }
+    .mark span {
+      font-size: var(--display-l); line-height: 56px; font-weight: var(--weight-strong);
+      letter-spacing: var(--display-l-ls);
+    }
+    .hero h1 {
+      font-size: clamp(var(--display-xl-mobile), 7vw, var(--display-xl));
+      line-height: var(--display-xl-lh); letter-spacing: var(--display-xl-ls);
+      font-weight: var(--weight-strong); max-width: 20ch;
+    }
+    .lead { font-size: var(--body-lead); line-height: var(--body-lead-lh); color: var(--ink-muted); max-width: var(--measure-lead); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+    .row--tight { gap: var(--s-2); }
+
+    /* ---- sections ---- */
+    section { display: flex; flex-direction: column; gap: var(--s-6); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: start; }
+    /* Long lines scroll inside their own block instead of widening the column. */
+    .grid-3 > *, .grid-2 > * { min-width: 0; }
+    .stack { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+    .note-list {
+      margin: 0; padding-left: 18px; font-size: var(--body-s); line-height: 1.7;
+      color: var(--ink-muted); display: flex; flex-direction: column; gap: 6px;
+    }
+    .card-actions { margin-top: auto; padding-top: var(--s-1); display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+    /* ---- responsive — the phone is the default, not the fallback ---- */
+    @media (max-width: 1199px) { .wrap { padding: 0 var(--page-pad-md); } .ice-footer { padding-left: var(--page-pad-md); padding-right: var(--page-pad-md); } }
+    @media (max-width: 1023px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 767px) {
+      .wrap { padding: 0 var(--page-pad-sm); }
+      .ice-footer { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
+      main { gap: var(--rhythm-section-mobile); padding-bottom: var(--rhythm-section-mobile); }
+      .hero { padding: var(--s-16) 0 var(--s-10); }
+      .mark img { width: 40px; height: 40px; }
+      .mark span { font-size: var(--display-l-mobile); line-height: 40px; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .ice-sechead__note { display: none; }
+    }
+  </style>
+</head>
+<body>
+<a class="ice-skiplink" href="#main">Skip to content</a>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="mark">
+      <img src="assets/favicon.svg" alt="" width="56" height="56">
+      <span>Iceberg</span>
+    </div>
+    <h1>Most of what you know is below the surface</h1>
+    <p class="lead">Iceberg is a knowledge system for a human and an agent —
+    notes, journal, and a typed knowledge graph in one place, native on iPhone,
+    iPad, and Mac. What you write links together; what links together, you and
+    your agent can both see.</p>
+
+    <div class="row">
+      <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-ios"
+         href="https://testflight.apple.com/join/XXXXXXXX">Join the beta — iOS<span class="ice-btn__meta">TestFlight</span></a>
+      <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-mac"
+         href="https://testflight.apple.com/join/YYYYYYYY">Join the beta — macOS<span class="ice-btn__meta">TestFlight</span></a>
+      <a class="ice-btn ice-btn--secondary ice-btn--lg" href="#get">App Store</a>
+    </div>
+
+    <div class="row row--tight">
+      <span class="ice-badge ice-badge--ok">TestFlight open</span>
+      <span class="ice-badge ice-badge--info">iPhone · iPad · Mac, native</span>
+      <span class="ice-badge ice-badge--warn">App Store soon</span>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="wrap" aria-label="A note, the way Iceberg sees it">
+    <div class="ice-code">
+      <div class="ice-code__bar"><span>journal — today</span></div>
+      <pre class="ice-code__body"><span class="ice-cmt"># Saturday</span>
+Finished <span class="ice-wikilink">[[The Extended Mind]]</span> — the notebook-as-memory chapter
+pairs with what <span class="ice-wikilink">[[Ada]]</span> said at <span class="ice-wikilink">[[Coffee with Ada]]</span> about tools
+you think <em>with</em>, not <em>about</em>.
+
+<span class="ice-cmt"># backlinks (3) · supports → [[Second Brain]] · cites → [[The Extended Mind]]</span></pre>
+    </div>
+  </section>
+
+  <section class="wrap" id="what">
+    <div class="ice-sechead">
+      <span class="ice-sechead__num">01</span>
+      <h2 class="ice-sechead__title">What it holds</h2>
+      <span class="ice-sechead__note">everything is a Thing; Things link</span>
+    </div>
+
+    <div class="grid-3">
+      <div class="ice-feature">
+        <span class="ice-feature__num">01</span>
+        <h3 class="ice-feature__title">Notes</h3>
+        <p class="ice-feature__body">Plain writing with wiki-links and backlinks.
+        Titles come from the first line, raw markup never leaks into the chrome,
+        and the editor keeps a reading measure instead of sprawling across the
+        window.</p>
+      </div>
+      <div class="ice-feature">
+        <span class="ice-feature__num">02</span>
+        <h3 class="ice-feature__title">Journal</h3>
+        <p class="ice-feature__body">A daily page with streaks, reflection
+        prompts, and voice memos. Home widgets keep it one tap away, and every
+        entry is a first-class node in the graph, not a silo.</p>
+      </div>
+      <div class="ice-feature">
+        <span class="ice-feature__num">03</span>
+        <h3 class="ice-feature__title">Graph</h3>
+        <p class="ice-feature__body">Relations are typed — supports,
+        contradicts, cites, causes — and each type carries its own color from a
+        palette validated for color-vision deficiency. The legend chips double
+        as filters.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="ice-callout ice-callout--info">
+        <span class="ice-callout__label">Capture from anywhere</span>
+        <p class="ice-callout__body">A share extension and web clipper feed the
+        graph from whatever you're reading; audio memos and scans land as
+        captures. Books, articles, people, places, and events all get their own
+        kind of node — so “where did I read that?” is a link, not a search.</p>
+      </div>
+      <div class="stack">
+        <span class="ice-eyebrow">The four meaning-bearing colors</span>
+        <div class="row row--tight">
+          <span class="ice-typechip ice-typechip--note">Note</span>
+          <span class="ice-typechip ice-typechip--journal">Journal</span>
+          <span class="ice-typechip ice-typechip--book">Book</span>
+          <span class="ice-typechip ice-typechip--capture">Capture</span>
+        </div>
+        <p class="ice-feature__body">Everything else in the app is chrome and
+        one accent. These four encode what a Thing <em>is</em> — on graph
+        nodes, legend chips, and backlink pills — and they are never
+        decorative.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="agent">
+    <div class="ice-sechead">
+      <span class="ice-sechead__num">02</span>
+      <h2 class="ice-sechead__title">For the agent too</h2>
+      <span class="ice-sechead__note">the same graph, both directions</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="ice-callout ice-callout--ok">
+        <span class="ice-callout__label">MCP built in</span>
+        <p class="ice-callout__body">Iceberg ships an MCP server, so an agent —
+        Claude, in my case — reads and writes the <strong>same</strong> notes,
+        journal, and relations you do. Ask it what connects two ideas and it
+        answers from your graph; let it file what it learns and you can see
+        exactly where it put things.</p>
+      </div>
+      <div class="stack">
+        <span class="ice-eyebrow">What it won't do</span>
+        <ul class="note-list">
+          <li>Take your data.</li>
+          <li>Trap your notes in a format only it can read.</li>
+          <li>Try to take over the world.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="get">
+    <div class="ice-sechead">
+      <span class="ice-sechead__num">03</span>
+      <h2 class="ice-sechead__title">Get it</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="ice-card">
+        <h3 class="ice-feature__title">iOS</h3>
+        <span class="ice-eyebrow">iPhone &amp; iPad · native SwiftUI</span>
+        <p class="ice-feature__body">The beta is open now on TestFlight —
+        install the TestFlight app, tap join, and updates arrive as they ship.
+        The App Store listing goes live at launch.</p>
+        <div class="card-actions">
+          <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-ios"
+             href="https://testflight.apple.com/join/XXXXXXXX">Join TestFlight beta</a>
+          <a class="ice-btn ice-btn--secondary ice-btn--sm" data-launch-link="appstore-ios"
+             href="https://apps.apple.com/app/iceberg/id0000000000">App Store</a>
+        </div>
+      </div>
+
+      <div class="ice-card">
+        <h3 class="ice-feature__title">macOS</h3>
+        <span class="ice-eyebrow">Apple silicon · native SwiftUI</span>
+        <p class="ice-feature__body">The same app, built for the Mac — three-pane
+        notes, the full graph, and the MCP server for your local agents. Beta
+        via TestFlight for Mac; Mac App Store at launch.</p>
+        <div class="card-actions">
+          <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-mac"
+             href="https://testflight.apple.com/join/YYYYYYYY">Join TestFlight beta</a>
+          <a class="ice-btn ice-btn--secondary ice-btn--sm" data-launch-link="appstore-mac"
+             href="https://apps.apple.com/app/iceberg/id0000000000?platform=mac">Mac App Store</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete this callout when the App Store listing is live. -->
+    <div class="ice-callout ice-callout--warn">
+      <span class="ice-callout__label">before launch</span>
+      <p class="ice-callout__body">Iceberg hasn't shipped to the App Store yet —
+      the App Store buttons point at the listing that goes live at launch, so
+      until then they'll come up empty. The TestFlight beta is the way in
+      today.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ice-footer">
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <img src="assets/favicon.svg" alt="" width="28" height="28" style="display:block">
+    <div class="ice-footer__meta">HutsonLabs<br>iceberg.hutsonlabs.com</div>
+    <a class="ice-footer__repo" href="https://github.com/HutsonLabs">GitHub</a>
+  </div>
+  <div class="ice-footer__cols">
+    <div class="ice-footer__col">
+      <span class="ice-footer__head">Get it</span>
+      <a class="ice-footer__link" data-launch-link="testflight-ios" href="https://testflight.apple.com/join/XXXXXXXX">TestFlight — iOS</a>
+      <a class="ice-footer__link" data-launch-link="testflight-mac" href="https://testflight.apple.com/join/YYYYYYYY">TestFlight — macOS</a>
+      <a class="ice-footer__link" href="#get">App Store</a>
+    </div>
+    <div class="ice-footer__col">
+      <span class="ice-footer__head">Project</span>
+      <a class="ice-footer__link" href="#what">What it holds</a>
+      <a class="ice-footer__link" href="#agent">For the agent</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
