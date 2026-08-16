@@ -3,13 +3,31 @@
    DESIGN_RULES.md §1) so the site and the app are literally the same colors.
    Do not invent a hex here: extend the app's palette first, then mirror it. */
 
+/* ==== fonts ==== */
+/* The app's own faces (FontRole.swift): Avenir Next for interface and prose,
+   Maple Mono NF for code-ish runs. Both ship in assets/fonts, so the page looks
+   like the app on every platform, not just Macs. Twemoji is the emoji fallback. */
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-UltraLight.woff2') format('woff2');font-weight:200;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');font-weight:200;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-MediumItalic.woff2') format('woff2');font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-DemiBold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-DemiBoldItalic.woff2') format('woff2');font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-BoldItalic.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Heavy.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');font-weight:800;font-style:italic;font-display:swap}
+@font-face{font-family:'Maple Mono NF';src:url('assets/fonts/MapleMono-NF-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Twemoji Mozilla';src:url('assets/fonts/Twemoji.Mozilla.woff2') format('woff2');font-display:swap}
+
 /* ==== tokens/palette.css ==== */
 :root{
   /* Chrome — DesignPalette.stock, verbatim. Dark only, like the app's stock theme. */
   --window:#131419;          /* window background */
   --raised:#191B22;          /* raised surface / card */
   --inspector:#16181F;       /* inspector surface / well */
-  --abyss:#0E0F13;           /* site-only: the ground gradient's floor, below window */
   --border-subtle:#23252D;
   --border-card:#262933;
   --text-primary:#E8E9EC;
@@ -18,29 +36,35 @@
   --text-tertiary:#6B6F7C;
   --text-faint:#565A66;
   --accent:#3478F6;          /* ONE accent means "selected / primary" everywhere */
-  --accent-hover:#4E8AF8;    /* site-only hover step off --accent */
-  --accent-active:#2B67D6;   /* site-only pressed step off --accent */
+  --accent-hover:#2A67DD;    /* hover darkens, as in the app's mockup */
+  --accent-active:#2456C8;   /* pressed — the Insights gradient's deep end-stop family */
   --link:#7AA2FF;
   --link-hover:#A3BFFF;
   --hero-card:#23252D;
   --reflection:#B0502F;      /* the journal reflection prompt's ember */
   --audio:#A18DF0;           /* the voice-memo lavender — media affordance, not a type */
 
+  /* The mockup's page backdrop (Iceberg Redesign Mockup): radial #14161D → #08090C. */
+  --backdrop-hi:#14161D;
+  --backdrop-lo:#08090C;
+
   /* The four meaning-bearing content-type colors (ContentTypeColor.swift).
-     "Never decorative" in the app; here they appear only as the legend chips. */
+     "Never decorative" in the app; here they appear only on chips and graph nodes. */
   --type-note:#5B8DEF;
   --type-journal:#8B7CF6;
   --type-book:#F0A35E;
   --type-capture:#2FA79A;
 
+  /* Typed relation hues from the app's CVD-validated RelationPalette
+     (DesignPalette.swift) — used on graph edges and backlink chips only. */
+  --rel-supports:#00B170;
+  --rel-cites:#9400C1;
+  --rel-contradicts:#DF001D;
+  --rel-related:#565A66;     /* untyped link = chrome gray, not a hue */
+
   /* The mark's glacial blue — the fill of favicon.svg. It is the mark, not a
      palette slot; nothing else on the page uses it. */
   --mark-blue:#4682C2;
-
-  /* Site-only status hues for badges/callouts. The app's palette has no status
-     colors (state is chrome + accent there), so these exist only on this page. */
-  --ok:#3EBD85;
-  --warn:#E0A458;
 }
 
 /* ==== tokens/semantic.css ==== */
@@ -59,23 +83,24 @@
   --hairline:var(--border-subtle);
   --hairline-strong:var(--border-card);
   --focus:var(--link);
-  --selection:rgb(52 120 246 / .30);
+  --selection:rgb(52 120 246 / .26);   /* the app's selection tint sits at .22–.28 */
+  --hover-wash:rgb(255 255 255 / .06); /* the universal hover (HoverHighlight.swift) */
 
-  /* The two approved gradients. Nothing else gets one. */
-  --grad-ground:linear-gradient(180deg,var(--window) 0%,var(--abyss) 100%);
-  --grad-bloom:radial-gradient(60% 100% at 50% 0%,rgb(52 120 246 / .10) 0%,transparent 70%);
+  /* The two approved gradients — the mockup backdrop, and the Insights card's
+     gradient, the ONE tinted gradient the app allows (SidebarWidgetCards.swift).
+     Nothing else gets one. */
+  --grad-ground:radial-gradient(120% 90% at 50% 0%,var(--backdrop-hi) 0%,var(--backdrop-lo) 100%);
+  --grad-insights:linear-gradient(135deg,var(--accent) 0%,#004280 100%);
 }
 ::selection{background:var(--selection)}
 
 /* ==== tokens/typography.css ==== */
-/* No webfont: the app is SF Pro / SF Mono, so the system stack IS brand-correct
-   on Apple devices — which is who a TestFlight page is for — and everyone else
-   falls to their own UI face. Nothing to host, no layout shift. */
 :root{
-  --font-ui:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Helvetica,sans-serif;
-  --font-mono:'SF Mono',ui-monospace,Menlo,monospace;
+  --font-ui:'Avenir Next',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,'Twemoji Mozilla',sans-serif;
+  --font-mono:'Maple Mono NF',ui-monospace,'SF Mono',Menlo,monospace;
 
   --display-xl:72px;  --display-xl-lh:1.12; --display-xl-ls:-0.025em;
+  --display-hero:60px; /* the two-column hero's cap — 72 overwhelms a half-width column */
   --display-l:44px;   --display-l-lh:1.1;   --display-l-ls:-0.02em;
   --title-l:28px;     --title-l-lh:1.2;     --title-l-ls:-0.01em;
   --title-s:19px;
@@ -83,9 +108,11 @@
   --body:16px;        --body-lh:1.65;
   --body-s:15px;      --body-xs:14px;
   --mono-s:13px;      --mono-xs:12px;
-  --micro:11px;       --micro-ls:0.08em;
 
-  --weight-body:400;  --weight-strong:600;
+  /* The app's signature label: 11pt semibold UPPERCASE, +0.08em, text.tertiary. */
+  --label:11px;       --label-ls:0.08em;
+
+  --weight-body:400;  --weight-strong:600;   /* 600 = Avenir Next DemiBold */
   --measure-lead:62ch;
 
   /* Mobile (<768). Body copy never shrinks below 16. */
@@ -107,14 +134,15 @@
   --page-pad:40px; --page-pad-md:32px; --page-pad-sm:20px;
   --content-max:1120px;
 
-  --r-chip:5px; --r-button:8px; --r-card:12px; --r-pill:999px;
+  /* App radii (DESIGN_RULES.md §4): cards 14, controls 8, chips capsule. */
+  --r-chip:5px; --r-button:8px; --r-card:14px; --r-pill:999px;
   --target-min:44px;
 }
 
 /* ==== tokens/motion.css ==== */
 :root{
   --ease:cubic-bezier(.2,0,.2,1);
-  --dur-hover:120ms;
+  --dur-hover:120ms;   /* matches HoverHighlight.swift's 0.12s ease-out */
   --press-shift:1px;
 }
 @media (prefers-reduced-motion:reduce){
@@ -134,75 +162,98 @@
 .ice-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-ui);font-weight:var(--weight-strong);border-radius:var(--r-button);border:0;background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap;transition:background var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),transform var(--dur-hover) var(--ease)}
 .ice-btn--lg{height:52px;padding:0 24px;font-size:16px}
 .ice-btn--sm{height:44px;padding:0 16px;font-size:15px}
-.ice-btn__meta{font-family:var(--font-mono);font-size:var(--mono-xs);font-weight:400;opacity:.75}
+.ice-btn__meta{font-size:var(--mono-xs);font-weight:400;opacity:.7}
 .ice-btn--primary{background:var(--accent);color:var(--ink-on-accent)}
 .ice-btn--primary:hover{background:var(--accent-hover)}
 .ice-btn--primary:active{background:var(--accent-active);transform:translateY(var(--press-shift))}
 .ice-btn--primary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .ice-btn--secondary{border:1px solid var(--hairline-strong);color:var(--ink)}
-.ice-btn--secondary:hover{background:var(--card);border-color:var(--ink-decor)}
+.ice-btn--secondary:hover{background:var(--hover-wash)}
 .ice-btn--secondary:active{background:var(--well);transform:translateY(var(--press-shift))}
 .ice-btn--secondary:focus-visible{outline:none;border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
+/* For use on the one gradient card only. */
+.ice-btn--inverse{background:#fff;color:var(--accent-active)}
+.ice-btn--inverse:hover{background:rgb(255 255 255 / .88)}
+.ice-btn--inverse:active{background:rgb(255 255 255 / .8);transform:translateY(var(--press-shift))}
+.ice-btn--inverse:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ice-btn:disabled,.ice-btn[aria-disabled=true]{background:transparent;border:1px solid var(--hairline);color:var(--ink-decor);cursor:not-allowed;transform:none}
 
-/* --- badge ------------------------------------------------------------- */
-.ice-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:var(--micro);padding:5px 10px;border-radius:var(--r-pill);background:var(--well);border:1px solid var(--hairline);color:var(--ink-muted)}
-.ice-badge--ok{background:rgb(62 189 133 / .12);border-color:rgb(62 189 133 / .3);color:var(--ok)}
-.ice-badge--warn{background:rgb(224 164 88 / .12);border-color:rgb(224 164 88 / .3);color:var(--warn)}
-.ice-badge--info{background:rgb(122 162 255 / .12);border-color:rgb(122 162 255 / .3);color:var(--link)}
+/* --- label (the app's signature eyebrow) -------------------------------- */
+/* 11pt semibold uppercase, +0.08em tracking, text.tertiary — everywhere the
+   app labels a section, and everywhere this page needs small chrome text. */
+.ice-eyebrow{font-family:var(--font-ui);font-size:var(--label);font-weight:var(--weight-strong);letter-spacing:var(--label-ls);text-transform:uppercase;color:var(--ink-dim)}
 
-/* --- content-type legend chip ------------------------------------------ */
-/* The app's graph legend chips: dot + label, one per content type. */
-.ice-typechip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:var(--mono-xs);padding:5px 12px;border-radius:var(--r-pill);background:var(--well);border:1px solid var(--hairline);color:var(--ink-body)}
-.ice-typechip::before{content:"";width:9px;height:9px;border-radius:var(--r-pill);background:var(--dot,var(--ink-dim))}
+/* --- chip (status / platform) ------------------------------------------- */
+/* State is chrome + the one accent, as in the app: neutral by default, an
+   accent tint for the live path. No page-only status hues. */
+.ice-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:var(--mono-xs);font-weight:500;padding:5px 12px;border-radius:var(--r-pill);background:var(--well);border:1px solid var(--hairline);color:var(--ink-muted)}
+.ice-badge--accent{background:rgb(52 120 246 / .18);border-color:rgb(52 120 246 / .5);color:var(--link)}
+
+/* --- content-type / relation chip --------------------------------------- */
+/* The app's chip recipe: the hue at ~18% fill, ~50% border, an 8px solid dot. */
+.ice-typechip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-ui);font-size:var(--mono-xs);font-weight:500;padding:4px 12px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--dot,var(--ink-dim)) 18%,transparent);border:1px solid color-mix(in srgb,var(--dot,var(--ink-dim)) 50%,transparent);color:var(--ink-body)}
+.ice-typechip::before{content:"";width:8px;height:8px;border-radius:var(--r-pill);background:var(--dot,var(--ink-dim));flex:none}
 .ice-typechip--note{--dot:var(--type-note)}
 .ice-typechip--journal{--dot:var(--type-journal)}
 .ice-typechip--book{--dot:var(--type-book)}
 .ice-typechip--capture{--dot:var(--type-capture)}
+.ice-typechip--supports{--dot:var(--rel-supports)}
+.ice-typechip--cites{--dot:var(--rel-cites)}
+.ice-typechip--contradicts{--dot:var(--rel-contradicts)}
+.ice-typechip--related{--dot:var(--rel-related)}
 
-/* --- eyebrow / section head -------------------------------------------- */
-.ice-eyebrow{font-family:var(--font-mono);font-size:var(--micro);letter-spacing:var(--micro-ls);text-transform:uppercase;color:var(--ink-dim)}
+/* --- section head -------------------------------------------------------- */
+/* Title + hairline. The app numbers nothing. */
 .ice-sechead{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--hairline);padding-bottom:12px}
-.ice-sechead__num{font-family:var(--font-mono);font-size:var(--mono-xs);color:var(--accent)}
 .ice-sechead__title{margin:0;font-family:var(--font-ui);font-size:var(--title-l);line-height:var(--title-l-lh);letter-spacing:var(--title-l-ls);font-weight:var(--weight-strong);color:var(--ink)}
-.ice-sechead__note{margin-left:auto;font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-dim);text-align:right}
+.ice-sechead__note{margin-left:auto;text-align:right}
 
 /* --- card --------------------------------------------------------------- */
 .ice-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:var(--gap-card)}
 
 /* --- feature card ------------------------------------------------------- */
-.ice-feature{background:var(--card);border:1px solid var(--border-card);border-radius:var(--r-card);padding:var(--pad-card);display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:10px;row-gap:var(--gap-card)}
-.ice-feature>*{grid-column:1/-1}
-.ice-feature__num{grid-column:1;grid-row:1;font-family:var(--font-mono);font-size:var(--micro);color:var(--accent)}
-.ice-feature__title{grid-column:2;grid-row:1;margin:0;font-family:var(--font-ui);font-size:var(--title-s);font-weight:var(--weight-strong);line-height:1.3;color:var(--ink)}
+.ice-feature{background:var(--card);border:1px solid var(--border-card);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:var(--gap-card)}
+.ice-feature__title{margin:0;font-family:var(--font-ui);font-size:var(--title-s);font-weight:var(--weight-strong);line-height:1.3;color:var(--ink)}
 .ice-feature__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.6;color:var(--ink-muted)}
 
 /* --- callout ------------------------------------------------------------ */
-.ice-callout{border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
-.ice-callout__label{font-family:var(--font-mono);font-size:var(--mono-xs);flex:none}
+/* A raised card with a labeled eyebrow — no page-only status colors. Info and
+   ok speak in the accent family; the cautionary note stays chrome gray. */
+.ice-callout{background:var(--card);border:1px solid var(--hairline-strong);border-radius:var(--r-card);padding:18px 20px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ice-callout__label{flex:none}
 .ice-callout__body{margin:0;font-family:var(--font-ui);font-size:var(--body-xs);line-height:1.6;color:var(--ink-muted)}
-.ice-callout--info{background:rgb(122 162 255 / .08);border:1px solid rgb(122 162 255 / .28)}
-.ice-callout--info .ice-callout__label{color:var(--link)}
-.ice-callout--ok{background:rgb(62 189 133 / .08);border:1px solid rgb(62 189 133 / .3)}
-.ice-callout--ok .ice-callout__label{color:var(--ok)}
-.ice-callout--warn{background:rgb(224 164 88 / .08);border:1px solid rgb(224 164 88 / .3)}
-.ice-callout--warn .ice-callout__label{color:var(--warn)}
+.ice-callout--info .ice-callout__label,.ice-callout--ok .ice-callout__label{color:var(--link)}
+.ice-callout--warn .ice-callout__label{color:var(--ink-dim)}
 
-/* --- note block (the transcript analog: a mono note card) --------------- */
-.ice-code{background:var(--well);border:1px solid var(--hairline);border-radius:10px;overflow:hidden;min-width:0}
-.ice-code__bar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--hairline);font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-dim)}
-.ice-code__body{margin:0;padding:16px;font-family:var(--font-mono);font-size:var(--mono-s);line-height:1.8;color:var(--ink-body);overflow-x:auto}
-.ice-wikilink{color:var(--link)}
-.ice-cmt{color:var(--text-faint);font-style:italic}
+/* --- note card (a note the way the app renders it — never as code) ------- */
+.ice-note{background:var(--card);border:1px solid var(--border-card);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:10px;min-width:0}
+.ice-note__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ice-note__title{margin:0;font-family:var(--font-ui);font-size:var(--title-s);font-weight:var(--weight-strong);color:var(--ink)}
+.ice-note__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.7;color:var(--ink-body);max-width:58ch}
+.ice-note__links{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-top:6px;border-top:1px solid var(--hairline);margin-top:6px}
+.ice-wikilink{color:var(--link);text-decoration:none}
+.ice-wikilink:hover{color:var(--link-hover)}
+
+/* --- CTA card (the ONE tinted gradient, spent as the app spends it) ------ */
+.ice-cta{background:var(--grad-insights);border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:var(--s-3);align-items:flex-start}
+.ice-cta__title{margin:0;font-family:var(--font-ui);font-size:24px;font-weight:var(--weight-strong);letter-spacing:-0.01em;color:#fff}
+.ice-cta__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.6;color:rgb(255 255 255 / .82);max-width:52ch}
+.ice-cta .ice-eyebrow{color:rgb(255 255 255 / .7)}
+.ice-cta__actions{display:flex;flex-wrap:wrap;gap:var(--s-3);padding-top:var(--s-2)}
+
+/* --- graph vignette ------------------------------------------------------ */
+.ice-graph{display:block;width:100%;height:auto}
+.ice-graph__label{font-family:var(--font-ui);font-size:11px;font-weight:500;fill:var(--ink-muted)}
+.ice-graph__edge{stroke-width:2.5;stroke-linecap:round}
 
 /* --- footer -------------------------------------------------------------- */
 .ice-footer{background:var(--well);border-top:1px solid var(--hairline);padding:28px var(--page-pad);display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap}
-.ice-footer__meta{font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-dim);line-height:1.7}
-.ice-footer__repo{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:var(--micro);color:var(--ink-muted);text-decoration:none;min-height:var(--target-min);transition:color var(--dur-hover) var(--ease)}
+.ice-footer__meta{font-family:var(--font-ui);font-size:var(--mono-xs);color:var(--ink-dim);line-height:1.7}
+.ice-footer__meta .ice-mono{font-family:var(--font-mono);font-size:var(--micro,11px)}
+.ice-footer__repo{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:var(--mono-xs);font-weight:500;color:var(--ink-muted);text-decoration:none;min-height:var(--target-min);transition:color var(--dur-hover) var(--ease)}
 .ice-footer__repo:hover{color:var(--link)}
 .ice-footer__cols{display:flex;gap:48px;margin-left:auto;font-family:var(--font-ui);font-size:var(--body-xs);flex-wrap:wrap}
 .ice-footer__col{display:flex;flex-direction:column;gap:8px}
-.ice-footer__head{font-family:var(--font-mono);font-size:10px;letter-spacing:var(--micro-ls);text-transform:uppercase;color:var(--ink-dim)}
 .ice-footer__link{color:var(--ink-muted);text-decoration:none;transition:color var(--dur-hover) var(--ease)}
 .ice-footer__link:hover{color:var(--ink)}
 

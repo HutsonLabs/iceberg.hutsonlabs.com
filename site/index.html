@@ -15,11 +15,13 @@
   <!--   appstore-ios   : https://apps.apple.com/app/iceberg/id0000000000     (PLACEHOLDER id) -->
   <!--   appstore-mac   : https://apps.apple.com/app/iceberg/id0000000000?platform=mac (PLACEHOLDER id) -->
   <!-- When the App Store listing is live, also delete the warn     -->
-  <!-- callout in section 03.                                       -->
+  <!-- callout in the "Get it" section.                             -->
   <!-- ============================================================ -->
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/AvenirNext-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/AvenirNext-DemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 
   <meta property="og:type" content="website">
@@ -32,14 +34,14 @@
   <style>
     /* Page layout only. Every value is a design-system token; anything reusable
        lives in styles.css, whose tokens are transcribed from the app's
-       DesignPalette.swift. */
+       DesignPalette.swift and FontRole.swift. */
     *, *::before, *::after { box-sizing: border-box; }
     body, h1, h2, h3, p, ul, figure { margin: 0; }
 
     html { scroll-behavior: smooth; }
     body {
       min-height: 100vh;
-      background: var(--grad-ground) no-repeat;
+      background: var(--grad-ground) no-repeat var(--backdrop-lo);
       color: var(--ink);
       font-family: var(--font-ui);
       font-size: var(--body);
@@ -51,9 +53,13 @@
 
     main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding-bottom: var(--rhythm-section); }
 
-    /* ---- hero — gradient bloom, once per site ---- */
-    .hero { background: var(--grad-bloom); padding: var(--rhythm-hero) 0 var(--s-16); }
-    .hero .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-6); }
+    /* ---- hero — copy beside the graph, the app's signature image ---- */
+    .hero { padding: var(--rhythm-hero) 0 var(--s-16); }
+    .hero .wrap {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+      gap: var(--s-10); align-items: center;
+    }
+    .hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-6); }
     /* Mark and wordmark on one row; the wordmark's line box is the mark's own height. */
     .mark { display: flex; align-items: center; gap: var(--s-3); }
     .mark img { display: block; width: 56px; height: 56px; flex: none; }
@@ -62,9 +68,9 @@
       letter-spacing: var(--display-l-ls);
     }
     .hero h1 {
-      font-size: clamp(var(--display-xl-mobile), 7vw, var(--display-xl));
+      font-size: clamp(var(--display-xl-mobile), 6vw, var(--display-hero));
       line-height: var(--display-xl-lh); letter-spacing: var(--display-xl-ls);
-      font-weight: var(--weight-strong); max-width: 20ch;
+      font-weight: var(--weight-strong); max-width: 16ch;
     }
     .lead { font-size: var(--body-lead); line-height: var(--body-lead-lh); color: var(--ink-muted); max-width: var(--measure-lead); }
     .row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
@@ -85,7 +91,11 @@
 
     /* ---- responsive — the phone is the default, not the fallback ---- */
     @media (max-width: 1199px) { .wrap { padding: 0 var(--page-pad-md); } .ice-footer { padding-left: var(--page-pad-md); padding-right: var(--page-pad-md); } }
-    @media (max-width: 1023px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 1023px) {
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .hero .wrap { grid-template-columns: 1fr; }
+      .hero-graph { max-width: 440px; }
+    }
     @media (max-width: 767px) {
       .wrap { padding: 0 var(--page-pad-sm); }
       .ice-footer { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
@@ -103,56 +113,90 @@
 
 <div class="hero">
   <div class="wrap">
-    <div class="mark">
-      <img src="assets/favicon.svg" alt="" width="56" height="56">
-      <span>Iceberg</span>
-    </div>
-    <h1>Most of what you know is below the surface</h1>
-    <p class="lead">Iceberg is a knowledge system for a human and an agent —
-    notes, journal, and a typed knowledge graph in one place, native on iPhone,
-    iPad, and Mac. What you write links together; what links together, you and
-    your agent can both see.</p>
+    <div class="hero-copy">
+      <div class="mark">
+        <img src="assets/favicon.svg" alt="" width="56" height="56">
+        <span>Iceberg</span>
+      </div>
+      <h1>Most of what you know is below the surface</h1>
+      <p class="lead">Iceberg is a knowledge system for a human and an agent —
+      notes, journal, and a typed knowledge graph in one place, native on iPhone,
+      iPad, and Mac. What you write links together; what links together, you and
+      your agent can both see.</p>
 
-    <div class="row">
-      <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-ios"
-         href="https://testflight.apple.com/join/XXXXXXXX">Join the beta — iOS<span class="ice-btn__meta">TestFlight</span></a>
-      <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-mac"
-         href="https://testflight.apple.com/join/YYYYYYYY">Join the beta — macOS<span class="ice-btn__meta">TestFlight</span></a>
-      <a class="ice-btn ice-btn--secondary ice-btn--lg" href="#get">App Store</a>
+      <div class="row">
+        <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-ios"
+           href="https://testflight.apple.com/join/XXXXXXXX">Join the beta — iOS<span class="ice-btn__meta">TestFlight</span></a>
+        <a class="ice-btn ice-btn--secondary ice-btn--lg" data-launch-link="testflight-mac"
+           href="https://testflight.apple.com/join/YYYYYYYY">Join the beta — macOS<span class="ice-btn__meta">TestFlight</span></a>
+      </div>
+
+      <div class="row row--tight">
+        <span class="ice-badge ice-badge--accent">TestFlight open</span>
+        <span class="ice-badge">iPhone · iPad · Mac, native</span>
+        <span class="ice-badge">App Store soon</span>
+      </div>
     </div>
 
-    <div class="row row--tight">
-      <span class="ice-badge ice-badge--ok">TestFlight open</span>
-      <span class="ice-badge ice-badge--info">iPhone · iPad · Mac, native</span>
-      <span class="ice-badge ice-badge--warn">App Store soon</span>
-    </div>
+    <!-- The graph as the app draws it: flat content-type circles, opaque typed
+         edges from RelationPalette, labels at rest, chromeless. -->
+    <svg class="hero-graph ice-graph" viewBox="0 0 520 440" role="img"
+         aria-label="A small knowledge graph: a journal entry cites a book, the book supports a note, and a captured conversation links them together.">
+      <g class="ice-graph__edge" fill="none">
+        <line x1="330" y1="84"  x2="146" y2="152" stroke="var(--rel-cites)"/>
+        <line x1="146" y1="152" x2="326" y2="266" stroke="var(--rel-supports)"/>
+        <line x1="452" y1="186" x2="336" y2="264" stroke="var(--rel-supports)"/>
+        <line x1="146" y1="152" x2="452" y2="186" stroke="var(--rel-contradicts)"/>
+        <line x1="126" y1="316" x2="326" y2="90"  stroke="var(--rel-related)"/>
+      </g>
+      <g>
+        <circle cx="140" cy="150" r="26" fill="var(--type-book)"/>
+        <circle cx="330" cy="82"  r="21" fill="var(--type-journal)"/>
+        <circle cx="330" cy="270" r="30" fill="var(--type-note)"/>
+        <circle cx="122" cy="320" r="19" fill="var(--type-capture)"/>
+        <circle cx="456" cy="184" r="16" fill="var(--type-note)"/>
+      </g>
+      <g class="ice-graph__label" text-anchor="middle">
+        <text x="140" y="196">The Extended Mind</text>
+        <text x="330" y="47">Saturday</text>
+        <text x="330" y="322">Second Brain</text>
+        <text x="122" y="360">Coffee with Ada</text>
+        <text x="456" y="222">Tools for Thought</text>
+      </g>
+    </svg>
   </div>
 </div>
 
 <main id="main">
 
-  <section class="wrap" aria-label="A note, the way Iceberg sees it">
-    <div class="ice-code">
-      <div class="ice-code__bar"><span>journal — today</span></div>
-      <pre class="ice-code__body"><span class="ice-cmt"># Saturday</span>
-Finished <span class="ice-wikilink">[[The Extended Mind]]</span> — the notebook-as-memory chapter
-pairs with what <span class="ice-wikilink">[[Ada]]</span> said at <span class="ice-wikilink">[[Coffee with Ada]]</span> about tools
-you think <em>with</em>, not <em>about</em>.
-
-<span class="ice-cmt"># backlinks (3) · supports → [[Second Brain]] · cites → [[The Extended Mind]]</span></pre>
+  <section class="wrap" aria-label="A note, the way Iceberg renders it">
+    <div class="ice-note">
+      <div class="ice-note__head">
+        <span class="ice-eyebrow">Journal · Today</span>
+        <span class="ice-typechip ice-typechip--journal">Journal</span>
+      </div>
+      <h3 class="ice-note__title">Saturday</h3>
+      <p class="ice-note__body">Finished <a class="ice-wikilink" href="#what">The
+      Extended Mind</a> — the notebook-as-memory chapter pairs with what
+      <a class="ice-wikilink" href="#what">Ada</a> said at <a class="ice-wikilink"
+      href="#what">Coffee with Ada</a> about tools you think <em>with</em>, not
+      <em>about</em>.</p>
+      <div class="ice-note__links">
+        <span class="ice-eyebrow">Backlinks (3)</span>
+        <span class="ice-typechip ice-typechip--supports">supports → Second Brain</span>
+        <span class="ice-typechip ice-typechip--cites">cites → The Extended Mind</span>
+      </div>
     </div>
   </section>
 
   <section class="wrap" id="what">
     <div class="ice-sechead">
-      <span class="ice-sechead__num">01</span>
       <h2 class="ice-sechead__title">What it holds</h2>
-      <span class="ice-sechead__note">everything is a Thing; Things link</span>
+      <span class="ice-sechead__note ice-eyebrow">Everything is a Thing · Things link</span>
     </div>
 
     <div class="grid-3">
       <div class="ice-feature">
-        <span class="ice-feature__num">01</span>
         <h3 class="ice-feature__title">Notes</h3>
         <p class="ice-feature__body">Plain writing with wiki-links and backlinks.
         Titles come from the first line, raw markup never leaks into the chrome,
@@ -160,14 +204,12 @@ you think <em>with</em>, not <em>about</em>.
         window.</p>
       </div>
       <div class="ice-feature">
-        <span class="ice-feature__num">02</span>
         <h3 class="ice-feature__title">Journal</h3>
         <p class="ice-feature__body">A daily page with streaks, reflection
         prompts, and voice memos. Home widgets keep it one tap away, and every
         entry is a first-class node in the graph, not a silo.</p>
       </div>
       <div class="ice-feature">
-        <span class="ice-feature__num">03</span>
         <h3 class="ice-feature__title">Graph</h3>
         <p class="ice-feature__body">Relations are typed — supports,
         contradicts, cites, causes — and each type carries its own color from a
@@ -178,7 +220,7 @@ you think <em>with</em>, not <em>about</em>.
 
     <div class="grid-2">
       <div class="ice-callout ice-callout--info">
-        <span class="ice-callout__label">Capture from anywhere</span>
+        <span class="ice-callout__label ice-eyebrow">Capture from anywhere</span>
         <p class="ice-callout__body">A share extension and web clipper feed the
         graph from whatever you're reading; audio memos and scans land as
         captures. Books, articles, people, places, and events all get their own
@@ -202,14 +244,13 @@ you think <em>with</em>, not <em>about</em>.
 
   <section class="wrap" id="agent">
     <div class="ice-sechead">
-      <span class="ice-sechead__num">02</span>
       <h2 class="ice-sechead__title">For the agent too</h2>
-      <span class="ice-sechead__note">the same graph, both directions</span>
+      <span class="ice-sechead__note ice-eyebrow">The same graph, both directions</span>
     </div>
 
     <div class="grid-2">
       <div class="ice-callout ice-callout--ok">
-        <span class="ice-callout__label">MCP built in</span>
+        <span class="ice-callout__label ice-eyebrow">MCP built in</span>
         <p class="ice-callout__body">Iceberg ships an MCP server, so an agent —
         Claude, in my case — reads and writes the <strong>same</strong> notes,
         journal, and relations you do. Ask it what connects two ideas and it
@@ -219,9 +260,11 @@ you think <em>with</em>, not <em>about</em>.
       <div class="stack">
         <span class="ice-eyebrow">What it won't do</span>
         <ul class="note-list">
-          <li>Take your data.</li>
+          <li>Take your data — the settings pane says it plainly: nothing here
+          leaves your device today.</li>
           <li>Trap your notes in a format only it can read.</li>
-          <li>Try to take over the world.</li>
+          <li>File anything invisibly. The agent's edits land in the same graph
+          you see, where you can follow them.</li>
         </ul>
       </div>
     </div>
@@ -229,7 +272,6 @@ you think <em>with</em>, not <em>about</em>.
 
   <section class="wrap" id="get">
     <div class="ice-sechead">
-      <span class="ice-sechead__num">03</span>
       <h2 class="ice-sechead__title">Get it</h2>
     </div>
 
@@ -263,9 +305,25 @@ you think <em>with</em>, not <em>about</em>.
       </div>
     </div>
 
+    <!-- The one tinted gradient on the page — the app spends its on the
+         Insights card; the site spends its here. -->
+    <div class="ice-cta">
+      <span class="ice-eyebrow">TestFlight</span>
+      <h3 class="ice-cta__title">Start below the surface tonight.</h3>
+      <p class="ice-cta__body">Install the beta, write one note, link it to a
+      second. From there the app offers what it always offers: New note ·
+      Import · Ask AI to Gather.</p>
+      <div class="ice-cta__actions">
+        <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-ios"
+           href="https://testflight.apple.com/join/XXXXXXXX">iOS beta</a>
+        <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-mac"
+           href="https://testflight.apple.com/join/YYYYYYYY">macOS beta</a>
+      </div>
+    </div>
+
     <!-- Delete this callout when the App Store listing is live. -->
     <div class="ice-callout ice-callout--warn">
-      <span class="ice-callout__label">before launch</span>
+      <span class="ice-callout__label ice-eyebrow">Before launch</span>
       <p class="ice-callout__body">Iceberg hasn't shipped to the App Store yet —
       the App Store buttons point at the listing that goes live at launch, so
       until then they'll come up empty. The TestFlight beta is the way in
@@ -278,18 +336,18 @@ you think <em>with</em>, not <em>about</em>.
 <footer class="ice-footer">
   <div style="display:flex;flex-direction:column;gap:8px">
     <img src="assets/favicon.svg" alt="" width="28" height="28" style="display:block">
-    <div class="ice-footer__meta">HutsonLabs<br>iceberg.hutsonlabs.com</div>
+    <div class="ice-footer__meta">HutsonLabs<br><span class="ice-mono">iceberg.hutsonlabs.com</span></div>
     <a class="ice-footer__repo" href="https://github.com/HutsonLabs">GitHub</a>
   </div>
   <div class="ice-footer__cols">
     <div class="ice-footer__col">
-      <span class="ice-footer__head">Get it</span>
+      <span class="ice-footer__head ice-eyebrow">Get it</span>
       <a class="ice-footer__link" data-launch-link="testflight-ios" href="https://testflight.apple.com/join/XXXXXXXX">TestFlight — iOS</a>
       <a class="ice-footer__link" data-launch-link="testflight-mac" href="https://testflight.apple.com/join/YYYYYYYY">TestFlight — macOS</a>
       <a class="ice-footer__link" href="#get">App Store</a>
     </div>
     <div class="ice-footer__col">
-      <span class="ice-footer__head">Project</span>
+      <span class="ice-footer__head ice-eyebrow">Project</span>
       <a class="ice-footer__link" href="#what">What it holds</a>
       <a class="ice-footer__link" href="#agent">For the agent</a>
     </div>
