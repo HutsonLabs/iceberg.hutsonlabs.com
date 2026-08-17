@@ -93,6 +93,10 @@
     @media (max-width: 1199px) { .wrap { padding: 0 var(--page-pad-md); } .ice-footer { padding-left: var(--page-pad-md); padding-right: var(--page-pad-md); } }
     @media (max-width: 1023px) {
       .grid-3 { grid-template-columns: 1fr 1fr; }
+      /* Three equivalent cards on a two-column grid: the last one takes the
+         full row instead of sitting beside an empty cell. */
+      .grid-3 > :last-child { grid-column: 1 / -1; }
+      .grid-3 > :last-child .ice-feature__body { max-width: var(--measure-lead); }
       .hero .wrap { grid-template-columns: 1fr; }
       .hero-graph { max-width: 440px; }
     }
@@ -175,7 +179,7 @@
         <span class="ice-eyebrow">Journal · Today</span>
         <span class="ice-typechip ice-typechip--journal">Journal</span>
       </div>
-      <h3 class="ice-note__title">Saturday</h3>
+      <p class="ice-note__title">Saturday</p>
       <p class="ice-note__body">Finished <a class="ice-wikilink" href="#what">The
       Extended Mind</a> — the notebook-as-memory chapter pairs with what
       <a class="ice-wikilink" href="#what">Ada</a> said at <a class="ice-wikilink"
@@ -275,6 +279,15 @@
       <h2 class="ice-sechead__title">Get it</h2>
     </div>
 
+    <!-- Delete this callout when the App Store listing is live. -->
+    <div class="ice-callout ice-callout--warn">
+      <span class="ice-callout__label ice-eyebrow">Before launch</span>
+      <p class="ice-callout__body">Iceberg hasn't shipped to the App Store yet —
+      the App Store buttons point at the listing that goes live at launch, so
+      until then they'll come up empty. The TestFlight beta is the way in
+      today.</p>
+    </div>
+
     <div class="grid-2">
       <div class="ice-card">
         <h3 class="ice-feature__title">iOS</h3>
@@ -308,26 +321,16 @@
     <!-- The one tinted gradient on the page — the app spends its on the
          Insights card; the site spends its here. -->
     <div class="ice-cta">
-      <span class="ice-eyebrow">TestFlight</span>
       <h3 class="ice-cta__title">Start below the surface tonight.</h3>
       <p class="ice-cta__body">Install the beta, write one note, link it to a
       second. From there the app offers what it always offers: New note ·
       Import · Ask AI to Gather.</p>
       <div class="ice-cta__actions">
         <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-ios"
-           href="https://testflight.apple.com/join/XXXXXXXX">iOS beta</a>
+           href="https://testflight.apple.com/join/XXXXXXXX">iOS beta<span class="ice-btn__meta">TestFlight</span></a>
         <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-mac"
-           href="https://testflight.apple.com/join/YYYYYYYY">macOS beta</a>
+           href="https://testflight.apple.com/join/YYYYYYYY">macOS beta<span class="ice-btn__meta">TestFlight</span></a>
       </div>
-    </div>
-
-    <!-- Delete this callout when the App Store listing is live. -->
-    <div class="ice-callout ice-callout--warn">
-      <span class="ice-callout__label ice-eyebrow">Before launch</span>
-      <p class="ice-callout__body">Iceberg hasn't shipped to the App Store yet —
-      the App Store buttons point at the listing that goes live at launch, so
-      until then they'll come up empty. The TestFlight beta is the way in
-      today.</p>
     </div>
   </section>
 

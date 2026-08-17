@@ -238,7 +238,6 @@
 .ice-cta{background:var(--grad-insights);border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:var(--s-3);align-items:flex-start}
 .ice-cta__title{margin:0;font-family:var(--font-ui);font-size:24px;font-weight:var(--weight-strong);letter-spacing:-0.01em;color:#fff}
 .ice-cta__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.6;color:rgb(255 255 255 / .82);max-width:52ch}
-.ice-cta .ice-eyebrow{color:rgb(255 255 255 / .7)}
 .ice-cta__actions{display:flex;flex-wrap:wrap;gap:var(--s-3);padding-top:var(--s-2)}
 
 /* --- graph vignette ------------------------------------------------------ */
