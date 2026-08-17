@@ -124,9 +124,9 @@
       </div>
       <h1>Most of what you know is below the surface</h1>
       <p class="lead">Iceberg is a knowledge system for a human and an agent —
-      notes, journal, and a typed knowledge graph in one place, native on iPhone,
-      iPad, and Mac. What you write links together; what links together, you and
-      your agent can both see.</p>
+      notes, a journal, and a graph of how it all connects, in one place, native
+      on iPhone, iPad, and Mac. What you write links together; what links
+      together, you and your agent can both see.</p>
 
       <div class="row">
         <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-ios"
@@ -196,7 +196,7 @@
   <section class="wrap" id="what">
     <div class="ice-sechead">
       <h2 class="ice-sechead__title">What it holds</h2>
-      <span class="ice-sechead__note ice-eyebrow">Everything is a Thing · Things link</span>
+      <span class="ice-sechead__note ice-eyebrow">Everything connects</span>
     </div>
 
     <div class="grid-3">
@@ -255,15 +255,20 @@
     <div class="grid-2">
       <div class="ice-callout ice-callout--ok">
         <span class="ice-callout__label ice-eyebrow">MCP built in</span>
-        <p class="ice-callout__body">Iceberg ships an MCP server, so an agent —
-        Claude, in my case — reads and writes the <strong>same</strong> notes,
-        journal, and relations you do. Ask it what connects two ideas and it
-        answers from your graph; let it file what it learns and you can see
-        exactly where it put things.</p>
+        <p class="ice-callout__body">Iceberg ships a server for the Model
+        Context Protocol (MCP), the standard way an agent connects to your
+        tools. So an agent — Claude, in my case — reads and writes the
+        <strong>same</strong> notes, journal, and relations you do. Ask it what
+        connects two ideas and it answers from your graph; let it file what it
+        learns and you can see exactly where it put things. The server runs on
+        your Mac, where any MCP client can launch it; iPhone and iPad carry the
+        same graph, minus the agent hookup.</p>
       </div>
       <div class="stack">
         <span class="ice-eyebrow">What it won't do</span>
         <ul class="note-list">
+          <li>Require an agent — the notes, journal, and graph are a complete
+          app on their own. Connect an agent when you want one, or never.</li>
           <li>Take your data — the settings pane says it plainly: nothing here
           leaves your device today.</li>
           <li>Trap your notes in a format only it can read.</li>
@@ -294,7 +299,8 @@
         <span class="ice-eyebrow">iPhone &amp; iPad · native SwiftUI</span>
         <p class="ice-feature__body">The beta is open now on TestFlight —
         install the TestFlight app, tap join, and updates arrive as they ship.
-        The App Store listing goes live at launch.</p>
+        The App Store listing goes live at launch. The MCP server is Mac-only
+        today; the phone has everything else.</p>
         <div class="card-actions">
           <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-ios"
              href="https://testflight.apple.com/join/XXXXXXXX">Join TestFlight beta</a>
@@ -324,7 +330,8 @@
       <h3 class="ice-cta__title">Start below the surface tonight.</h3>
       <p class="ice-cta__body">Install the beta, write one note, link it to a
       second. From there the app offers what it always offers: New note ·
-      Import · Ask AI to Gather.</p>
+      Import · Ask AI to Gather, which sends your agent to research a topic
+      and file what it finds as linked notes you can see.</p>
       <div class="ice-cta__actions">
         <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-ios"
            href="https://testflight.apple.com/join/XXXXXXXX">iOS beta<span class="ice-btn__meta">TestFlight</span></a>
