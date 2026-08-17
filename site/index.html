@@ -41,7 +41,10 @@
     html { scroll-behavior: smooth; }
     body {
       min-height: 100vh;
+      /* The berg artwork bleeds past the viewport edges, so the body clips
+         horizontally instead of growing a scrollbar. */
       background: var(--grad-ground) no-repeat var(--backdrop-lo);
+      overflow-x: clip;
       color: var(--ink);
       font-family: var(--font-ui);
       font-size: var(--body);
@@ -51,7 +54,30 @@
 
     .wrap { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 var(--page-pad); }
 
-    main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding-bottom: var(--rhythm-section); }
+    main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding: var(--s-16) 0 var(--rhythm-section); }
+
+    /* ---- the waterline — the page is the iceberg ----
+       The hero floats above this line; everything the product holds sits
+       below it. Sunlight scatters just under the surface, the faceted mass
+       descends behind the content, and the light is gone by the time the
+       scroll reaches the gradient CTA — the deepest point on the page.
+       z-index -1 keeps the whole drawing behind content but above the
+       body's ground. */
+    .waterline { position: relative; z-index: -1; height: 0; }
+    .waterline::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgb(122 162 255 / .5) 16% 84%, transparent);
+    }
+    .waterline::after {
+      content: ""; position: absolute; left: 0; right: 0; top: 1px; height: 200px;
+      background: linear-gradient(180deg, rgb(0 66 128 / .16), transparent);
+    }
+    .waterline__berg {
+      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      display: block;
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
+      mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
+    }
 
     /* ---- hero — copy beside the graph, the app's signature image ---- */
     .hero { padding: var(--rhythm-hero) 0 var(--s-16); }
@@ -103,7 +129,7 @@
     @media (max-width: 767px) {
       .wrap { padding: 0 var(--page-pad-sm); }
       .ice-footer { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
-      main { gap: var(--rhythm-section-mobile); padding-bottom: var(--rhythm-section-mobile); }
+      main { gap: var(--rhythm-section-mobile); padding: var(--s-10) 0 var(--rhythm-section-mobile); }
       .hero { padding: var(--s-16) 0 var(--s-10); }
       .mark img { width: 40px; height: 40px; }
       .mark span { font-size: var(--display-l-mobile); line-height: 40px; }
@@ -153,22 +179,52 @@
         <line x1="146" y1="152" x2="452" y2="186" stroke="var(--rel-contradicts)"/>
         <line x1="126" y1="316" x2="326" y2="90"  stroke="var(--rel-related)"/>
       </g>
-      <g>
+      <!-- One group per node so the note card below can link straight into
+           the graph — :target draws the ring, no script involved. -->
+      <g class="ice-graph__node" id="g-extended-mind">
         <circle cx="140" cy="150" r="26" fill="var(--type-book)"/>
-        <circle cx="330" cy="82"  r="21" fill="var(--type-journal)"/>
-        <circle cx="330" cy="270" r="30" fill="var(--type-note)"/>
-        <circle cx="122" cy="320" r="19" fill="var(--type-capture)"/>
-        <circle cx="456" cy="184" r="16" fill="var(--type-note)"/>
+        <text class="ice-graph__label" x="140" y="196">The Extended Mind</text>
       </g>
-      <g class="ice-graph__label" text-anchor="middle">
-        <text x="140" y="196">The Extended Mind</text>
-        <text x="330" y="47">Saturday</text>
-        <text x="330" y="322">Second Brain</text>
-        <text x="122" y="360">Coffee with Ada</text>
-        <text x="456" y="222">Tools for Thought</text>
+      <g class="ice-graph__node" id="g-saturday">
+        <circle cx="330" cy="82" r="21" fill="var(--type-journal)"/>
+        <text class="ice-graph__label" x="330" y="47">Saturday</text>
+      </g>
+      <g class="ice-graph__node" id="g-second-brain">
+        <circle cx="330" cy="270" r="30" fill="var(--type-note)"/>
+        <text class="ice-graph__label" x="330" y="322">Second Brain</text>
+      </g>
+      <g class="ice-graph__node" id="g-coffee-with-ada">
+        <circle cx="122" cy="320" r="19" fill="var(--type-capture)"/>
+        <text class="ice-graph__label" x="122" y="360">Coffee with Ada</text>
+      </g>
+      <g class="ice-graph__node" id="g-tools-for-thought">
+        <circle cx="456" cy="184" r="16" fill="var(--type-note)"/>
+        <text class="ice-graph__label" x="456" y="222">Tools for Thought</text>
       </g>
     </svg>
   </div>
+</div>
+
+<!-- The waterline. Above it, the tip; below it, the mass — drawn from the
+     palette the page already owns (white and the Insights gradient's deep
+     stop, both at low alpha). The below-water facets sit 14px left of the
+     tip: refraction. -->
+<div class="waterline" aria-hidden="true">
+  <svg class="waterline__berg" width="1440" height="1240" viewBox="0 0 1440 1240">
+    <!-- tip, above the line -->
+    <polygon points="760,58 620,200 760,200" fill="rgb(255 255 255 / .045)"/>
+    <polygon points="760,58 760,200 910,200" fill="rgb(255 255 255 / .028)"/>
+    <polygon points="760,58 738,200 782,200" fill="rgb(255 255 255 / .07)"/>
+    <!-- mass, below the line -->
+    <polygon points="606,200 918,200 1004,384 516,402" fill="rgb(0 66 128 / .16)"/>
+    <polygon points="516,402 1004,384 1030,540 470,520" fill="rgb(0 66 128 / .11)"/>
+    <polygon points="470,520 1030,540 890,850 620,860" fill="rgb(0 66 128 / .07)"/>
+    <polygon points="620,860 890,850 740,1090" fill="rgb(0 66 128 / .045)"/>
+    <!-- crystalline planes catching what light gets down -->
+    <polygon points="606,200 760,200 640,430" fill="rgb(255 255 255 / .025)"/>
+    <polygon points="918,200 1004,384 830,430" fill="rgb(255 255 255 / .018)"/>
+    <polygon points="760,200 700,700 820,690" fill="rgb(255 255 255 / .014)"/>
+  </svg>
 </div>
 
 <main id="main">
@@ -180,15 +236,16 @@
         <span class="ice-typechip ice-typechip--journal">Journal</span>
       </div>
       <p class="ice-note__title">Saturday</p>
-      <p class="ice-note__body">Finished <a class="ice-wikilink" href="#what">The
-      Extended Mind</a> — the notebook-as-memory chapter pairs with what
-      <a class="ice-wikilink" href="#what">Ada</a> said at <a class="ice-wikilink"
-      href="#what">Coffee with Ada</a> about tools you think <em>with</em>, not
-      <em>about</em>.</p>
+      <p class="ice-note__body">Finished <a class="ice-wikilink"
+      href="#g-extended-mind">The Extended Mind</a> — the notebook-as-memory
+      chapter pairs with what <a class="ice-wikilink"
+      href="#g-coffee-with-ada">Ada</a> said at <a class="ice-wikilink"
+      href="#g-coffee-with-ada">Coffee with Ada</a> about tools you think
+      <em>with</em>, not <em>about</em>.</p>
       <div class="ice-note__links">
         <span class="ice-eyebrow">Backlinks (3)</span>
-        <span class="ice-typechip ice-typechip--supports">supports → Second Brain</span>
-        <span class="ice-typechip ice-typechip--cites">cites → The Extended Mind</span>
+        <a class="ice-typechip ice-typechip--supports" href="#g-second-brain">supports → Second Brain</a>
+        <a class="ice-typechip ice-typechip--cites" href="#g-extended-mind">cites → The Extended Mind</a>
       </div>
     </div>
   </section>

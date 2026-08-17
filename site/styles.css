@@ -89,7 +89,10 @@
   /* The two approved gradients — the mockup backdrop, and the Insights card's
      gradient, the ONE tinted gradient the app allows (SidebarWidgetCards.swift).
      Nothing else gets one. */
-  --grad-ground:radial-gradient(120% 90% at 50% 0%,var(--backdrop-hi) 0%,var(--backdrop-lo) 100%);
+  /* The ground carries the page's depth ramp: a faint band of surface light
+     (accent at 8% — the app's one-gradient rule is not binding on the site,
+     PRODUCT.md) over the mockup's radial. No new hex. */
+  --grad-ground:radial-gradient(90% 480px at 50% 0%,rgb(52 120 246 / .08),transparent 70%),radial-gradient(120% 90% at 50% 0%,var(--backdrop-hi) 0%,var(--backdrop-lo) 100%);
   --grad-insights:linear-gradient(135deg,var(--accent) 0%,#004280 100%);
 }
 ::selection{background:var(--selection)}
@@ -197,6 +200,10 @@
 .ice-typechip--journal{--dot:var(--type-journal)}
 .ice-typechip--book{--dot:var(--type-book)}
 .ice-typechip--capture{--dot:var(--type-capture)}
+/* A chip that is also a link (backlink chips traverse to the graph). */
+a.ice-typechip{text-decoration:none;transition:border-color var(--dur-hover) var(--ease),background var(--dur-hover) var(--ease)}
+a.ice-typechip:hover{border-color:color-mix(in srgb,var(--dot,var(--ink-dim)) 80%,transparent);background:color-mix(in srgb,var(--dot,var(--ink-dim)) 26%,transparent)}
+a.ice-typechip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .ice-typechip--supports{--dot:var(--rel-supports)}
 .ice-typechip--cites{--dot:var(--rel-cites)}
 .ice-typechip--contradicts{--dot:var(--rel-contradicts)}
@@ -242,8 +249,13 @@
 
 /* --- graph vignette ------------------------------------------------------ */
 .ice-graph{display:block;width:100%;height:auto}
-.ice-graph__label{font-family:var(--font-ui);font-size:11px;font-weight:500;fill:var(--ink-muted)}
+.ice-graph__label{font-family:var(--font-ui);font-size:11px;font-weight:500;fill:var(--ink-muted);text-anchor:middle}
 .ice-graph__edge{stroke-width:2.5;stroke-linecap:round}
+/* Wikilinks elsewhere on the page land on a node; :target draws its ring —
+   the app's "open in graph", done with fragment navigation alone. */
+.ice-graph__node{scroll-margin-top:var(--s-16)}
+.ice-graph__node:target circle{stroke:var(--ink);stroke-width:2;stroke-opacity:.9}
+.ice-graph__node:target text{fill:var(--ink)}
 
 /* --- footer -------------------------------------------------------------- */
 .ice-footer{background:var(--well);border-top:1px solid var(--hairline);padding:28px var(--page-pad);display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap}
