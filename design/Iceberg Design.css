@@ -1,0 +1,19 @@
+  @font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-400-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 500; font-display: swap;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-700-normal.woff2) format('woff2'); }
+
+:root {
+  --primary: hsl(206, 89%, 53%);
+  --secondary: hsl(206, 89%, 60%);
+  --link: hsl(218, 73%, 58%);
+  --bg: hsl(240, 21%, 12%);
+  --border: 1px solid hsla(223, 70%, 40%, 0.35);
+}
+  
+html, body { margin: 0; padding: 0; background: var(--bg); }
+body { -webkit-font-smoothing: antialiased; }
+a { color: var(--link); text-decoration: none; border-bottom: var(--border); }
+a:hover { color: var(--primary); border-bottom-color: var(--secondary); }

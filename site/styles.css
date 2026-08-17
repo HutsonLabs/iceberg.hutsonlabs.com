@@ -1,12 +1,3 @@
-/* Iceberg design system — tokens transcribed from the app's canonical palette
-   (IcebergKit Sources/Core/Theme/DesignPalette.swift, "the only palette" of
-   DESIGN_RULES.md §1) so the site and the app are literally the same colors.
-   Do not invent a hex here: extend the app's palette first, then mirror it. */
-
-/* ==== fonts ==== */
-/* The app's own faces (FontRole.swift): Avenir Next for interface and prose,
-   Maple Mono NF for code-ish runs. Both ship in assets/fonts, so the page looks
-   like the app on every platform, not just Macs. Twemoji is the emoji fallback. */
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-UltraLight.woff2') format('woff2');font-weight:200;font-style:normal;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');font-weight:200;font-style:italic;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
@@ -19,7 +10,9 @@
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-BoldItalic.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Heavy.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');font-weight:800;font-style:italic;font-display:swap}
-@font-face{font-family:'Maple Mono NF';src:url('assets/fonts/MapleMono-NF-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-700-normal.woff2) format('woff2'); }
 @font-face{font-family:'Twemoji Mozilla';src:url('assets/fonts/Twemoji.Mozilla.woff2') format('woff2');font-display:swap}
 
 /* ==== tokens/palette.css ==== */
@@ -271,3 +264,106 @@ a.ice-typechip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 /* --- skip link ----------------------------------------------------------- */
 .ice-skiplink{position:absolute;left:-9999px;top:0;z-index:50}
 .ice-skiplink:focus{left:12px;top:12px;padding:10px 16px;border-radius:var(--r-pill);background:var(--accent);color:var(--ink-on-accent);font-family:var(--font-ui);font-size:var(--body-xs);font-weight:var(--weight-strong);text-decoration:none}
+
+
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, p, ul, figure { margin: 0; }
+
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  /* The berg artwork bleeds past the viewport edges, so the body clips
+     horizontally instead of growing a scrollbar. */
+  background: var(--grad-ground) no-repeat var(--backdrop-lo);
+  overflow-x: clip;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--body);
+  line-height: var(--body-lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 var(--page-pad); }
+
+main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding: var(--s-16) 0 var(--rhythm-section); }
+
+/* ---- the waterline — the page is the iceberg ----
+   The hero floats above this line; everything the product holds sits
+   below it. Sunlight scatters just under the surface, the faceted mass
+   descends behind the content, and the light is gone by the time the
+   scroll reaches the gradient CTA — the deepest point on the page.
+   z-index -1 keeps the whole drawing behind content but above the
+   body's ground. */
+.waterline { position: relative; z-index: -1; height: 0; }
+.waterline::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(122 162 255 / .5) 16% 84%, transparent);
+}
+.waterline::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 1px; height: 200px;
+  background: linear-gradient(180deg, rgb(0 66 128 / .16), transparent);
+}
+.waterline__berg {
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  display: block;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
+}
+
+/* ---- hero — copy beside the graph, the app's signature image ---- */
+.hero { padding: var(--rhythm-hero) 0 var(--s-16); }
+.hero .wrap {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+  gap: var(--s-10); align-items: center;
+}
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-6); }
+/* Mark and wordmark on one row; the wordmark's line box is the mark's own height. */
+.mark { display: flex; align-items: center; gap: var(--s-3); }
+.mark img { display: block; width: 56px; height: 56px; flex: none; }
+.mark span {
+  font-size: var(--display-l); line-height: 56px; font-weight: var(--weight-strong);
+  letter-spacing: var(--display-l-ls);
+}
+.hero h1 {
+  font-size: clamp(var(--display-xl-mobile), 6vw, var(--display-hero));
+  line-height: var(--display-xl-lh); letter-spacing: var(--display-xl-ls);
+  font-weight: var(--weight-strong); max-width: 16ch;
+}
+.lead { font-size: var(--body-lead); line-height: var(--body-lead-lh); color: var(--ink-muted); max-width: var(--measure-lead); }
+.row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+.row--tight { gap: var(--s-2); }
+
+/* ---- sections ---- */
+section { display: flex; flex-direction: column; gap: var(--s-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: start; }
+/* Long lines scroll inside their own block instead of widening the column. */
+.grid-3 > *, .grid-2 > * { min-width: 0; }
+.stack { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.note-list {
+  margin: 0; padding-left: 18px; font-size: var(--body-s); line-height: 1.7;
+  color: var(--ink-muted); display: flex; flex-direction: column; gap: 6px;
+}
+.card-actions { margin-top: auto; padding-top: var(--s-1); display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+/* ---- responsive — the phone is the default, not the fallback ---- */
+@media (max-width: 1199px) { .wrap { padding: 0 var(--page-pad-md); } .ice-footer { padding-left: var(--page-pad-md); padding-right: var(--page-pad-md); } }
+@media (max-width: 1023px) {
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  /* Three equivalent cards on a two-column grid: the last one takes the
+     full row instead of sitting beside an empty cell. */
+  .grid-3 > :last-child { grid-column: 1 / -1; }
+  .grid-3 > :last-child .ice-feature__body { max-width: var(--measure-lead); }
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-graph { max-width: 440px; }
+}
+@media (max-width: 767px) {
+  .wrap { padding: 0 var(--page-pad-sm); }
+  .ice-footer { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
+  main { gap: var(--rhythm-section-mobile); padding: var(--s-10) 0 var(--rhythm-section-mobile); }
+  .hero { padding: var(--s-16) 0 var(--s-10); }
+  .mark img { width: 40px; height: 40px; }
+  .mark span { font-size: var(--display-l-mobile); line-height: 40px; }
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .ice-sechead__note { display: none; }
+}
