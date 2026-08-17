@@ -171,7 +171,7 @@
     <!-- The graph as the app draws it: flat content-type circles, opaque typed
          edges from RelationPalette, labels at rest, chromeless. -->
     <svg class="hero-graph ice-graph" viewBox="0 0 520 440" role="img"
-         aria-label="A small knowledge graph: a journal entry cites a book, the book supports a note, and a captured conversation links them together.">
+         aria-label="A small knowledge graph: a journal entry cites a book, the book supports one note and contradicts another, and a captured conversation links them together.">
       <g class="ice-graph__edge" fill="none">
         <line x1="330" y1="84"  x2="146" y2="152" stroke="var(--rel-cites)"/>
         <line x1="146" y1="152" x2="326" y2="266" stroke="var(--rel-supports)"/>
@@ -401,8 +401,8 @@
 </main>
 
 <footer class="ice-footer">
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <img src="assets/favicon.svg" alt="" width="28" height="28" style="display:block">
+  <div class="ice-footer__brand">
+    <img src="assets/favicon.svg" alt="" width="28" height="28">
     <div class="ice-footer__meta">HutsonLabs<br><span class="ice-mono">iceberg.hutsonlabs.com</span></div>
     <a class="ice-footer__repo" href="https://github.com/HutsonLabs">GitHub</a>
   </div>
