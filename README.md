@@ -6,8 +6,14 @@ points people at the TestFlight beta now and the App Store listings at launch.
 
 ## Layout
 
-- `site/` — the whole site: `index.html`, `styles.css`, `assets/`. Static, no
-  build step, no JavaScript.
+- `site/` — the whole site: `index.html`, `styles.css`, `app.js`, `assets/`.
+  Static, no build step. `app.js` is one dependency-free ES module (the install
+  dock, the graph's spring simulation and drag/filter behaviour, and the beat
+  observer that drives it). The page renders and reads with JavaScript off; the
+  graph simply stays as drawn.
+- `site/assets/og.svg` — the source of the social card. After editing it,
+  re-render at 1200x630 and save over `og.png`; `og:image` points at the PNG
+  because most crawlers will not render an SVG.
 - `site/styles.css` — the design system. Its tokens are transcribed from the
   app's canonical palette (`DesignPalette.swift` / `ContentTypeColor.swift` in
   the iceberg repo); don't invent a hex here — extend the app's palette first,
@@ -30,5 +36,7 @@ Every URL that changes at release is tagged `data-launch-link` in
 | `appstore-ios` | `apps.apple.com/app/iceberg/id0000000000` | the real App Store URL |
 | `appstore-mac` | same, `?platform=mac` | the real Mac App Store URL |
 
-When the App Store listing is live, also delete the "before launch" warn
-callout in section 03 (it's marked with a comment).
+The two App Store anchors also carry `data-prelaunch`, which renders them
+dimmed with an "At launch" meta label. Deleting that attribute (and swapping
+the URL) is the whole launch-day change for them — there is no separate
+"before launch" callout to remove any more.

@@ -4,293 +4,533 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
-    <title>Iceberg — a knowledge system for a human and an agent</title>
-    <meta name="description" content="Iceberg — notes, journal, and a typed knowledge graph that you and your agent share. Native on iPhone, iPad, and Mac. Beta open on TestFlight.">  
+    <title>Iceberg — put the thought down, it finds its own place</title>
+    <meta name="description" content="Iceberg captures what you read, hear, and think from anywhere on iPhone, iPad, and Mac, and files it into one typed knowledge graph. It ships an MCP server, so your agent reads and writes that same graph. Beta open on TestFlight.">
+
+    <!-- LAUNCH-DAY LINK SWAP — every URL that changes at release is tagged
+         data-launch-link. Enumerated here and in README.md:
+           testflight-ios   → the iOS TestFlight public invite URL
+           testflight-mac   → the macOS TestFlight public invite URL
+           appstore-ios     → the App Store listing (also drop [data-prelaunch])
+           appstore-mac     → the Mac App Store listing (also drop [data-prelaunch])
+         The App Store anchors carry data-prelaunch and render as "At launch"
+         until the listing is live; deleting that attribute enables them. -->
+
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
     <link rel="preload" href="assets/fonts/AvenirNext-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/AvenirNext-DemiBold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Iceberg — a knowledge system for a human and an agent">
-    <meta property="og:description" content="Notes, journal, and a typed knowledge graph that you and your agent share. Native on iPhone, iPad, and Mac. Beta open on TestFlight.">
+    <meta property="og:title" content="Iceberg — put the thought down, it finds its own place">
+    <meta property="og:description" content="Capture from anywhere on iPhone, iPad, and Mac. It files itself into one typed graph — and ships an MCP server, so your agent reads and writes that same graph.">
     <meta property="og:url" content="https://iceberg.hutsonlabs.com/">
-    <meta property="og:image" content="https://iceberg.hutsonlabs.com/assets/og.svg">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://iceberg.hutsonlabs.com/assets/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Iceberg — a knowledge system for a human and an agent.">
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="app.js" type="module" defer></script>
   </head>
   <body>
-    <a class="ice-skiplink" href="#main">Skip to content</a>
-    <div class="hero">
-      <div class="wrap">
-        <div class="hero-copy">
+<!--
+  THESIS: Iceberg's page is a descent, not a feature list. One idea owns it —
+  a thought goes in with one gesture and finds its own place, and what surfaces
+  is a graph both you and your agent read. Refuses the PKM landing page's
+  three-icon-card row and its screenshot carousel.
+  OWN-WORLD: The app's dark stock palette and Avenir Next, with the four
+  content-type hues and typed-relation hues as the only saturated color on the
+  page. Everything else is water: a depth ramp that cools and darkens as you
+  scroll, and Liquid-Glass surfaces — specular top edge, backdrop blur and
+  saturation, refraction of the berg behind them — that float in it.
+  STORY: Capture is one gesture from anywhere → the graph assembles itself from
+  those captures, and you can grab it → your agent answers from that same graph
+  → install the beta.
+  FIRST VIEWPORT: Above the waterline. Headline left at display scale over the
+  berg's tip, primary TestFlight button directly under it; right, the five
+  capture on-ramps as drawn surfaces, one already in flight toward the water.
+  FORM: descent / water column — ranked first of seven; user-pinned across two
+  structured rounds (2026-08-17), so no roll was dealt.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the
+  finish review, the verdict, DESIGN.md, and every shipping raster carrying its
+  provenance.
+-->
+    <a class="skiplink" href="#main">Skip to content</a>
+
+    <!-- Persistent install affordance — glass, reveals once the hero's own
+         buttons have scrolled away, hides again over the footer. -->
+    <div class="dock" id="dock" data-state="hidden">
+      <a class="dock__brand" href="#top">
+        <img src="assets/favicon.svg" alt="Iceberg" width="26" height="26">
+      </a>
+      <p class="dock__line">Beta open on TestFlight</p>
+      <div class="dock__actions">
+        <a class="btn btn--primary btn--sm" data-launch-link="testflight-ios"
+           href="https://testflight.apple.com/join/XXXXXXXX">iPhone &amp; iPad</a>
+        <a class="btn btn--glass btn--sm" data-launch-link="testflight-mac"
+           href="https://testflight.apple.com/join/YYYYYYYY">Mac</a>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ABOVE THE WATERLINE                                          -->
+    <!-- ============================================================ -->
+    <header class="hero" id="top">
+      <div class="hero__sky" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <div class="hero__copy">
           <div class="mark">
-            <img src="assets/favicon.svg" alt="" width="56" height="56">
+            <img src="assets/favicon.svg" alt="" width="44" height="44">
             <span>Iceberg</span>
           </div>
-          <h1>Most of what you know is below the surface</h1>
-          <p class="lead">Iceberg is a knowledge system for a human and an agent —
-          notes, a journal, and a graph of how it all connects, in one place, native
-          on iPhone, iPad, and Mac. What you write links together; what links
-          together, you and your agent can both see.</p>
-    
-          <div class="row">
-            <a class="ice-btn ice-btn--primary ice-btn--lg" data-launch-link="testflight-ios"
-               href="https://testflight.apple.com/join/XXXXXXXX">Join the beta — iOS<span class="ice-btn__meta">TestFlight</span></a>
-            <a class="ice-btn ice-btn--secondary ice-btn--lg" data-launch-link="testflight-mac"
-               href="https://testflight.apple.com/join/YYYYYYYY">Join the beta — macOS<span class="ice-btn__meta">TestFlight</span></a>
+
+          <h1 class="hero__h1">Put the thought down. <br><em>It finds its own place.</em></h1>
+
+          <p class="hero__lead">Whatever you're reading, hearing, or half-thinking: one gesture from any app
+          on iPhone, iPad, or Mac and it's in, filed as a linked node in a single
+          graph. Iceberg ships an MCP server too, so your agent reads and writes
+          that same graph. It stops guessing about you.</p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" data-launch-link="testflight-ios"
+               href="https://testflight.apple.com/join/XXXXXXXX">Join the beta<span class="btn__meta">iPhone &amp; iPad</span></a>
+            <a class="btn btn--glass btn--lg" data-launch-link="testflight-mac"
+               href="https://testflight.apple.com/join/YYYYYYYY">Join the beta<span class="btn__meta">Mac</span></a>
           </div>
-    
-          <div class="row row--tight">
-            <span class="ice-badge ice-badge--accent">TestFlight open</span>
-            <span class="ice-badge">iPhone · iPad · Mac, native</span>
-            <span class="ice-badge">App Store soon</span>
-          </div>
+
+          <ul class="hero__facts">
+            <li><span class="dot dot--live"></span>TestFlight open now</li>
+            <li>Native SwiftUI, not a wrapper</li>
+            <li>Nothing leaves your device today</li>
+          </ul>
         </div>
-    
-        <!-- The graph as the app draws it: flat content-type circles, opaque typed
-             edges from RelationPalette, labels at rest, chromeless. -->
-        <svg class="hero-graph ice-graph" viewBox="0 0 520 440" role="img"
-             aria-label="A small knowledge graph: a journal entry cites a book, the book supports one note and contradicts another, and a captured conversation links them together.">
-          <g class="ice-graph__edge" fill="none">
-            <line x1="330" y1="84"  x2="146" y2="152" stroke="var(--rel-cites)"/>
-            <line x1="146" y1="152" x2="326" y2="266" stroke="var(--rel-supports)"/>
-            <line x1="452" y1="186" x2="336" y2="264" stroke="var(--rel-supports)"/>
-            <line x1="146" y1="152" x2="452" y2="186" stroke="var(--rel-contradicts)"/>
-            <line x1="126" y1="316" x2="326" y2="90"  stroke="var(--rel-related)"/>
-          </g>
-          <!-- One group per node so the note card below can link straight into
-               the graph — :target draws the ring, no script involved. -->
-          <g class="ice-graph__node" id="g-extended-mind">
-            <circle cx="140" cy="150" r="26" fill="var(--type-book)"/>
-            <text class="ice-graph__label" x="140" y="196">The Extended Mind</text>
-          </g>
-          <g class="ice-graph__node" id="g-saturday">
-            <circle cx="330" cy="82" r="21" fill="var(--type-journal)"/>
-            <text class="ice-graph__label" x="330" y="47">Saturday</text>
-          </g>
-          <g class="ice-graph__node" id="g-second-brain">
-            <circle cx="330" cy="270" r="30" fill="var(--type-note)"/>
-            <text class="ice-graph__label" x="330" y="322">Second Brain</text>
-          </g>
-          <g class="ice-graph__node" id="g-coffee-with-ada">
-            <circle cx="122" cy="320" r="19" fill="var(--type-capture)"/>
-            <text class="ice-graph__label" x="122" y="360">Coffee with Ada</text>
-          </g>
-          <g class="ice-graph__node" id="g-tools-for-thought">
-            <circle cx="456" cy="184" r="16" fill="var(--type-note)"/>
-            <text class="ice-graph__label" x="456" y="222">Tools for Thought</text>
-          </g>
-        </svg>
+
+        <!-- The five on-ramps, drawn as the surfaces they actually are. The
+             clipping is mid-flight; it is the node that lands in the graph
+             three sections down. -->
+        <div class="ramps" aria-label="Five ways a thought gets into Iceberg">
+          <figure class="ramp ramp--share glass" style="--i:0">
+            <span class="ramp__grab" aria-hidden="true"></span>
+            <div class="ramp__chrome">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L8.5 6.5M12 3l3.5 3.5"/><path d="M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12"/></svg>
+              <span>Share sheet</span>
+              <span class="ramp__tag">Save to Iceberg</span>
+            </div>
+            <figcaption>Any app, any selection. Tap Iceberg and keep reading.</figcaption>
+          </figure>
+
+          <figure class="ramp ramp--clip glass" style="--i:1">
+            <div class="ramp__chrome">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 13.5a3.5 3.5 0 0 0 5 0l3-3a3.54 3.54 0 0 0-5-5l-1 1"/><path d="M13.5 10.5a3.5 3.5 0 0 0-5 0l-3 3a3.54 3.54 0 0 0 5 5l1-1"/></svg>
+              <span>Web clipper</span>
+            </div>
+            <p class="ramp__url" aria-hidden="true">calnewport.com/on-tools</p>
+            <figcaption>The page you're on, with its source, as a capture.</figcaption>
+          </figure>
+
+          <figure class="ramp ramp--voice glass" style="--i:2">
+            <div class="ramp__chrome">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></svg>
+              <span>Voice memo</span>
+            </div>
+            <div class="ramp__rec" aria-hidden="true">
+              <span class="ramp__wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="ramp__time">0:14</span>
+            </div>
+            <figcaption>Say it while walking. It lands in today's journal.</figcaption>
+          </figure>
+
+          <figure class="ramp ramp--scan glass" style="--i:3">
+            <span class="ramp__frame" aria-hidden="true"></span>
+            <div class="ramp__chrome">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><path d="M4 12h16"/></svg>
+              <span>Scan</span>
+            </div>
+            <figcaption>A page of a paperback. A whiteboard. A receipt.</figcaption>
+          </figure>
+
+          <figure class="ramp ramp--widget glass" style="--i:4">
+            <div class="ramp__chrome">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>
+              <span>Home Screen</span>
+            </div>
+            <div class="ramp__streak" aria-hidden="true">
+              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i>
+              <span>6-day streak</span>
+            </div>
+            <figcaption>The journal widget. One tap, no app launch.</figcaption>
+          </figure>
+        </div>
       </div>
-    </div>
-    <div class="waterline" aria-hidden="true">
-      <svg class="waterline__berg" width="1440" height="1240" viewBox="0 0 1440 1240">
-        <!-- tip, above the line -->
-        <polygon points="760,58 620,200 760,200" fill="rgb(255 255 255 / .045)"/>
-        <polygon points="760,58 760,200 910,200" fill="rgb(255 255 255 / .028)"/>
-        <polygon points="760,58 738,200 782,200" fill="rgb(255 255 255 / .07)"/>
-        <!-- mass, below the line -->
-        <polygon points="606,200 918,200 1004,384 516,402" fill="rgb(0 66 128 / .16)"/>
-        <polygon points="516,402 1004,384 1030,540 470,520" fill="rgb(0 66 128 / .11)"/>
-        <polygon points="470,520 1030,540 890,850 620,860" fill="rgb(0 66 128 / .07)"/>
-        <polygon points="620,860 890,850 740,1090" fill="rgb(0 66 128 / .045)"/>
-        <!-- crystalline planes catching what light gets down -->
-        <polygon points="606,200 760,200 640,430" fill="rgb(255 255 255 / .025)"/>
-        <polygon points="918,200 1004,384 830,430" fill="rgb(255 255 255 / .018)"/>
-        <polygon points="760,200 700,700 820,690" fill="rgb(255 255 255 / .014)"/>
+
+      <!-- The tip. Tall enough that its peak rises behind the headline, wide
+           enough at the base to read as ice rather than as an arrow; it sits in
+           flow so its base *is* the hero's bottom edge and meets the waterline. -->
+      <svg class="berg-tip" viewBox="0 0 1400 520" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+        <!-- The peak sits right of the copy column on purpose: the bright ridge
+             would otherwise lift the ground under the lead below 4.5:1, and the
+             lit face is more useful behind the glass on-ramps, which now have
+             something real to refract. The faint left face still runs under the
+             headline. -->
+        <polygon class="facet--dim"  points="110,520 20,520 380,330"/>
+        <polygon class="facet--dim"  points="760,24 110,520 760,520"/>
+        <polygon class="facet--lit"  points="760,24 760,520 1000,520"/>
+        <polygon class="facet--mid"  points="1000,520 1300,520 856,200"/>
+        <polygon class="facet--edge" points="760,24 750,520 772,520"/>
+      </svg>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- THE CROSSING                                                 -->
+    <!-- ============================================================ -->
+    <div class="waterline">
+      <div class="waterline__glass" aria-hidden="true"></div>
+      <p class="waterline__line">Most of what you know is below the surface.</p>
+
+      <!-- The other ninety percent. Faceted mass falling away behind every
+           station; the glass surfaces above refract this. -->
+      <svg class="berg-mass" viewBox="0 0 1600 4200" aria-hidden="true" preserveAspectRatio="xMidYMin slice">
+        <polygon points="612,0 1008,0 1108,300 500,330" fill="rgb(0 66 128 / .20)"/>
+        <polygon points="500,330 1108,300 1152,700 452,660" fill="rgb(0 66 128 / .15)"/>
+        <polygon points="452,660 1152,700 1120,1250 500,1300" fill="rgb(0 66 128 / .105)"/>
+        <polygon points="500,1300 1120,1250 1040,2100 590,2150" fill="rgb(0 66 128 / .075)"/>
+        <polygon points="590,2150 1040,2100 950,3150 660,3190" fill="rgb(0 66 128 / .05)"/>
+        <polygon points="660,3190 950,3150 810,4150" fill="rgb(0 66 128 / .03)"/>
+        <polygon points="612,0 800,0 640,520" fill="rgb(255 255 255 / .028)"/>
+        <polygon points="1008,0 1108,300 900,560" fill="rgb(255 255 255 / .020)"/>
+        <polygon points="800,0 742,1500 878,1470" fill="rgb(255 255 255 / .014)"/>
+        <polygon points="452,660 640,520 500,1300" fill="rgb(255 255 255 / .010)"/>
       </svg>
     </div>
+
     <main id="main">
-      <section class="wrap" aria-label="A note, the way Iceberg renders it">
-        <div class="ice-note">
-          <div class="ice-note__head">
-            <span class="ice-eyebrow">Journal · Today</span>
-            <span class="ice-typechip ice-typechip--journal">Journal</span>
-          </div>
-          <p class="ice-note__title">Saturday</p>
-          <p class="ice-note__body">Finished <a class="ice-wikilink"
-          href="#g-extended-mind">The Extended Mind</a> — the notebook-as-memory
-          chapter pairs with what <a class="ice-wikilink"
-          href="#g-coffee-with-ada">Ada</a> said at <a class="ice-wikilink"
-          href="#g-coffee-with-ada">Coffee with Ada</a> about tools you think
-          <em>with</em>, not <em>about</em>.</p>
-          <div class="ice-note__links">
-            <span class="ice-eyebrow">Backlinks (3)</span>
-            <a class="ice-typechip ice-typechip--supports" href="#g-second-brain">supports → Second Brain</a>
-            <a class="ice-typechip ice-typechip--cites" href="#g-extended-mind">cites → The Extended Mind</a>
-          </div>
+
+      <!-- ---------------------------------------------------------- -->
+      <!-- STATION 1 — what one capture actually becomes              -->
+      <!-- ---------------------------------------------------------- -->
+      <section class="station" data-depth="1" aria-labelledby="h-in">
+        <div class="station__head">
+          <h2 id="h-in">One gesture in. Nothing to file.</h2>
+          <p>There is no inbox to process, no folder to choose, no tag to
+          remember. A capture arrives as a first-class thing (a book, an
+          article, a person, a place, an event, a voice memo) and Iceberg draws
+          it into what you already have. The four colors below aren't decoration;
+          they're how the app says what a thing <em>is</em>, on every node, chip,
+          and backlink.</p>
         </div>
+
+        <div class="landing">
+          <!-- What arrives -->
+          <article class="capture glass">
+            <header class="capture__head">
+              <span class="chip chip--capture">Capture</span>
+              <time datetime="2026-08-17T09:14">Today, 9:14</time>
+            </header>
+            <h3 class="capture__title">Cal Newport, on tools</h3>
+            <p class="capture__body">“The value isn't in the tool. It's in
+            whether the tool changes what you're able to hold in your head at
+            once.”</p>
+            <p class="capture__src">calnewport.com · clipped from Safari</p>
+          </article>
+
+          <div class="landing__arrow" aria-hidden="true">
+            <svg viewBox="0 0 120 24"><path d="M2 12h108m0 0-8-6m8 6-8 6"/></svg>
+          </div>
+
+          <!-- What it becomes -->
+          <article class="note glass">
+            <header class="note__head">
+              <span class="chip chip--note">Note</span>
+              <span class="note__meta">Linked automatically</span>
+            </header>
+            <h3 class="note__title">Tools for Thought</h3>
+            <p class="note__body">Reading <a class="wikilink" href="#deep">The
+            Extended Mind</a> alongside what <a class="wikilink" href="#deep">Ada</a>
+            said: a tool you think <em>with</em> beats a tool you think
+            <em>about</em>. Newport lands on the same side.</p>
+            <footer class="note__links">
+              <span class="lbl">Backlinks · 3</span>
+              <span class="chip chip--cites">cites → Cal Newport, on tools</span>
+              <span class="chip chip--contradicts">contradicts → Second Brain</span>
+              <span class="chip chip--supports">supports → Attention residue</span>
+            </footer>
+          </article>
+        </div>
+
+        <p class="fineprint">Illustrative content, drawn in the app's real
+        palette and type. Screenshots of the shipping app go up at launch.</p>
       </section>
-    
-      <section class="wrap" id="what">
-        <div class="ice-sechead">
-          <h2 class="ice-sechead__title">What it holds</h2>
-          <span class="ice-sechead__note ice-eyebrow">Everything connects</span>
-        </div>
-    
-        <div class="grid-3">
-          <div class="ice-feature">
-            <h3 class="ice-feature__title">Notes</h3>
-            <p class="ice-feature__body">Plain writing with wiki-links and backlinks.
-            Titles come from the first line, raw markup never leaks into the chrome,
-            and the editor keeps a reading measure instead of sprawling across the
-            window.</p>
-          </div>
-          <div class="ice-feature">
-            <h3 class="ice-feature__title">Journal</h3>
-            <p class="ice-feature__body">A daily page with streaks, reflection
-            prompts, and voice memos. Home widgets keep it one tap away, and every
-            entry is a first-class node in the graph, not a silo.</p>
-          </div>
-          <div class="ice-feature">
-            <h3 class="ice-feature__title">Graph</h3>
-            <p class="ice-feature__body">Relations are typed — supports,
-            contradicts, cites, causes — and each type carries its own color from a
-            palette validated for color-vision deficiency. The legend chips double
-            as filters.</p>
-          </div>
-        </div>
-    
-        <div class="grid-2">
-          <div class="ice-callout ice-callout--info">
-            <span class="ice-callout__label ice-eyebrow">Capture from anywhere</span>
-            <p class="ice-callout__body">A share extension and web clipper feed the
-            graph from whatever you're reading; audio memos and scans land as
-            captures. Books, articles, people, places, and events all get their own
-            kind of node — so “where did I read that?” is a link, not a search.</p>
-          </div>
-          <div class="stack">
-            <span class="ice-eyebrow">The four meaning-bearing colors</span>
-            <div class="row row--tight">
-              <span class="ice-typechip ice-typechip--note">Note</span>
-              <span class="ice-typechip ice-typechip--journal">Journal</span>
-              <span class="ice-typechip ice-typechip--book">Book</span>
-              <span class="ice-typechip ice-typechip--capture">Capture</span>
+
+      <!-- ---------------------------------------------------------- -->
+      <!-- STATION 2 — the graph: assembles, then you take it,        -->
+      <!--             then the agent reads it. One stage, three beats-->
+      <!-- ---------------------------------------------------------- -->
+      <section class="deep" id="deep" data-depth="2" aria-labelledby="h-graph">
+
+        <div class="deep__stage">
+          <div class="stage glass">
+            <div class="stage__bar">
+              <div class="legend" role="group" aria-label="Filter the graph by content type">
+                <label class="chip chip--note"><input type="checkbox" data-type="note" checked>Note</label>
+                <label class="chip chip--journal"><input type="checkbox" data-type="journal" checked>Journal</label>
+                <label class="chip chip--book"><input type="checkbox" data-type="book" checked>Book</label>
+                <label class="chip chip--capture"><input type="checkbox" data-type="capture" checked>Capture</label>
+              </div>
+              <p class="stage__hint" id="stage-hint">Drag a node</p>
             </div>
-            <p class="ice-feature__body">Everything else in the app is chrome and
-            one accent. These four encode what a Thing <em>is</em> — on graph
-            nodes, legend chips, and backlink pills — and they are never
-            decorative.</p>
-          </div>
-        </div>
-      </section>
-    
-      <section class="wrap" id="agent">
-        <div class="ice-sechead">
-          <h2 class="ice-sechead__title">For the agent too</h2>
-          <span class="ice-sechead__note ice-eyebrow">The same graph, both directions</span>
-        </div>
-    
-        <div class="grid-2">
-          <div class="ice-callout ice-callout--ok">
-            <span class="ice-callout__label ice-eyebrow">MCP built in</span>
-            <p class="ice-callout__body">Iceberg ships a server for the Model
-            Context Protocol (MCP), the standard way an agent connects to your
-            tools. So an agent — Claude, in my case — reads and writes the
-            <strong>same</strong> notes, journal, and relations you do. Ask it what
-            connects two ideas and it answers from your graph; let it file what it
-            learns and you can see exactly where it put things. The server runs on
-            your Mac, where any MCP client can launch it; iPhone and iPad carry the
-            same graph, minus the agent hookup.</p>
-          </div>
-          <div class="stack">
-            <span class="ice-eyebrow">What it won't do</span>
-            <ul class="note-list">
-              <li>Require an agent — the notes, journal, and graph are a complete
-              app on their own. Connect an agent when you want one, or never.</li>
-              <li>Take your data — the settings pane says it plainly: nothing here
-              leaves your device today.</li>
-              <li>Trap your notes in a format only it can read.</li>
-              <li>File anything invisibly. The agent's edits land in the same graph
-              you see, where you can follow them.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    
-      <section class="wrap" id="get">
-        <div class="ice-sechead">
-          <h2 class="ice-sechead__title">Get it</h2>
-        </div>
-    
-        <!-- Delete this callout when the App Store listing is live. -->
-        <div class="ice-callout ice-callout--warn">
-          <span class="ice-callout__label ice-eyebrow">Before launch</span>
-          <p class="ice-callout__body">Iceberg hasn't shipped to the App Store yet —
-          the App Store buttons point at the listing that goes live at launch, so
-          until then they'll come up empty. The TestFlight beta is the way in
-          today.</p>
-        </div>
-    
-        <div class="grid-2">
-          <div class="ice-card">
-            <h3 class="ice-feature__title">iOS</h3>
-            <span class="ice-eyebrow">iPhone &amp; iPad · native SwiftUI</span>
-            <p class="ice-feature__body">The beta is open now on TestFlight —
-            install the TestFlight app, tap join, and updates arrive as they ship.
-            The App Store listing goes live at launch. The MCP server is Mac-only
-            today; the phone has everything else.</p>
-            <div class="card-actions">
-              <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-ios"
-                 href="https://testflight.apple.com/join/XXXXXXXX">Join TestFlight beta</a>
-              <a class="ice-btn ice-btn--secondary ice-btn--sm" data-launch-link="appstore-ios"
-                 href="https://apps.apple.com/app/iceberg/id0000000000">App Store</a>
+
+            <svg class="graph" id="graph" viewBox="0 0 620 520"
+                 role="img" aria-labelledby="graph-desc">
+              <desc id="graph-desc">A knowledge graph of eight things: a clipping
+              of Cal Newport cites the note Tools for Thought, which contradicts
+              the note Second Brain and is supported by the note Attention
+              residue. The book The Extended Mind supports both Second Brain and
+              Attention residue, and is cited by the journal entry Saturday.
+              Saturday relates to the capture Coffee with Ada, which relates to
+              Tools for Thought. The journal entry Sunday relates to Attention
+              residue.</desc>
+              <g class="graph__edges" fill="none">
+                <line class="on" data-a="clipping" data-b="tools-thought" data-rel="cites"
+                      x1="466" y1="128" x2="346" y2="254"
+                      stroke="var(--rel-cites)" style="color:var(--rel-cites)"/>
+                <line class="on" data-a="tools-thought" data-b="second-brain" data-rel="contradicts"
+                      x1="346" y1="254" x2="132" y2="356"
+                      stroke="var(--rel-contradicts)" style="color:var(--rel-contradicts)"/>
+                <line class="on" data-a="attention" data-b="tools-thought" data-rel="supports"
+                      x1="400" y1="400" x2="346" y2="254"
+                      stroke="var(--rel-supports)" style="color:var(--rel-supports)"/>
+                <line class="on" data-a="extended-mind" data-b="second-brain" data-rel="supports"
+                      x1="128" y1="176" x2="132" y2="356"
+                      stroke="var(--rel-supports)" style="color:var(--rel-supports)"/>
+                <line class="on" data-a="extended-mind" data-b="attention" data-rel="supports"
+                      x1="128" y1="176" x2="400" y2="400"
+                      stroke="var(--rel-supports)" style="color:var(--rel-supports)"/>
+                <line class="on" data-a="saturday" data-b="extended-mind" data-rel="cites"
+                      x1="280" y1="62" x2="128" y2="176"
+                      stroke="var(--rel-cites)" style="color:var(--rel-cites)"/>
+                <line class="on" data-a="saturday" data-b="coffee-ada" data-rel="related"
+                      x1="280" y1="62" x2="250" y2="452"
+                      stroke="var(--rel-related)" style="color:var(--rel-related)"/>
+                <line class="on" data-a="coffee-ada" data-b="tools-thought" data-rel="related"
+                      x1="250" y1="452" x2="346" y2="254"
+                      stroke="var(--rel-related)" style="color:var(--rel-related)"/>
+                <line class="on" data-a="sunday" data-b="attention" data-rel="related"
+                      x1="540" y1="330" x2="400" y2="400"
+                      stroke="var(--rel-related)" style="color:var(--rel-related)"/>
+              </g>
+              <g class="graph__nodes">
+                <g class="on" data-id="saturday" data-type="journal" data-r="20" data-x="280" data-y="62"
+                   transform="translate(280 62)">
+                  <circle r="20" fill="var(--type-journal)"/>
+                  <text y="-34">Saturday</text>
+                </g>
+                <g class="on" data-id="clipping" data-type="capture" data-r="18" data-x="466" data-y="128"
+                   transform="translate(466 128)">
+                  <circle r="18" fill="var(--type-capture)"/>
+                  <text y="40">Cal Newport, on tools</text>
+                </g>
+                <g class="on" data-id="extended-mind" data-type="book" data-r="28" data-x="128" data-y="176"
+                   transform="translate(128 176)">
+                  <circle r="28" fill="var(--type-book)"/>
+                  <text y="50">The Extended Mind</text>
+                </g>
+                <g class="on" data-id="tools-thought" data-type="note" data-r="26" data-x="346" data-y="254"
+                   transform="translate(346 254)">
+                  <circle r="26" fill="var(--type-note)"/>
+                  <text y="48">Tools for Thought</text>
+                </g>
+                <g class="on" data-id="second-brain" data-type="note" data-r="31" data-x="132" data-y="356"
+                   transform="translate(132 356)">
+                  <circle r="31" fill="var(--type-note)"/>
+                  <text y="53">Second Brain</text>
+                </g>
+                <g class="on" data-id="sunday" data-type="journal" data-r="17" data-x="540" data-y="330"
+                   transform="translate(540 330)">
+                  <circle r="17" fill="var(--type-journal)"/>
+                  <text y="39">Sunday</text>
+                </g>
+                <g class="on" data-id="attention" data-type="note" data-r="22" data-x="400" data-y="400"
+                   transform="translate(400 400)">
+                  <circle r="22" fill="var(--type-note)"/>
+                  <text y="44">Attention residue</text>
+                </g>
+                <g class="on" data-id="coffee-ada" data-type="capture" data-r="20" data-x="250" data-y="452"
+                   transform="translate(250 452)">
+                  <circle r="20" fill="var(--type-capture)"/>
+                  <text y="42">Coffee with Ada</text>
+                </g>
+              </g>
+            </svg>
+
+            <!-- The agent's answer, rendered over the same graph in beat 3 -->
+            <div class="answer" id="answer" hidden>
+              <div class="answer__q"><span class="lbl">You</span><p>What have I read that argues against the second-brain idea?</p></div>
+              <div class="answer__a">
+                <span class="lbl">Claude, via MCP</span>
+                <p>Two things, both yours. <b data-node="tools-thought">Tools for
+                Thought</b> contradicts <b data-node="second-brain">Second
+                Brain</b> outright. You wrote it the evening after
+                <b data-node="coffee-ada">Coffee with Ada</b>. And
+                <b data-node="attention">Attention residue</b> supports it from
+                the other direction, citing <b data-node="extended-mind">The
+                Extended Mind</b>, which you finished on
+                <b data-node="saturday">Saturday</b>.</p>
+              </div>
             </div>
           </div>
-    
-          <div class="ice-card">
-            <h3 class="ice-feature__title">macOS</h3>
-            <span class="ice-eyebrow">Apple silicon · native SwiftUI</span>
-            <p class="ice-feature__body">The same app, built for the Mac — three-pane
-            notes, the full graph, and the MCP server for your local agents. Beta
-            via TestFlight for Mac; Mac App Store at launch.</p>
-            <div class="card-actions">
-              <a class="ice-btn ice-btn--primary ice-btn--sm" data-launch-link="testflight-mac"
-                 href="https://testflight.apple.com/join/YYYYYYYY">Join TestFlight beta</a>
-              <a class="ice-btn ice-btn--secondary ice-btn--sm" data-launch-link="appstore-mac"
-                 href="https://apps.apple.com/app/iceberg/id0000000000?platform=mac">Mac App Store</a>
-            </div>
-          </div>
         </div>
-    
-        <!-- The one tinted gradient on the page — the app spends its on the
-             Insights card; the site spends its here. -->
-        <div class="ice-cta">
-          <h3 class="ice-cta__title">Start below the surface tonight.</h3>
-          <p class="ice-cta__body">Install the beta, write one note, link it to a
-          second. From there the app offers what it always offers: New note ·
-          Import · Ask AI to Gather, which sends your agent to research a topic
-          and file what it finds as linked notes you can see.</p>
-          <div class="ice-cta__actions">
-            <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-ios"
-               href="https://testflight.apple.com/join/XXXXXXXX">iOS beta<span class="ice-btn__meta">TestFlight</span></a>
-            <a class="ice-btn ice-btn--inverse ice-btn--sm" data-launch-link="testflight-mac"
-               href="https://testflight.apple.com/join/YYYYYYYY">macOS beta<span class="ice-btn__meta">TestFlight</span></a>
+
+        <div class="deep__beats">
+          <div class="beat" data-beat="assemble">
+            <h2 id="h-graph">It links itself.</h2>
+            <p>Wiki-links and backlinks are the floor. Above that, relations are
+            <em>typed</em>. Supports, contradicts, cites, causes: the graph records not
+            just that two things touch but how, and each type carries its own color
+            from a palette validated for color-vision deficiency.</p>
+            <p class="beat__cue">The clipping from the top of this page is in there. →</p>
+          </div>
+
+          <div class="beat" data-beat="play">
+            <h3>And it's yours to push around.</h3>
+            <p>Grab any node and drag it. Turn a content type off and the graph
+            re-reads without it. This is the same structure the app draws, with
+            the same colors meaning the same things. The legend chips are the
+            filters, in the app and here.</p>
+          </div>
+
+          <div class="beat" data-beat="agent">
+            <h3>Then your agent reads the whole thing.</h3>
+            <p>Iceberg ships a server for the Model Context Protocol, the standard
+            way an agent connects to your tools. So an agent (Claude, in my case) works
+            in the <strong>same</strong> notes, journal, and relations you do. Ask what connects two ideas and it answers out of your graph, not
+            its training. Let it file what it learns and you can walk to exactly
+            where it put things.</p>
+            <p class="beat__note">The server runs on your Mac, where any MCP
+            client can launch it. iPhone and iPad carry the same graph, minus the
+            agent hookup.</p>
           </div>
         </div>
       </section>
-    
+
+      <!-- ---------------------------------------------------------- -->
+      <!-- STATION 3 — the refusals                                   -->
+      <!-- ---------------------------------------------------------- -->
+      <section class="station station--wide" data-depth="3" aria-labelledby="h-wont">
+        <div class="station__head">
+          <h2 id="h-wont">What it won't do.</h2>
+          <p>The shortest way to say what this is, is to say what I refused to
+          build into it.</p>
+        </div>
+
+        <ol class="refusals">
+          <li>
+            <h3>Require an agent.</h3>
+            <p>The notes, journal, and graph are a complete app on their own.
+            Connect an agent when you want one, or never. Nothing is greyed out
+            waiting for a key.</p>
+          </li>
+          <li>
+            <h3>Take your data.</h3>
+            <p>The settings pane says it plainly, and so will I: nothing here
+            leaves your device today.</p>
+          </li>
+          <li>
+            <h3>Trap your notes.</h3>
+            <p>No format only Iceberg can read. What you wrote stays something you
+            can walk out with.</p>
+          </li>
+          <li>
+            <h3>File anything invisibly.</h3>
+            <p>The agent's edits land in the same graph you see, typed the same
+            way, where you can follow them back. No hidden index, no second
+            memory you can't inspect.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ---------------------------------------------------------- -->
+      <!-- THE FLOOR — deepest point on the page                      -->
+      <!-- ---------------------------------------------------------- -->
+      <section class="station" id="get" data-depth="4" aria-labelledby="h-get">
+        <div class="station__head">
+          <h2 id="h-get">Get it.</h2>
+          <p>The beta is open. Install TestFlight, tap join, and updates arrive as
+          they ship.</p>
+        </div>
+
+        <div class="platforms">
+          <article class="platform glass">
+            <h3>iPhone &amp; iPad</h3>
+            <p class="platform__spec">Native SwiftUI · iOS &amp; iPadOS</p>
+            <p>Everything but the agent hookup: capture from anywhere, the daily
+            journal with streaks and prompts, Home Screen widgets, and the full
+            graph, carried on the same device you actually have on you.</p>
+            <div class="platform__actions">
+              <a class="btn btn--primary btn--sm" data-launch-link="testflight-ios"
+                 href="https://testflight.apple.com/join/XXXXXXXX">Join the beta<span class="btn__meta">TestFlight</span></a>
+              <a class="btn btn--glass btn--sm" data-launch-link="appstore-ios" data-prelaunch
+                 href="https://apps.apple.com/app/iceberg/id0000000000">App Store<span class="btn__meta">At launch</span></a>
+            </div>
+          </article>
+
+          <article class="platform glass">
+            <h3>Mac</h3>
+            <p class="platform__spec">Native SwiftUI · Apple silicon</p>
+            <p>The same app with room to work: three-pane notes, the full graph,
+            and the MCP server your local agents connect to. This is where the
+            human and the agent share a desk.</p>
+            <div class="platform__actions">
+              <a class="btn btn--primary btn--sm" data-launch-link="testflight-mac"
+                 href="https://testflight.apple.com/join/YYYYYYYY">Join the beta<span class="btn__meta">TestFlight</span></a>
+              <a class="btn btn--glass btn--sm" data-launch-link="appstore-mac" data-prelaunch
+                 href="https://apps.apple.com/app/iceberg/id0000000000?platform=mac">Mac App Store<span class="btn__meta">At launch</span></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="close">
+          <!-- the descent's last frame: the mass, closing the page out -->
+          <svg class="close__berg" viewBox="0 0 460 320" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
+            <polygon points="150,0 400,0 460,132 96,150" fill="rgb(255 255 255 / .10)"/>
+            <polygon points="96,150 460,132 460,236 130,246" fill="rgb(255 255 255 / .07)"/>
+            <polygon points="130,246 460,236 460,320 196,320" fill="rgb(255 255 255 / .045)"/>
+            <polygon points="150,0 236,0 96,150" fill="rgb(255 255 255 / .07)"/>
+            <polygon points="400,0 460,132 330,140" fill="rgb(255 255 255 / .05)"/>
+          </svg>
+          <h3>Start below the surface tonight.</h3>
+          <p>Install the beta, write one note, link it to a second. From there the
+          app offers what it always offers: New note · Import · Ask AI to Gather,
+          which sends your agent out to research a topic and file what it finds as
+          linked notes you can see.</p>
+          <div class="close__actions">
+            <a class="btn btn--inverse btn--lg" data-launch-link="testflight-ios"
+               href="https://testflight.apple.com/join/XXXXXXXX">iPhone &amp; iPad<span class="btn__meta">TestFlight</span></a>
+            <a class="btn btn--outline-inverse btn--lg" data-launch-link="testflight-mac"
+               href="https://testflight.apple.com/join/YYYYYYYY">Mac<span class="btn__meta">TestFlight</span></a>
+          </div>
+        </div>
+      </section>
     </main>
-    <footer class="ice-footer">
-      <div class="ice-footer__brand">
-        <img src="assets/favicon.svg" alt="" width="28" height="28">
-        <div class="ice-footer__meta">HutsonLabs<br><span class="ice-mono">iceberg.hutsonlabs.com</span></div>
-        <a class="ice-footer__repo" href="https://github.com/HutsonLabs">GitHub</a>
+
+    <footer class="footer">
+      <div class="footer__brand">
+        <img src="assets/favicon.svg" alt="" width="30" height="30">
+        <p>Iceberg, by HutsonLabs<br><span class="mono">iceberg.hutsonlabs.com</span></p>
       </div>
-      <div class="ice-footer__cols">
-        <div class="ice-footer__col">
-          <span class="ice-footer__head ice-eyebrow">Get it</span>
-          <a class="ice-footer__link" data-launch-link="testflight-ios" href="https://testflight.apple.com/join/XXXXXXXX">TestFlight — iOS</a>
-          <a class="ice-footer__link" data-launch-link="testflight-mac" href="https://testflight.apple.com/join/YYYYYYYY">TestFlight — macOS</a>
-          <a class="ice-footer__link" href="#get">App Store</a>
+      <nav class="footer__cols" aria-label="Footer">
+        <div class="footer__col">
+          <p class="lbl">Get it</p>
+          <a data-launch-link="testflight-ios" href="https://testflight.apple.com/join/XXXXXXXX">TestFlight — iPhone &amp; iPad</a>
+          <a data-launch-link="testflight-mac" href="https://testflight.apple.com/join/YYYYYYYY">TestFlight — Mac</a>
         </div>
-        <div class="ice-footer__col">
-          <span class="ice-footer__head ice-eyebrow">Project</span>
-          <a class="ice-footer__link" href="#what">What it holds</a>
-          <a class="ice-footer__link" href="#agent">For the agent</a>
+        <div class="footer__col">
+          <p class="lbl">The page</p>
+          <a href="#deep">The graph</a>
+          <a href="#get">Download</a>
+          <a href="https://github.com/HutsonLabs">GitHub</a>
         </div>
-      </div>
+      </nav>
     </footer>
-  
   </body>
 </html>

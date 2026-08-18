@@ -1,16 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <!-- OG card. SVG og:image is a soft target — most crawlers want raster; if a
-       platform drops it, export this file to og.png and point og:image there. -->
-  <rect width="1200" height="630" fill="#131419"/>
-  <radialGradient id="bloom" cx="0.5" cy="0" r="1">
-    <stop offset="0" stop-color="#3478F6" stop-opacity="0.14"/>
-    <stop offset="0.7" stop-color="#3478F6" stop-opacity="0"/>
-  </radialGradient>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- OG card, source of truth for og.png. Re-export after any edit by
+       rendering this file at 1200x630 in a browser and saving as og.png.
+       Palette and type are the site's own; no claim here that the page
+       does not also make. -->
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14161D"/>
+      <stop offset="0.55" stop-color="#0B0D13"/>
+      <stop offset="1" stop-color="#050609"/>
+    </linearGradient>
+    <radialGradient id="bloom" cx="0.42" cy="0" r="0.9">
+      <stop offset="0" stop-color="#3478F6" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#3478F6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#ground)"/>
   <rect width="1200" height="630" fill="url(#bloom)"/>
-  <g transform="translate(90,80) scale(0.42)">
-    <path d="m 406.03563,122.62683 a 1406.9232,1406.76 0 0 1 37.9031,60.26144 16.523958,16.523958 0 0 1 -1.2648,18.35994 c -10.52637,13.97398 -30.68152,42.3299 -41.65669,68.58464 -11.28117,26.94833 -12.97436,68.84983 -13.05596,89.29056 a 34.822711,34.822711 0 0 1 -7.30319,21.41994 l -65.23902,82.90541 a 76.377404,76.377404 0 0 0 -1.55039,-11.07719 c -2.16241,-10.26117 -6.2628,-20.48154 -10.93438,-30.59991 -2.7336,-5.91598 -5.91599,-12.23998 -9.09838,-18.64556 l -6.32398,-12.77037 c -10.52638,-21.78714 -20.33874,-45.43068 -23.09275,-73.2358 -2.52959,-25.70394 0.93841,-55.69186 16.62597,-91.41217 2.61119,-0.2244 5.24277,-0.51 7.87437,-0.89759 a 129.80487,129.80487 0 0 0 67.85023,-30.70193 c 18.68635,-16.11596 35.57752,-39.20869 49.26587,-71.39981 z M 178.45382,40.394635 c 1.4892,-0.244799 2.9784,-0.407994 4.48799,-0.407994 15.91196,-0.489598 42.73789,-1.876799 64.46384,-5.915985 17.74793,-3.263989 52.89705,-13.055965 81.80378,-21.521943 22.09315,-6.4463857 44.83909,11.179165 48.04187,33.945517 2.32559,16.60555 6.73198,35.393906 14.78997,52.631864 l -0.204,-0.10207 C 378.1693,137.17192 360.78855,161.81506 342.551,177.54342 a 108.01772,108.01772 0 0 1 -56.67106,25.64274 c -31.41592,4.40639 -60.22065,-3.876 -78.3358,-9.17997 10.85278,-45.24709 7.50719,-98.511354 -29.06992,-153.632008 z M 124.06755,298.06637 c -0.46919,-2.03999 -1.14238,-4.01878 -1.99919,-5.91598 L 68.722501,173.1983 a 32.680716,32.680716 0 0 1 6.385182,-36.1487 L 159.07388,50.553817 c 42.90108,63.260233 36.63829,122.807683 17.05436,169.319563 -14.85118,35.2919 -37.37272,62.85224 -52.01988,78.15219 z m 77.2546,-83.06858 c 12.54597,3.73319 32.76233,9.48598 55.99787,10.89356 -13.93318,35.18991 -17.29917,65.95304 -14.60636,93.37057 3.14159,31.66072 14.27995,58.07866 25.19393,80.57979 2.30519,4.794 4.54919,9.26158 6.69119,13.54556 3.03958,6.05879 5.87518,11.77078 8.54756,17.54396 4.4268,9.58798 7.73159,18.05396 9.38398,25.90794 1.632,7.75198 1.632,14.68797 -0.2856,21.27714 -1.93799,6.62999 -6.05879,13.76998 -13.87196,21.62395 a 32.639916,32.639916 0 0 1 -30.08992,-7.34398 L 147.3031,401.57571 a 32.680716,32.680716 0 0 1 -10.46516,-19.42076 l -8.71079,-57.73185 c 13.70876,-12.03596 47.49108,-47.24628 68.03382,-96.10414 1.83599,-4.28399 3.56999,-8.77199 5.16118,-13.32117 z" fill="#4682C2"/>
+
+  <!-- the waterline, three-fifths down: above it the tip, below it the graph -->
+  <rect x="0" y="368" width="1200" height="1" fill="#7AA2FF" opacity="0.3"/>
+
+  <!-- submerged mass -->
+  <g opacity="0.5">
+    <polygon points="806,369 1046,369 1090,510 754,530" fill="#004280" opacity="0.42"/>
+    <polygon points="754,530 1090,510 1010,630 800,630" fill="#004280" opacity="0.26"/>
   </g>
-  <text x="90" y="420" font-family="'Avenir Next',-apple-system,Helvetica,sans-serif" font-size="88" font-weight="600" fill="#E8E9EC" letter-spacing="-2">Iceberg</text>
-  <text x="90" y="486" font-family="'Avenir Next',-apple-system,Helvetica,sans-serif" font-size="34" fill="#8A8D98">A knowledge system for a human and an agent</text>
-  <text x="90" y="560" font-family="'Maple Mono NF','SF Mono',Menlo,monospace" font-size="24" fill="#565A66">iceberg.hutsonlabs.com</text>
+  <!-- tip -->
+  <polygon points="926,286 838,368 926,368" fill="#D6E8FF" opacity="0.12"/>
+  <polygon points="926,286 926,368 1000,368" fill="#B4D2FF" opacity="0.07"/>
+  <polygon points="926,286 918,368 934,368" fill="#F0F7FF" opacity="0.24"/>
+
+  <!-- the mark -->
+  <g transform="translate(84,74) scale(0.152)">
+    <path d="m 406.03563,122.62683 a 1406.9232,1406.76 0 0 1 37.9031,60.26144 16.523958,16.523958 0 0 1 -1.2648,18.35994 c -10.52637,13.97398 -30.68152,42.3299 -41.65669,68.58464 -11.28117,26.94833 -12.97436,68.84983 -13.05596,89.29056 a 34.822711,34.822711 0 0 1 -7.30319,21.41994 l -65.23902,82.90541 a 76.377404,76.377404 0 0 0 -1.55039,-11.07719 c -2.16241,-10.26117 -6.2628,-20.48154 -10.93438,-30.59991 -2.7336,-5.91598 -5.91599,-12.23998 -9.09838,-18.64556 l -6.32398,-12.77037 c -10.52638,-21.78714 -20.33874,-45.43068 -23.09275,-73.2358 -2.52959,-25.70394 0.93841,-55.69186 16.62597,-91.41217 2.61119,-0.2244 5.24277,-0.51 7.87437,-0.89759 a 129.80487,129.80487 0 0 0 67.85023,-30.70193 c 18.68635,-16.11596 35.57752,-39.20869 49.26587,-71.39981 z M 178.45382,40.394635 c 1.4892,-0.244799 2.9784,-0.407994 4.48799,-0.407994 15.91196,-0.489598 42.73789,-1.876799 64.46384,-5.915985 17.74793,-3.263989 52.89705,-13.055965 81.80378,-21.521943 22.09315,-6.4463857 44.83909,11.179165 48.04187,33.945517 2.32559,16.60555 6.73198,35.393906 14.78997,52.631864 l -0.204,-0.10207 C 378.1693,137.17192 360.78855,161.81506 342.551,177.54342 a 108.01772,108.01772 0 0 1 -56.67106,25.64274 c -31.41592,4.40639 -60.22065,-3.876 -78.3358,-9.17997 10.85278,-45.24709 7.50719,-98.511354 -29.06992,-153.632008 z M 124.06755,298.06637 c -0.46919,-2.03999 -1.14238,-4.01878 -1.99919,-5.91598 L 68.722501,173.1983 a 32.680716,32.680716 0 0 1 6.385182,-36.1487 L 159.07388,50.553817 c 42.90108,63.260233 36.63829,122.807683 17.05436,169.319563 -14.85118,35.2919 -37.37272,62.85224 -52.01988,78.15219 z m 77.2546,-83.06858 c 12.54597,3.73319 32.76233,9.48598 55.99787,10.89356 -13.93318,35.18991 -17.29917,65.95304 -14.60636,93.37057 3.14159,31.66072 14.27995,58.07866 25.19393,80.57979 2.30519,4.794 4.54919,9.26158 6.69119,13.54556 3.03958,6.05879 5.87518,11.77078 8.54756,17.54396 4.4268,9.58798 7.73159,18.05396 9.38398,25.90794 1.632,7.75198 1.632,14.68797 -0.2856,21.27714 -1.93799,6.62999 -6.05879,13.76998 -13.87196,21.62395 a 32.639916,32.639916 0 0 1 -30.08992,-7.34398 L 147.3031,401.57571 a 32.680716,32.680716 0 0 1 -10.46516,-19.42076 l -8.71079,-57.73185 c 13.70876,-12.03596 47.49108,-47.24628 68.03382,-96.10414 1.83599,-4.28399 3.56999,-8.77199 5.16118,-13.32117 z" fill="#4682c2"/>
+  </g>
+  <text x="164" y="118" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="34" font-weight="600" letter-spacing="-0.5" fill="#E8E9EC">Iceberg</text>
+
+  <!-- the line -->
+  <text x="84" y="248" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="66" font-weight="600" letter-spacing="-2.2" fill="#E8E9EC">Put the thought down.</text>
+  <text x="84" y="324" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="66" font-weight="400" font-style="italic" letter-spacing="-2.2" fill="#A8C4EE">It finds its own place.</text>
+
+  <text x="84" y="404" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="24" font-weight="400" fill="#8A8D98">Notes, journal, and a typed graph you and your agent share.</text>
+  <text x="84" y="440" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="24" font-weight="400" fill="#8A8D98">Native on iPhone, iPad, and Mac. MCP built in.</text>
+
+  <!-- a fragment of the real graph, in the real relation colours -->
+  <g stroke-width="3" stroke-linecap="round">
+    <line x1="880" y1="470" x2="1010" y2="516" stroke="#9400C1"/>
+    <line x1="1010" y1="516" x2="900" y2="580" stroke="#DF001D"/>
+    <line x1="1010" y1="516" x2="1116" y2="470" stroke="#00B170"/>
+  </g>
+  <circle cx="880" cy="470" r="17" fill="#2FA79A"/>
+  <circle cx="1010" cy="516" r="23" fill="#5B8DEF"/>
+  <circle cx="900" cy="580" r="19" fill="#5B8DEF"/>
+  <circle cx="1116" cy="470" r="15" fill="#F0A35E"/>
+
+  <!-- beta status -->
+  <rect x="84" y="500" width="216" height="44" rx="22" fill="#2A67DD"/>
+  <text x="192" y="528" text-anchor="middle" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="17" font-weight="600" fill="#FFFFFF">Beta open on TestFlight</text>
+  <text x="84" y="580" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif"
+        font-size="16" fill="#6B6F7C">iceberg.hutsonlabs.com</text>
 </svg>
