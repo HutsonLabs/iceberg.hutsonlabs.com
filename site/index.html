@@ -38,17 +38,17 @@
   a thought goes in with one gesture and finds its own place, and what surfaces
   is a graph both you and your agent read. Refuses the PKM landing page's
   three-icon-card row and its screenshot carousel.
-  OWN-WORLD: The app's dark stock palette and Avenir Next, with the four
-  content-type hues and typed-relation hues as the only saturated color on the
-  page. Everything else is water: a depth ramp that cools and darkens as you
-  scroll, and Liquid-Glass surfaces — specular top edge, backdrop blur and
-  saturation, refraction of the berg behind them — that float in it.
+  OWN-WORLD: The app's dark stock palette and Avenir Next. The typed-relation
+  hues are the only saturated color, and they are quiet. Everything else is
+  water: a depth ramp that cools and darkens as you scroll, and glass surfaces
+  — specular top edge, backdrop blur and saturation — floating in it.
   STORY: Capture is one gesture from anywhere → the graph assembles itself from
   those captures, and you can grab it → your agent answers from that same graph
   → install the beta.
-  FIRST VIEWPORT: Above the waterline. Headline left at display scale over the
-  berg's tip, primary TestFlight button directly under it; right, the five
-  capture on-ramps as drawn surfaces, one already in flight toward the water.
+  FIRST VIEWPORT: Above the waterline. Headline left at display scale, primary
+  TestFlight button directly under it; right, the five capture on-ramps as the
+  drawn surfaces they actually are. No drawn iceberg anywhere on the page — the
+  descent is carried by the ground's own darkening, not by an illustration.
   FORM: descent / water column — ranked first of seven; user-pinned across two
   structured rounds (2026-08-17), so no roll was dealt.
   FINISH: unreviewed and undocumented is unfinished; this build ends with the
@@ -164,21 +164,6 @@
         </div>
       </div>
 
-      <!-- The tip. Tall enough that its peak rises behind the headline, wide
-           enough at the base to read as ice rather than as an arrow; it sits in
-           flow so its base *is* the hero's bottom edge and meets the waterline. -->
-      <svg class="berg-tip" viewBox="0 0 1400 520" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
-        <!-- The peak sits right of the copy column on purpose: the bright ridge
-             would otherwise lift the ground under the lead below 4.5:1, and the
-             lit face is more useful behind the glass on-ramps, which now have
-             something real to refract. The faint left face still runs under the
-             headline. -->
-        <polygon class="facet--dim"  points="110,520 20,520 380,330"/>
-        <polygon class="facet--dim"  points="760,24 110,520 760,520"/>
-        <polygon class="facet--lit"  points="760,24 760,520 1000,520"/>
-        <polygon class="facet--mid"  points="1000,520 1300,520 856,200"/>
-        <polygon class="facet--edge" points="760,24 750,520 772,520"/>
-      </svg>
     </header>
 
     <!-- ============================================================ -->
@@ -188,20 +173,6 @@
       <div class="waterline__glass" aria-hidden="true"></div>
       <p class="waterline__line">Most of what you know is below the surface.</p>
 
-      <!-- The other ninety percent. Faceted mass falling away behind every
-           station; the glass surfaces above refract this. -->
-      <svg class="berg-mass" viewBox="0 0 1600 4200" aria-hidden="true" preserveAspectRatio="xMidYMin slice">
-        <polygon points="612,0 1008,0 1108,300 500,330" fill="rgb(0 66 128 / .20)"/>
-        <polygon points="500,330 1108,300 1152,700 452,660" fill="rgb(0 66 128 / .15)"/>
-        <polygon points="452,660 1152,700 1120,1250 500,1300" fill="rgb(0 66 128 / .105)"/>
-        <polygon points="500,1300 1120,1250 1040,2100 590,2150" fill="rgb(0 66 128 / .075)"/>
-        <polygon points="590,2150 1040,2100 950,3150 660,3190" fill="rgb(0 66 128 / .05)"/>
-        <polygon points="660,3190 950,3150 810,4150" fill="rgb(0 66 128 / .03)"/>
-        <polygon points="612,0 800,0 640,520" fill="rgb(255 255 255 / .028)"/>
-        <polygon points="1008,0 1108,300 900,560" fill="rgb(255 255 255 / .020)"/>
-        <polygon points="800,0 742,1500 878,1470" fill="rgb(255 255 255 / .014)"/>
-        <polygon points="452,660 640,520 500,1300" fill="rgb(255 255 255 / .010)"/>
-      </svg>
     </div>
 
     <main id="main">
@@ -322,42 +293,42 @@
               <g class="graph__nodes">
                 <g class="on" data-id="saturday" data-type="journal" data-r="20" data-x="280" data-y="62"
                    transform="translate(280 62)">
-                  <circle r="20" fill="var(--type-journal)"/>
+                  <circle r="20" fill="var(--node)"/>
                   <text y="-34">Saturday</text>
                 </g>
                 <g class="on" data-id="clipping" data-type="capture" data-r="18" data-x="466" data-y="128"
                    transform="translate(466 128)">
-                  <circle r="18" fill="var(--type-capture)"/>
+                  <circle r="18" fill="var(--node)"/>
                   <text y="40">Cal Newport, on tools</text>
                 </g>
                 <g class="on" data-id="extended-mind" data-type="book" data-r="28" data-x="128" data-y="176"
                    transform="translate(128 176)">
-                  <circle r="28" fill="var(--type-book)"/>
+                  <circle r="28" fill="var(--node)"/>
                   <text y="50">The Extended Mind</text>
                 </g>
                 <g class="on" data-id="tools-thought" data-type="note" data-r="26" data-x="346" data-y="254"
                    transform="translate(346 254)">
-                  <circle r="26" fill="var(--type-note)"/>
+                  <circle r="26" fill="var(--node)"/>
                   <text y="48">Tools for Thought</text>
                 </g>
                 <g class="on" data-id="second-brain" data-type="note" data-r="31" data-x="132" data-y="356"
                    transform="translate(132 356)">
-                  <circle r="31" fill="var(--type-note)"/>
+                  <circle r="31" fill="var(--node)"/>
                   <text y="53">Second Brain</text>
                 </g>
                 <g class="on" data-id="sunday" data-type="journal" data-r="17" data-x="540" data-y="330"
                    transform="translate(540 330)">
-                  <circle r="17" fill="var(--type-journal)"/>
+                  <circle r="17" fill="var(--node)"/>
                   <text y="39">Sunday</text>
                 </g>
                 <g class="on" data-id="attention" data-type="note" data-r="22" data-x="400" data-y="400"
                    transform="translate(400 400)">
-                  <circle r="22" fill="var(--type-note)"/>
+                  <circle r="22" fill="var(--node)"/>
                   <text y="44">Attention residue</text>
                 </g>
                 <g class="on" data-id="coffee-ada" data-type="capture" data-r="20" data-x="250" data-y="452"
                    transform="translate(250 452)">
-                  <circle r="20" fill="var(--type-capture)"/>
+                  <circle r="20" fill="var(--node)"/>
                   <text y="42">Coffee with Ada</text>
                 </g>
               </g>
@@ -490,23 +461,15 @@
         </div>
 
         <div class="close">
-          <!-- the descent's last frame: the mass, closing the page out -->
-          <svg class="close__berg" viewBox="0 0 460 320" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
-            <polygon points="150,0 400,0 460,132 96,150" fill="rgb(255 255 255 / .10)"/>
-            <polygon points="96,150 460,132 460,236 130,246" fill="rgb(255 255 255 / .07)"/>
-            <polygon points="130,246 460,236 460,320 196,320" fill="rgb(255 255 255 / .045)"/>
-            <polygon points="150,0 236,0 96,150" fill="rgb(255 255 255 / .07)"/>
-            <polygon points="400,0 460,132 330,140" fill="rgb(255 255 255 / .05)"/>
-          </svg>
           <h3>Start below the surface tonight.</h3>
           <p>Install the beta, write one note, link it to a second. From there the
           app offers what it always offers: New note · Import · Ask AI to Gather,
           which sends your agent out to research a topic and file what it finds as
           linked notes you can see.</p>
           <div class="close__actions">
-            <a class="btn btn--inverse btn--lg" data-launch-link="testflight-ios"
+            <a class="btn btn--primary btn--lg" data-launch-link="testflight-ios"
                href="https://testflight.apple.com/join/XXXXXXXX">iPhone &amp; iPad<span class="btn__meta">TestFlight</span></a>
-            <a class="btn btn--outline-inverse btn--lg" data-launch-link="testflight-mac"
+            <a class="btn btn--glass btn--lg" data-launch-link="testflight-mac"
                href="https://testflight.apple.com/join/YYYYYYYY">Mac<span class="btn__meta">TestFlight</span></a>
           </div>
         </div>

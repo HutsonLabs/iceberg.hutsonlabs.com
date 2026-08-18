@@ -26,6 +26,7 @@
   --accent:#3478F6; --accent-hover:#2A67DD; --accent-active:#2456C8;
   --link:#7AA2FF; --link-hover:#A3BFFF;
   --audio:#A18DF0;          /* the voice-memo lavender: a media affordance, not a type */
+  --node:#4682C2;           /* the mark's glacial blue — every graph node, one colour */
   --insights-deep:#004280;  /* the deep stop of the app's Insights-card gradient */
   --backdrop-hi:#14161D; --backdrop-lo:#08090C;
   --abyss:#050609;                      /* the floor: backdrop-lo, one rung down */
@@ -144,20 +145,7 @@ strong,b{font-weight:var(--weight-strong);color:var(--ink)}
   -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   mask-composite:exclude;
 }
-/* the lens — a band just inside the border that over-blurs and over-saturates
-   what sits behind it. Real glass bends hardest at its edge; a rim highlight
-   on its own is only half the effect, and the half that reads as a drawn
-   outline rather than as a material. */
-.glass::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
-  -webkit-backdrop-filter:blur(4px) saturate(2.2) brightness(1.16);
-  backdrop-filter:blur(4px) saturate(2.2) brightness(1.16);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  mask-composite:exclude;padding:8px;
-}
-.glass>*{position:relative;z-index:2}
+.glass>*{position:relative;z-index:1}
 
 /* ============================ buttons =================================== */
 .btn{
@@ -245,7 +233,7 @@ label.chip:has(input:focus-visible){outline:2px solid var(--link);outline-offset
 .dock .btn--sm{height:40px;padding:0 15px;font-size:14px}
 
 /* ============================= hero ===================================== */
-.hero{position:relative;padding:var(--s-24) var(--pad) 0;overflow:hidden}
+.hero{position:relative;padding:var(--s-24) var(--pad) var(--s-20);overflow:hidden}
 .hero__sky{
   position:absolute;inset:0 0 auto;height:520px;pointer-events:none;
   background:
@@ -294,11 +282,7 @@ label.chip:has(input:focus-visible){outline:2px solid var(--link);outline-offset
 
 /* web clipper — the thing it captures is a URL, so show one */
 .ramp--clip .ramp__chrome{color:var(--type-capture)}
-/* in flight: tilted off the grid, trailing, already falling toward the water */
-.ramp--clip{overflow:visible;z-index:3;transform:translate(8px,22px) rotate(2.2deg);
-  animation:inflight 1500ms var(--ease-out) 260ms backwards;
-  box-shadow:0 30px 46px -26px rgb(0 0 0 / .8)}
-@keyframes inflight{from{transform:translate(10px,-96px) rotate(-3deg);opacity:0}}
+
 .ramp__url{font-family:var(--font-mono);font-size:11.5px;letter-spacing:0;color:var(--ink-muted);
   padding:5px 10px;border-radius:7px;background:rgb(255 255 255 / .06);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -337,19 +321,6 @@ label.chip:has(input:focus-visible){outline:2px solid var(--link);outline-offset
 .ramp__streak span{margin-left:var(--s-2)}
 
 /* ---- the tip ---------------------------------------------------------- */
-/* In flow, so its base *is* the hero's bottom edge and meets the waterline
-   exactly; the negative top margin tucks it up behind the copy. */
-.berg-tip{position:relative;z-index:1;left:50%;transform:translateX(-50%);
-  width:min(1500px,150%);height:auto;pointer-events:none;opacity:.75;
-  margin:-477px 0 -1px;
-  filter:drop-shadow(0 -20px 50px rgb(122 162 255 / .1))}
-/* Kept deliberately low: the lead paragraph reads across the lit face, and at
-   .10 the facet lifts its ground enough to drop --ink-muted under 4.5:1. */
-.facet--lit{fill:rgb(206 228 255 / .075)}
-.facet--mid{fill:rgb(170 204 255 / .045)}
-.facet--edge{fill:rgb(240 247 255 / .16)}
-.facet--dim{fill:rgb(150 190 255 / .028)}
-
 /* =========================== the crossing =============================== */
 .waterline{position:relative;height:0;z-index:3}
 .waterline__glass{
@@ -367,15 +338,6 @@ label.chip:has(input:focus-visible){outline:2px solid var(--link);outline-offset
   font-size:clamp(15px,1.5vw,18px);font-weight:500;letter-spacing:.01em;
   color:rgb(200 220 255 / .62);text-shadow:0 1px 20px rgb(0 0 0 / .6);
 }
-
-/* the submerged mass, drawn behind every station */
-.berg-mass{position:absolute;z-index:0;left:50%;top:0;transform:translateX(-50%);
-  width:min(1700px,100%);height:auto;pointer-events:none;
-  -webkit-mask-image:linear-gradient(180deg,#000 3%,#000 80%,transparent 100%);
-  mask-image:linear-gradient(180deg,#000 3%,#000 80%,transparent 100%);
-  /* enough blur to stop a polygon edge drawing a seam across a paragraph,
-     little enough that the glass above it has real content to bend */
-  filter:blur(9px)}
 
 /* ============================ stations ================================== */
 main{position:relative;z-index:2;display:flex;flex-direction:column;
@@ -428,11 +390,11 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;
 /* Default state is the finished graph — the markup is the graph. Only once
    app.js has taken over does anything hide, so a blocked script leaves a
    complete picture rather than an empty frame. */
-.graph__edges line{stroke-width:2.5;stroke-linecap:round;opacity:.85;
+.graph__edges line{stroke-width:2;stroke-linecap:round;opacity:.5;
   transition:opacity 420ms var(--ease-out),stroke-width var(--dur) var(--ease)}
 .graph--staged .graph__edges line{opacity:0}
-.graph--staged .graph__edges line.on{opacity:.85}
-.graph__edges line.lit{stroke-width:4.5;filter:drop-shadow(0 0 6px currentColor)}
+.graph--staged .graph__edges line.on{opacity:.5}
+.graph__edges line.lit{stroke-width:3.5;opacity:.95;filter:drop-shadow(0 0 5px currentColor)}
 .graph__nodes g{cursor:grab;opacity:1;transition:opacity 420ms var(--ease-out)}
 .graph--staged .graph__nodes g{opacity:0}
 .graph--staged .graph__nodes g.on{opacity:1}
@@ -445,7 +407,7 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;
 /* the agent's answer, traced on the graph: the cited path stays lit and
    everything else falls back into the water */
 .graph.lighting .graph__nodes g:not(.lit){opacity:.22}
-.graph.lighting .graph__edges line:not(.lit){opacity:.12}
+.graph.lighting .graph__edges line:not(.lit){opacity:.1}
 .graph__nodes g.lit text{fill:var(--ink);font-weight:600}
 .graph__nodes g.lit circle{stroke:#fff;stroke-width:2.5;
   filter:drop-shadow(0 0 9px rgb(255 255 255 / .55))}
@@ -505,20 +467,14 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;
 .platform__actions{margin-top:auto;padding-top:var(--s-4);display:flex;flex-wrap:wrap;gap:var(--s-2)}
 
 .close{
-  position:relative;overflow:hidden;border-radius:var(--r-lg);padding:var(--s-12) var(--s-10);
+  position:relative;margin-top:var(--s-8);padding:var(--s-16) 0 0;
+  border-top:1px solid rgb(255 255 255 / .1);
   display:flex;flex-direction:column;gap:var(--s-4);align-items:flex-start;
-  background:linear-gradient(135deg,var(--accent-ink) 0%,var(--insights-deep) 100%);
-  box-shadow:0 40px 90px -40px rgb(52 120 246 / .55),inset 0 1px 0 rgb(255 255 255 / .28);
 }
-.close::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(80% 200px at 12% -10%,rgb(255 255 255 / .22),transparent 70%)}
-.close__berg{position:absolute;right:0;top:0;height:100%;width:auto;
-  pointer-events:none;opacity:.55}
-.close>*:not(.close__berg){position:relative;z-index:1}
-.close h3{font-size:clamp(24px,2.8vw,34px);font-weight:var(--weight-strong);
-  letter-spacing:-.024em;line-height:1.15;color:#fff;text-wrap:balance}
-.close p{font-size:16px;line-height:1.6;color:rgb(255 255 255 / .94);max-width:56ch}
-.close__actions{display:flex;flex-wrap:wrap;gap:var(--s-3);padding-top:var(--s-2)}
+.close h3{font-size:clamp(30px,4vw,52px);font-weight:var(--weight-strong);
+  letter-spacing:-.03em;line-height:1.05;color:var(--ink);text-wrap:balance;max-width:16ch}
+.close p{font-size:17px;line-height:1.6;color:var(--ink-muted);max-width:58ch}
+.close__actions{display:flex;flex-wrap:wrap;gap:var(--s-3);padding-top:var(--s-4)}
 
 /* ============================= footer =================================== */
 .footer{position:relative;z-index:2;max-width:var(--content);margin:0 auto;width:100%;
@@ -553,7 +509,7 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;
   /* a stretched flex item has no room to stick — it is already as tall as
      its container */
   /* opaque: a translucent pinned panel lets the copy scroll through it */
-  .deep__stage{position:sticky;align-self:start;top:0;order:0;z-index:4;
+  .deep__stage{position:sticky;top:0;order:0;z-index:4;
     padding:var(--s-4) var(--pad) var(--s-3);
     margin:0 calc(var(--pad) * -1);background:var(--backdrop-lo);
     box-shadow:0 18px 30px -22px rgb(0 0 0 / .9)}
@@ -567,7 +523,6 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;
   body{font-size:16px}
   main{gap:var(--s-20);padding-top:120px}
   .station{gap:var(--s-8)}
-  .hero .berg-tip{margin-top:-130px}
   /* Every rung tightened so a drawn on-ramp clears the fold at 390x844 — the
      first screen has to carry some of the world, not just the proposition. */
   .hero{padding-top:var(--s-6)}
@@ -579,8 +534,6 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;
   .btn--lg{height:50px;font-size:15px}
   .ramps{grid-template-columns:1fr}
   .ramp--share{grid-column:auto}
-  /* the clipper's flight pose costs vertical room the phone hasn't got */
-  .ramp--clip{transform:none;animation:none;z-index:auto}
   .hero__actions .btn{flex:1 1 100%}
   .refusals li{padding:var(--s-8) var(--s-6)}
   .close{padding:var(--s-10) var(--s-6)}
