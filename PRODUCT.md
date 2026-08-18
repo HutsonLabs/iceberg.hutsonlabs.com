@@ -47,16 +47,22 @@ native-on-all-Apple-platforms + built-in MCP + shared-visibility combination.
   Store + Mac App Store listings go live at launch.
 - Launch-day link swap is a designed workflow: every URL that changes at
   release carries `data-launch-link` in `site/index.html`, enumerated in a
-  comment at the top of `<head>` and in README.md. The "Before launch" warn
-  callout in the Get-it section is deleted when the App Store listing is live.
+  comment at the top of `<head>` and in README.md. The two App Store anchors
+  additionally carry `data-prelaunch`, which renders them dimmed and labelled
+  "At launch"; deleting that attribute at launch is the whole change. (The
+  standalone "Before launch" warn callout was removed 2026-08-17 — it damped
+  the page at the moment of conversion.)
 - Deployed as an assets-only Cloudflare Worker (`iceberg-website`) by Workers
   Builds on every push to `main`; the dashboard project name must stay
   identical to `"name"` in `wrangler.jsonc`.
 
 ## Capabilities and Constraints
 
-- Static site: `site/` holds everything (`index.html`, `styles.css`,
-  `assets/`). No build step, no JavaScript. Unknown paths 404
+- Static site: `site/` holds everything (`index.html`, `styles.css`, `app.js`,
+  `assets/`). No build step and no dependencies. Client-side JavaScript is
+  allowed as of 2026-08-17 (user, during the capture-first redesign): one
+  hand-written ES module drives the install dock and the interactive graph. The
+  page must still read completely with JavaScript off. Unknown paths 404
   (`not_found_handling: "none"`).
 - The site's design tokens are transcribed from the app's canonical palette
   (`DesignPalette.swift`, `ContentTypeColor.swift`, `FontRole.swift` in the
@@ -73,10 +79,18 @@ native-on-all-Apple-platforms + built-in MCP + shared-visibility combination.
 - Name: Iceberg, by HutsonLabs (`iceberg.hutsonlabs.com`;
   github.com/HutsonLabs). Tagline in use: "Most of what you know is below the
   surface."
+- Positioning as of 2026-08-17 (user, capture-first redesign): the site is
+  **two-sided and capture-first**. Lead with how effortless it is to get a
+  thought in (share sheet, web clipper, voice memo, scan, Home Screen widget);
+  the payoff is both a real notes app for the human and a memory the agent
+  reads and writes. Neither half is subordinate, and the MCP server is framed
+  as what makes an agent useful rather than as a feature the app ships.
 - The app's design system (Avenir Next + Maple Mono NF faces shipped in
   `assets/fonts`, dark-only stock theme, app-transcribed palette) is the
   **basis, not law** for the site (user, 2026-08-16): future site work should
-  challenge it with modern aesthetics where warranted. The user specifically
+  challenge it with modern aesthetics where warranted. The site's own world as
+  built (2026-08-17) is a water column: a depth ramp that darkens with scroll,
+  and Liquid-Glass surfaces (macOS/iOS 26+ as the reference) floating in it. The user specifically
   finds the near-absence of gradients jarring — the app's one-tinted-gradient
   rule is not binding on the site. Product truth (colors that carry meaning,
   e.g. the four content-type colors and typed-relation hues) should stay

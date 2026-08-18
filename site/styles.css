@@ -1,3 +1,10 @@
+/* ============================================================================
+   Iceberg — iceberg.hutsonlabs.com
+   The page is a water column. Light, contrast, and surface fill all fall off
+   with depth; glass floats in it and refracts the berg behind it.
+   ==========================================================================*/
+
+/* ---- faces: all self-hosted, no CDN ------------------------------------ */
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-UltraLight.woff2') format('woff2');font-weight:200;font-style:normal;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');font-weight:200;font-style:italic;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
@@ -7,363 +14,549 @@
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-DemiBold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-DemiBoldItalic.woff2') format('woff2');font-weight:600;font-style:italic;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-BoldItalic.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap}
 @font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-Heavy.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
-@font-face{font-family:'Avenir Next';src:url('assets/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');font-weight:800;font-style:italic;font-display:swap}
-@font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-400-normal.woff2) format('woff2'); }
-@font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-500-normal.woff2) format('woff2'); }
-@font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-700-normal.woff2) format('woff2'); }
+@font-face{font-family:'Maple Mono';src:url('assets/fonts/MapleMono-NF-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Twemoji Mozilla';src:url('assets/fonts/Twemoji.Mozilla.woff2') format('woff2');font-display:swap}
 
-/* ==== tokens/palette.css ==== */
+/* ---- palette: transcribed from the app, extended only by water --------- */
 :root{
-  /* Chrome — DesignPalette.stock, verbatim. Dark only, like the app's stock theme. */
-  --window:#131419;          /* window background */
-  --raised:#191B22;          /* raised surface / card */
-  --inspector:#16181F;       /* inspector surface / well */
-  --border-subtle:#23252D;
   --border-card:#262933;
-  --text-primary:#E8E9EC;
-  --text-body:#D5D8E0;
-  --text-secondary:#8A8D98;
-  --text-tertiary:#6B6F7C;
+  --text-primary:#E8E9EC; --text-body:#D5D8E0; --text-secondary:#8A8D98;
   --text-faint:#565A66;
-  --accent:#3478F6;          /* ONE accent means "selected / primary" everywhere */
-  --accent-hover:#2A67DD;    /* hover darkens, as in the app's mockup */
-  --accent-active:#2456C8;   /* pressed — the Insights gradient's deep end-stop family */
-  --link:#7AA2FF;
-  --link-hover:#A3BFFF;
-  --hero-card:#23252D;
-  --reflection:#B0502F;      /* the journal reflection prompt's ember */
-  --audio:#A18DF0;           /* the voice-memo lavender — media affordance, not a type */
+  --accent:#3478F6; --accent-hover:#2A67DD; --accent-active:#2456C8;
+  --link:#7AA2FF; --link-hover:#A3BFFF;
+  --audio:#A18DF0;          /* the voice-memo lavender: a media affordance, not a type */
+  --node:#4682C2;           /* the mark's glacial blue — every graph node, one colour */
+  --insights-deep:#004280;  /* the deep stop of the app's Insights-card gradient */
+  --backdrop-hi:#14161D; --backdrop-lo:#08090C;
+  --abyss:#050609;                      /* the floor: backdrop-lo, one rung down */
 
-  /* The mockup's page backdrop (Iceberg Redesign Mockup): radial #14161D → #08090C. */
-  --backdrop-hi:#14161D;
-  --backdrop-lo:#08090C;
+  /* meaning-bearing — these encode facts about the app, never decoration */
+  --type-note:#5B8DEF; --type-journal:#8B7CF6; --type-book:#F0A35E; --type-capture:#2FA79A;
+  --rel-supports:#00B170; --rel-cites:#9400C1; --rel-contradicts:#DF001D; --rel-related:#565A66;
 
-  /* The four meaning-bearing content-type colors (ContentTypeColor.swift).
-     "Never decorative" in the app; here they appear only on chips and graph nodes. */
-  --type-note:#5B8DEF;
-  --type-journal:#8B7CF6;
-  --type-book:#F0A35E;
-  --type-capture:#2FA79A;
-
-  /* Typed relation hues from the app's CVD-validated RelationPalette
-     (DesignPalette.swift) — used on graph edges and backlink chips only. */
-  --rel-supports:#00B170;
-  --rel-cites:#9400C1;
-  --rel-contradicts:#DF001D;
-  --rel-related:#565A66;     /* untyped link = chrome gray, not a hue */
-
-  /* The mark's glacial blue — the fill of favicon.svg. It is the mark, not a
-     palette slot; nothing else on the page uses it. */
-  --mark-blue:#4682C2;
-}
-
-/* ==== tokens/semantic.css ==== */
-:root{
-  --page:var(--window);
-  --card:var(--raised);
-  --well:var(--inspector);
-
-  --ink:var(--text-primary);
-  --ink-body:var(--text-body);
-  --ink-muted:var(--text-secondary);
-  --ink-dim:var(--text-tertiary);
-  --ink-decor:var(--text-faint);
-  --ink-on-accent:#FFFFFF;
-
-  --hairline:var(--border-subtle);
+  --ink:var(--text-primary); --ink-body:var(--text-body);
+  /* The app's text.tertiary (#6B6F7C) lands at 3.6:1 on this ground, so every
+     text rung here steps up one and tertiary is not carried at all. */
+  --ink-muted:var(--text-secondary); --ink-dim:var(--text-secondary);
+  /* the accent rung that carries white text at AA (4.8:1) */
+  --accent-ink:var(--accent-hover);
+  --ink-on-accent:#fff;
   --hairline-strong:var(--border-card);
-  --focus:var(--link);
-  --selection:rgb(52 120 246 / .26);   /* the app's selection tint sits at .22–.28 */
-  --hover-wash:rgb(255 255 255 / .06); /* the universal hover (HoverHighlight.swift) */
+  --selection:rgb(52 120 246 / .3);
 
-  /* The two approved gradients — the mockup backdrop, and the Insights card's
-     gradient, the ONE tinted gradient the app allows (SidebarWidgetCards.swift).
-     Nothing else gets one. */
-  /* The ground carries the page's depth ramp: a faint band of surface light
-     (accent at 8% — the app's one-gradient rule is not binding on the site,
-     PRODUCT.md) over the mockup's radial. No new hex. */
-  --grad-ground:radial-gradient(90% 480px at 50% 0%,rgb(52 120 246 / .08),transparent 70%),radial-gradient(120% 90% at 50% 0%,var(--backdrop-hi) 0%,var(--backdrop-lo) 100%);
-  --grad-insights:linear-gradient(135deg,var(--accent) 0%,#004280 100%);
-}
-::selection{background:var(--selection)}
-
-/* ==== tokens/typography.css ==== */
-:root{
   --font-ui:'Avenir Next',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,'Twemoji Mozilla',sans-serif;
-  --font-mono:'Maple Mono NF',ui-monospace,'SF Mono',Menlo,monospace;
+  --font-mono:'Maple Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --label:11px; --label-ls:.08em;
+  --weight-strong:600;
 
-  --display-xl:72px;  --display-xl-lh:1.12; --display-xl-ls:-0.025em;
-  --display-hero:60px; /* the two-column hero's cap — 72 overwhelms a half-width column */
-  --display-l:44px;   --display-l-lh:1.1;   --display-l-ls:-0.02em;
-  --title-l:28px;     --title-l-lh:1.2;     --title-l-ls:-0.01em;
-  --title-s:19px;
-  --body-lead:19px;   --body-lead-lh:1.55;
-  --body:16px;        --body-lh:1.65;
-  --body-s:15px;      --body-xs:14px;
-  --mono-s:13px;      --mono-xs:12px;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px;
+  --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-20:80px; --s-24:96px;
+  --r-chip:999px; --r-button:10px; --r-card:16px; --r-lg:22px;
+  --content:1180px; --pad:40px; --pad-md:32px; --pad-sm:20px;
+  --target:44px;
 
-  /* The app's signature label: 11pt semibold UPPERCASE, +0.08em, text.tertiary. */
-  --label:11px;       --label-ls:0.08em;
-
-  --weight-body:400;  --weight-strong:600;   /* 600 = Avenir Next DemiBold */
-  --measure-lead:62ch;
-
-  /* Mobile (<768). Body copy never shrinks below 16. */
-  --display-xl-mobile:38px; --display-l-mobile:30px;
-}
-
-/* ==== tokens/space.css ==== */
-:root{
-  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-6:24px;
-  --s-10:40px; --s-16:64px;
-
-  --pad-card:24px;
-  --gap-card:12px;
-  --gutter:24px;
-  --rhythm-section:96px;
-  --rhythm-hero:120px;
-  --rhythm-section-mobile:56px;
-
-  --page-pad:40px; --page-pad-md:32px; --page-pad-sm:20px;
-  --content-max:1120px;
-
-  /* App radii (DESIGN_RULES.md §4): cards 14, controls 8, chips capsule. */
-  --r-chip:5px; --r-button:8px; --r-card:14px; --r-pill:999px;
-  --target-min:44px;
-}
-
-/* ==== tokens/motion.css ==== */
-:root{
   --ease:cubic-bezier(.2,0,.2,1);
-  --dur-hover:120ms;   /* matches HoverHighlight.swift's 0.12s ease-out */
-  --press-shift:1px;
+  --ease-out:cubic-bezier(.16,1,.3,1);   /* exponential-ish; the page's one curve */
+  --dur:160ms; --dur-slow:640ms;
+
+  /* --- the depth ramp. Every station sets --depth 0..4; fill, rim light and
+         shadow all fall off with it, so a card at the floor is a card at the
+         floor and not a card with a different class. ----------------------*/
+  --depth:0;
+  --glass-fill:rgb(255 255 255 / calc(.062 - var(--depth) * .0092));
+  --glass-rim:calc(.30 - var(--depth) * .045);
+  --glass-blur:calc(26px - var(--depth) * 2px);
+  --glass-shadow:0 24px 60px -28px rgb(0 0 0 / calc(.55 + var(--depth) * .08));
 }
+
+/* ============================ base ====================================== */
+*,*::before,*::after{box-sizing:border-box}
+body,h1,h2,h3,p,ul,ol,figure,figcaption{margin:0}
+ul,ol{padding:0;list-style:none}
+
+html{scroll-behavior:smooth;background:var(--abyss);
+  scrollbar-color:var(--border-card) transparent}
+body{
+  min-height:100vh;
+  color:var(--ink-body);font-family:var(--font-ui);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  caret-color:var(--link);
+  /* the water column itself: surface bloom, then a long fall to the floor */
+  background:
+    radial-gradient(120% 620px at 50% 0%,rgb(52 120 246 / .13),transparent 68%),
+    linear-gradient(180deg,
+      var(--backdrop-hi) 0%,
+      var(--backdrop-lo) 70%,
+      var(--abyss) 100%);
+  /* NOT background-attachment:fixed — a fixed ramp re-runs identically on every
+     screen, so the page never actually gets deeper. This one spans the
+     document, which is the whole thesis. */
+}
+::selection{background:var(--selection);color:var(--ink)}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border-card);border-radius:99px;border:3px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--text-faint);background-clip:content-box}
+
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--link-hover)}
+:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:4px}
+img,svg{display:block}
+em{font-style:italic}
+strong,b{font-weight:var(--weight-strong);color:var(--ink)}
+.mono{font-family:var(--font-mono);font-size:.85em;letter-spacing:0}
+
+.lbl{font-size:var(--label);font-weight:var(--weight-strong);letter-spacing:var(--label-ls);
+     text-transform:uppercase;color:var(--ink-muted)}
+
+.skiplink{position:absolute;left:-9999px;top:0;z-index:100}
+.skiplink:focus{left:14px;top:14px;padding:11px 18px;border-radius:var(--r-chip);
+  background:var(--accent);color:var(--ink-on-accent);font-weight:var(--weight-strong);text-decoration:none}
+
+/* ======================= liquid glass primitive ========================= */
+/* A specific effect, used only where something floats in the water: a
+   specular top rim that fades round the body, backdrop blur with the
+   saturation lift real glass gives, and a shadow with offset and blur. */
+.glass{
+  position:relative;isolation:isolate;border-radius:var(--r-card);
+  background:var(--glass-fill);
+  box-shadow:var(--glass-shadow),inset 0 1px 0 rgb(255 255 255 / calc(var(--glass-rim) * .55));
+}
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
+  .glass{
+    /* the caustic rides in the fill so ::after is free to be the lens */
+    background:
+      radial-gradient(120% 90px at 22% -6%,rgb(255 255 255 / calc(var(--glass-rim) * .30)),transparent 72%),
+      linear-gradient(178deg,rgb(255 255 255 / .045),rgb(255 255 255 / .012) 46%,rgb(0 0 0 / .05));
+    -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.7);
+    backdrop-filter:blur(var(--glass-blur)) saturate(1.7);
+  }
+}
+/* the rim — a 1px gradient stroke, brightest where the light is (top) */
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:2;
+  background:linear-gradient(168deg,
+    rgb(255 255 255 / var(--glass-rim)) 0%,
+    rgb(255 255 255 / calc(var(--glass-rim) * .22)) 34%,
+    rgb(122 162 255 / calc(var(--glass-rim) * .16)) 70%,
+    rgb(255 255 255 / calc(var(--glass-rim) * .30)) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+}
+.glass>*{position:relative;z-index:1}
+
+/* ============================ buttons =================================== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:inherit;font-weight:var(--weight-strong);letter-spacing:-.005em;
+  border:0;border-radius:var(--r-button);text-decoration:none;white-space:nowrap;cursor:pointer;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);
+}
+.btn--lg{height:54px;padding:0 26px;font-size:16px}
+.btn--sm{height:var(--target);padding:0 18px;font-size:15px}
+.btn__meta{font-size:12px;font-weight:400;opacity:.72;letter-spacing:0}
+.btn:active{transform:translateY(1px)}
+
+.btn:hover,.btn:focus{color:inherit}
+.btn--primary{background:var(--accent-ink);color:var(--ink-on-accent);
+  box-shadow:0 10px 26px -12px rgb(36 86 200 / .7),inset 0 1px 0 rgb(255 255 255 / .22)}
+.btn--primary:hover,.btn--primary:active{background:var(--accent-active);color:var(--ink-on-accent)}
+
+.btn--glass{color:var(--ink);background:rgb(255 255 255 / .07);
+  -webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);
+  box-shadow:inset 0 0 0 1px rgb(255 255 255 / .16),inset 0 1px 0 rgb(255 255 255 / .16)}
+.btn--glass:hover,.btn--glass:active{background:rgb(255 255 255 / .12);color:var(--ink)}
+
+.btn--inverse{background:#fff;color:var(--accent-active);box-shadow:0 12px 30px -14px rgb(0 0 0 / .6)}
+.btn--inverse:hover,.btn--inverse:active{background:rgb(255 255 255 / .9);color:var(--accent-active)}
+.btn--outline-inverse{color:#fff;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .45)}
+.btn--outline-inverse:hover,.btn--outline-inverse:active{background:rgb(255 255 255 / .12);color:#fff}
+
+/* App Store links before the listing exists: legible, reachable, and honest
+   about landing nowhere. Deleting data-prelaunch at launch restores them. */
+.btn[data-prelaunch]{opacity:.55;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .1)}
+.btn[data-prelaunch]:hover{opacity:.72}
+.btn[data-prelaunch] .btn__meta{opacity:1;color:var(--ink-dim)}
+
+/* ============================ chips ===================================== */
+/* The app's recipe: the hue at 18% fill, 50% rim, an 8px solid dot. */
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12.5px;font-weight:500;line-height:1;padding:6px 12px;border-radius:var(--r-chip);
+  background:color-mix(in srgb,var(--dot,var(--ink-dim)) 18%,transparent);
+  border:1px solid color-mix(in srgb,var(--dot,var(--ink-dim)) 50%,transparent);
+  color:var(--ink-body);white-space:nowrap;
+}
+.chip::before{content:"";width:8px;height:8px;border-radius:99px;background:var(--dot,var(--ink-dim));flex:none}
+.chip--note{--dot:var(--type-note)} .chip--journal{--dot:var(--type-journal)}
+.chip--book{--dot:var(--type-book)} .chip--capture{--dot:var(--type-capture)}
+.chip--supports{--dot:var(--rel-supports)} .chip--cites{--dot:var(--rel-cites)}
+.chip--contradicts{--dot:var(--rel-contradicts)}
+
+/* legend chips are real controls */
+label.chip{cursor:pointer;user-select:none;transition:opacity var(--dur) var(--ease),background var(--dur) var(--ease)}
+label.chip input{position:absolute;opacity:0;width:0;height:0}
+label.chip:hover{background:color-mix(in srgb,var(--dot) 27%,transparent)}
+label.chip:has(input:not(:checked)){opacity:.38;background:transparent}
+label.chip:has(input:focus-visible){outline:2px solid var(--link);outline-offset:3px}
+
+.dot{width:7px;height:7px;border-radius:99px;background:var(--ink-dim);flex:none}
+.dot--live{background:var(--rel-supports);box-shadow:0 0 0 4px rgb(0 177 112 / .18)}
+
+/* ============================ icons ===================================== */
+.ico{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;
+     stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============================= dock ===================================== */
+.dock{
+  position:fixed;z-index:60;right:22px;bottom:22px;
+  display:flex;align-items:center;gap:var(--s-4);
+  padding:9px 9px 9px var(--s-5);border-radius:var(--r-chip);
+  background:rgb(20 22 29 / .72);
+  -webkit-backdrop-filter:blur(30px) saturate(1.9);backdrop-filter:blur(30px) saturate(1.9);
+  box-shadow:0 26px 60px -24px rgb(0 0 0 / .85),inset 0 0 0 1px rgb(255 255 255 / .12),
+             inset 0 1px 0 rgb(255 255 255 / .2);
+  transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out);
+}
+/* While the graph stage is on screen the dock drops its status line: the
+   collision it used to cause was a width problem, and moving it to the other
+   corner only put it over the beat headings instead. */
+.dock[data-compact=true]{padding-left:var(--s-3)}
+.dock[data-compact=true] .dock__line{display:none}
+.dock[data-state=hidden]{opacity:0;transform:translateY(26px);pointer-events:none}
+.dock__brand{display:flex;flex:none}
+.dock__line{font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap}
+.dock__actions{display:flex;gap:var(--s-2)}
+.dock .btn--sm{height:40px;padding:0 15px;font-size:14px}
+
+/* ============================= hero ===================================== */
+.hero{position:relative;padding:var(--s-24) var(--pad) var(--s-20);overflow:hidden}
+.hero__sky{
+  position:absolute;inset:0 0 auto;height:520px;pointer-events:none;
+  background:
+    radial-gradient(58% 300px at 50% 0%,rgb(122 162 255 / .10),transparent 70%),
+    radial-gradient(30% 160px at 78% 8%,rgb(255 255 255 / .035),transparent 70%);
+}
+.hero__inner{
+  position:relative;z-index:2;max-width:var(--content);margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:var(--s-24) var(--s-16);align-items:center;
+}
+.hero__copy{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-6)}
+.mark{display:flex;align-items:center;gap:var(--s-3)}
+.mark img{width:44px;height:44px}
+.mark span{font-size:26px;font-weight:var(--weight-strong);letter-spacing:-.015em;color:var(--ink)}
+
+.hero__h1{
+  font-size:clamp(38px,4.7vw,64px);line-height:1.06;letter-spacing:-.03em;
+  font-weight:var(--weight-strong);color:var(--ink);text-wrap:pretty;
+}
+.hero__h1 em{font-style:italic;font-weight:400;color:var(--link-hover)}
+.hero__lead{font-size:19px;line-height:1.6;color:var(--ink-body);max-width:52ch}
+.hero__lead strong{color:var(--ink-body)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:var(--s-3)}
+.hero__facts{display:flex;flex-wrap:wrap;gap:var(--s-3) var(--s-6);font-size:14px;color:var(--ink-dim)}
+.hero__facts li{display:flex;align-items:center;gap:var(--s-2)}
+
+/* ---- the on-ramps: five real surfaces, each wearing its own chrome ----- */
+.ramps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-3);
+  align-content:center;isolation:isolate}
+.ramp{
+  position:relative;overflow:hidden;
+  padding:var(--s-4) var(--s-5) var(--s-5);display:flex;flex-direction:column;gap:var(--s-2);
+}
+.ramp--share{grid-column:1 / -1;padding-top:var(--s-5)}
+.ramp__chrome{display:flex;align-items:center;gap:var(--s-2);color:var(--ink);
+  font-weight:var(--weight-strong);font-size:15px;letter-spacing:-.008em}
+.ramp figcaption{font-size:13.5px;line-height:1.5;color:var(--ink-dim)}
+
+/* share sheet — it is a sheet, so it gets a sheet's grabber */
+.ramp__grab{position:absolute;left:50%;top:7px;transform:translateX(-50%);
+  width:34px;height:4px;border-radius:99px;background:rgb(255 255 255 / .22)}
+.ramp--share .ramp__chrome{color:var(--link)}
+.ramp__tag{margin-left:auto;font-size:12px;font-weight:600;letter-spacing:-.005em;
+  color:var(--ink-on-accent);background:var(--accent-ink);padding:4px 10px;border-radius:var(--r-chip)}
+
+/* web clipper — the thing it captures is a URL, so show one */
+.ramp--clip .ramp__chrome{color:var(--type-capture)}
+
+.ramp__url{font-family:var(--font-mono);font-size:11.5px;letter-spacing:0;color:var(--ink-muted);
+  padding:5px 10px;border-radius:7px;background:rgb(255 255 255 / .06);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* voice memo — a live recorder, so it meters and it counts */
+.ramp--voice .ramp__chrome{color:var(--audio)}
+.ramp__rec{display:flex;align-items:center;gap:var(--s-3)}
+.ramp__wave{display:flex;align-items:center;gap:2.5px;height:18px;flex:1;overflow:hidden}
+.ramp__wave i{width:2px;height:4px;border-radius:2px;background:var(--audio);opacity:.45;
+  animation:vu 1.1s var(--ease) 7 alternate both;animation-delay:calc(var(--n,0) * 90ms)}
+.ramp__wave i:nth-child(2n){--n:1} .ramp__wave i:nth-child(3n){--n:2}
+.ramp__wave i:nth-child(4n){--n:3} .ramp__wave i:nth-child(5n){--n:4}
+.ramp__time{font-family:var(--font-mono);font-size:11.5px;color:var(--audio);letter-spacing:0;flex:none}
+@keyframes vu{to{height:14px;opacity:.9}}
+
+/* scan — a viewfinder, so it gets the viewfinder's corners */
+.ramp__frame{position:absolute;inset:var(--s-3);border-radius:9px;pointer-events:none;
+  background:
+    linear-gradient(currentColor,currentColor) 0 0/12px 1px no-repeat,
+    linear-gradient(currentColor,currentColor) 0 0/1px 12px no-repeat,
+    linear-gradient(currentColor,currentColor) 100% 0/12px 1px no-repeat,
+    linear-gradient(currentColor,currentColor) 100% 0/1px 12px no-repeat,
+    linear-gradient(currentColor,currentColor) 0 100%/12px 1px no-repeat,
+    linear-gradient(currentColor,currentColor) 0 100%/1px 12px no-repeat,
+    linear-gradient(currentColor,currentColor) 100% 100%/12px 1px no-repeat,
+    linear-gradient(currentColor,currentColor) 100% 100%/1px 12px no-repeat;
+  color:rgb(240 163 94 / .5)}
+.ramp--scan .ramp__chrome{color:var(--type-book)}
+.ramp--scan{padding-left:var(--s-6);padding-right:var(--s-6)}
+
+/* home screen — a widget tile, so it shows what the widget shows */
+.ramp--widget .ramp__chrome{color:var(--type-journal)}
+.ramp__streak{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--ink-dim)}
+.ramp__streak i{width:11px;height:11px;border-radius:3px;background:rgb(255 255 255 / .08)}
+.ramp__streak i.on{background:color-mix(in srgb,var(--type-journal) 72%,transparent)}
+.ramp__streak span{margin-left:var(--s-2)}
+
+/* ---- the tip ---------------------------------------------------------- */
+/* =========================== the crossing =============================== */
+.waterline{position:relative;height:0;z-index:3}
+.waterline__glass{
+  position:absolute;left:0;right:0;top:-2px;height:88px;pointer-events:none;
+  -webkit-backdrop-filter:blur(7px) saturate(1.5) brightness(1.08);
+  backdrop-filter:blur(7px) saturate(1.5) brightness(1.08);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%,#000 44%,transparent);
+  mask-image:linear-gradient(180deg,transparent,#000 26%,#000 44%,transparent);
+  border-top:1px solid rgb(160 195 255 / .42);
+  background:linear-gradient(180deg,rgb(200 224 255 / .09),rgb(0 66 128 / .1) 40%,transparent);
+}
+.waterline__line{
+  position:absolute;left:50%;top:26px;transform:translateX(-50%);
+  margin:0;max-width:min(92vw,34ch);text-align:center;
+  font-size:clamp(15px,1.5vw,18px);font-weight:500;letter-spacing:.01em;
+  color:rgb(200 220 255 / .62);text-shadow:0 1px 20px rgb(0 0 0 / .6);
+}
+
+/* ============================ stations ================================== */
+main{position:relative;z-index:2;display:flex;flex-direction:column;
+     gap:var(--s-24);padding:150px 0 var(--s-24)}
+.station{max-width:var(--content);margin:0 auto;width:100%;padding:0 var(--pad);
+  display:flex;flex-direction:column;gap:var(--s-10)}
+[data-depth="1"]{--depth:1} [data-depth="2"]{--depth:2}
+[data-depth="3"]{--depth:3} [data-depth="4"]{--depth:4}
+
+.station__head{max-width:62ch;display:flex;flex-direction:column;gap:var(--s-4)}
+.station__head h2,.deep h2{
+  font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.028em;
+  font-weight:var(--weight-strong);color:var(--ink);text-wrap:balance;
+}
+.station__head p{font-size:17.5px;line-height:1.65;color:var(--ink-muted);max-width:66ch}
+.fineprint{font-size:13px;color:var(--ink-dim);max-width:60ch}
+
+/* ---- station 1: capture → note ---------------------------------------- */
+.landing{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.18fr);
+  gap:var(--s-6);align-items:center}
+.landing__arrow{color:var(--ink-dim);width:96px}
+.landing__arrow svg{width:100%;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.55}
+
+.capture,.note{padding:var(--s-6);display:flex;flex-direction:column;gap:var(--s-3)}
+.capture__head,.note__head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3)}
+.capture__head time,.note__meta{font-size:13px;color:var(--ink-dim)}
+.capture__title,.note__title{font-size:20px;font-weight:var(--weight-strong);
+  letter-spacing:-.015em;color:var(--ink);line-height:1.25}
+.capture__body{font-size:16px;line-height:1.6;color:var(--ink-body);
+  border-left:1px solid color-mix(in srgb,var(--type-capture) 55%,transparent);padding-left:var(--s-4)}
+.capture__src{font-family:var(--font-mono);font-size:12px;color:var(--ink-dim);letter-spacing:0}
+.note__body{font-size:16px;line-height:1.7;color:var(--ink-body);max-width:52ch}
+.wikilink{color:var(--link);text-decoration:none;border-bottom:1px solid rgb(122 162 255 / .35)}
+.wikilink:hover{border-bottom-color:var(--link-hover)}
+.note__links{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2);
+  padding-top:var(--s-3);margin-top:var(--s-1);border-top:1px solid rgb(255 255 255 / .07)}
+
+/* ---- station 2: the sticky stage -------------------------------------- */
+.deep{max-width:var(--content);margin:0 auto;width:100%;padding:0 var(--pad);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:var(--s-16);align-items:start}
+.deep__stage{position:sticky;top:max(4vh,40px);order:2}
+.stage{padding:var(--s-4);display:flex;flex-direction:column;gap:var(--s-3);border-radius:var(--r-lg)}
+.stage__bar{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);flex-wrap:wrap}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.stage__hint{font-size:12px;color:var(--ink-dim);white-space:nowrap;
+  transition:opacity var(--dur-slow) var(--ease-out)}
+
+.graph{width:100%;height:auto;touch-action:pan-y;overflow:visible}
+/* Default state is the finished graph — the markup is the graph. Only once
+   app.js has taken over does anything hide, so a blocked script leaves a
+   complete picture rather than an empty frame. */
+.graph__edges line{stroke-width:2;stroke-linecap:round;opacity:.5;
+  transition:opacity 420ms var(--ease-out),stroke-width var(--dur) var(--ease)}
+.graph--staged .graph__edges line{opacity:0}
+.graph--staged .graph__edges line.on{opacity:.5}
+.graph__edges line.lit{stroke-width:3.5;opacity:.95;filter:drop-shadow(0 0 5px currentColor)}
+.graph__nodes g{cursor:grab;opacity:1;transition:opacity 420ms var(--ease-out)}
+.graph--staged .graph__nodes g{opacity:0}
+.graph--staged .graph__nodes g.on{opacity:1}
+.graph__nodes g.dragging{cursor:grabbing}
+.graph__nodes g.muted{opacity:.13}
+.graph__nodes circle{transition:r 260ms var(--ease-out)}
+.graph__nodes text{font-family:var(--font-ui);font-size:11.5px;font-weight:500;
+  fill:var(--ink-muted);text-anchor:middle;pointer-events:none;paint-order:stroke;
+  stroke:rgb(8 9 12 / .8);stroke-width:3px}
+/* the agent's answer, traced on the graph: the cited path stays lit and
+   everything else falls back into the water */
+.graph.lighting .graph__nodes g:not(.lit){opacity:.22}
+.graph.lighting .graph__edges line:not(.lit){opacity:.1}
+.graph__nodes g.lit text{fill:var(--ink);font-weight:600}
+.graph__nodes g.lit circle{stroke:#fff;stroke-width:2.5;
+  filter:drop-shadow(0 0 9px rgb(255 255 255 / .55))}
+.graph__edges line.lit{opacity:1}
+.graph__nodes g.arriving circle{stroke:rgb(255 255 255 / .75);stroke-width:2}
+
+/* the agent's answer, over the stage */
+.answer{display:flex;flex-direction:column;gap:var(--s-3);
+  padding:var(--s-4) var(--s-2) var(--s-1);
+  border-top:1px solid rgb(255 255 255 / .1)}
+.answer[hidden]{display:none}
+.answer p{font-size:14.5px;line-height:1.6;margin-top:var(--s-1)}
+.answer__q p{color:var(--ink)}
+.answer__a p{color:var(--ink-muted)}
+.answer__a b{color:var(--ink);cursor:default;border-bottom:1px dashed rgb(255 255 255 / .3)}
+
+.deep__beats{order:1;display:flex;flex-direction:column;
+  gap:min(30vh,260px);padding:min(16vh,150px) 0 min(30vh,280px)}
+/* The active beat is marked by the rule beside it, never by fading the copy:
+   dimmed body text is a contrast failure wearing a scroll effect. */
+.beat{position:relative;display:flex;flex-direction:column;gap:var(--s-4);padding-left:var(--s-6)}
+.beat::before{content:"";position:absolute;left:0;top:.2em;bottom:.4em;width:1px;
+  background:var(--hairline-strong);transition:background 420ms var(--ease-out)}
+.beat.active::before{background:var(--ink-muted)}
+.beat h3{font-size:clamp(24px,2.5vw,32px);line-height:1.15;letter-spacing:-.022em;
+  font-weight:var(--weight-strong);color:var(--ink);text-wrap:balance}
+.beat p{font-size:17px;line-height:1.65;color:var(--ink-muted);max-width:56ch}
+.beat__cue{font-size:14px !important;color:var(--link) !important}
+.beat__note{font-size:14.5px !important;color:var(--ink-dim) !important;
+  padding-left:var(--s-4);border-left:1px solid rgb(255 255 255 / .1)}
+
+/* ---- station 3: the refusals ------------------------------------------ */
+.station--wide{max-width:var(--content)}
+.refusals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1px;background:rgb(255 255 255 / .07);
+  border-radius:var(--r-lg);overflow:hidden;box-shadow:0 0 0 1px rgb(255 255 255 / .07)}
+.refusals li{padding:var(--s-10) var(--s-8);background:rgb(10 12 17 / .55);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  display:flex;flex-direction:column;gap:var(--s-3);counter-increment:none}
+.refusals h3{font-size:22px;font-weight:var(--weight-strong);letter-spacing:-.018em;
+  color:var(--ink);line-height:1.2;position:relative;padding-left:34px}
+.refusals h3::before{
+  content:"";position:absolute;left:0;top:.34em;width:20px;height:20px;border-radius:99px;
+  background:
+    linear-gradient(45deg,transparent 44%,var(--rel-contradicts) 44% 56%,transparent 56%),
+    linear-gradient(-45deg,transparent 44%,var(--rel-contradicts) 44% 56%,transparent 56%);
+  opacity:.85;
+}
+.refusals p{font-size:15.5px;line-height:1.65;color:var(--ink-muted);padding-left:34px}
+
+/* ---- the floor -------------------------------------------------------- */
+.platforms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-5)}
+.platform{padding:var(--s-8);display:flex;flex-direction:column;gap:var(--s-3)}
+.platform h3{font-size:24px;font-weight:var(--weight-strong);letter-spacing:-.02em;color:var(--ink)}
+.platform__spec{font-family:var(--font-mono);font-size:12px;color:var(--ink-dim);letter-spacing:0}
+.platform p{font-size:15.5px;line-height:1.65;color:var(--ink-muted)}
+.platform__actions{margin-top:auto;padding-top:var(--s-4);display:flex;flex-wrap:wrap;gap:var(--s-2)}
+
+.close{
+  position:relative;margin-top:var(--s-8);padding:var(--s-16) 0 0;
+  border-top:1px solid rgb(255 255 255 / .1);
+  display:flex;flex-direction:column;gap:var(--s-4);align-items:flex-start;
+}
+.close h3{font-size:clamp(30px,4vw,52px);font-weight:var(--weight-strong);
+  letter-spacing:-.03em;line-height:1.05;color:var(--ink);text-wrap:balance;max-width:16ch}
+.close p{font-size:17px;line-height:1.6;color:var(--ink-muted);max-width:58ch}
+.close__actions{display:flex;flex-wrap:wrap;gap:var(--s-3);padding-top:var(--s-4)}
+
+/* ============================= footer =================================== */
+.footer{position:relative;z-index:2;max-width:var(--content);margin:0 auto;width:100%;
+  padding:var(--s-16) var(--pad) var(--s-24);
+  display:flex;gap:var(--s-16);flex-wrap:wrap;align-items:flex-start;
+  border-top:1px solid rgb(255 255 255 / .07)}
+.footer__brand{display:flex;flex-direction:column;gap:var(--s-3)}
+.footer__brand p{font-size:13px;line-height:1.7;color:var(--ink-dim)}
+.footer__cols{display:flex;gap:var(--s-16);margin-left:auto;flex-wrap:wrap}
+.footer__col{display:flex;flex-direction:column}
+.footer__col .lbl{margin-bottom:var(--s-2)}
+.footer__col a{display:inline-flex;align-items:center;min-height:var(--target);
+  font-size:14px;color:var(--ink-muted);text-decoration:none}
+.footer__col a:hover{color:var(--ink)}
+
+/* =========================== responsive ================================= */
+@media (max-width:1180px){
+  :root{--pad:var(--pad-md)}
+  .hero__inner{gap:var(--s-16) var(--s-10)}
+  .deep{gap:var(--s-10)}
+}
+@media (max-width:960px){
+  .hero{padding-top:var(--s-16)}
+  .hero__inner{grid-template-columns:1fr}
+  .ramps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .landing{grid-template-columns:1fr;gap:var(--s-4)}
+  .landing__arrow{width:24px;justify-self:center;transform:rotate(90deg)}
+  .refusals{grid-template-columns:1fr}
+  .platforms{grid-template-columns:1fr}
+  /* the stage stops being a companion and becomes the section's headpiece */
+  .deep{display:flex;flex-direction:column;gap:var(--s-6);align-items:stretch}
+  /* a stretched flex item has no room to stick — it is already as tall as
+     its container */
+  /* opaque: a translucent pinned panel lets the copy scroll through it */
+  .deep__stage{position:sticky;top:0;order:0;z-index:4;
+    padding:var(--s-4) var(--pad) var(--s-3);
+    margin:0 calc(var(--pad) * -1);background:var(--backdrop-lo);
+    box-shadow:0 18px 30px -22px rgb(0 0 0 / .9)}
+  .deep__beats{order:1;padding:var(--s-10) 0 0;gap:min(38vh,300px)}
+  .graph{max-height:34vh}
+  /* inline under its beat, not inside the pinned stage */
+  .beat > .answer{margin-top:var(--s-2)}
+}
+@media (max-width:720px){
+  :root{--pad:var(--pad-sm)}
+  body{font-size:16px}
+  main{gap:var(--s-20);padding-top:120px}
+  .station{gap:var(--s-8)}
+  /* Every rung tightened so a drawn on-ramp clears the fold at 390x844 — the
+     first screen has to carry some of the world, not just the proposition. */
+  .hero{padding-top:var(--s-6)}
+  .hero__inner{gap:var(--s-6)}
+  .hero__copy{gap:var(--s-3)}
+  .hero__h1{font-size:clamp(33px,9vw,44px);line-height:1.08}
+  .hero__lead{font-size:17px;line-height:1.55}
+  .hero__facts{gap:2px var(--s-3);font-size:12.5px;line-height:1.5}
+  .btn--lg{height:50px;font-size:15px}
+  .ramps{grid-template-columns:1fr}
+  .ramp--share{grid-column:auto}
+  .hero__actions .btn{flex:1 1 100%}
+  .refusals li{padding:var(--s-8) var(--s-6)}
+  .close{padding:var(--s-10) var(--s-6)}
+  .close__actions .btn{flex:1 1 100%}
+  .footer{gap:var(--s-10);padding-top:var(--s-12)}
+  .footer__cols{gap:var(--s-10);margin-left:0}
+  /* A full-width bar covers a whole line of copy when it is summoned; the
+     same compact right-anchored pill used at desktop covers a line's tail at
+     worst. */
+  .dock{left:auto;right:var(--s-3);bottom:var(--s-3);padding:7px 7px 7px var(--s-3)}
+  .dock[data-state=hidden]{transform:translateY(26px)}
+  .dock__line{display:none}
+  .dock .btn--sm{height:38px;padding:0 13px;font-size:13.5px}
+  /* the Mac beta link is the least useful control on a phone, and it still
+     lives in "Get it." and in the footer */
+  .dock__actions .btn[data-launch-link="testflight-mac"]{display:none}
+}
+
+/* ============================ motion opt-out ============================ */
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
-
-/* ==== components ==== */
-/* Interaction states live here because hover/active/focus cannot be expressed
-   inline. One curve, one duration, no delays. */
-
-/* --- button ------------------------------------------------------------ */
-.ice-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-ui);font-weight:var(--weight-strong);border-radius:var(--r-button);border:0;background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap;transition:background var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),transform var(--dur-hover) var(--ease)}
-.ice-btn--lg{height:52px;padding:0 24px;font-size:16px}
-.ice-btn--sm{height:44px;padding:0 16px;font-size:15px}
-.ice-btn__meta{font-size:var(--mono-xs);font-weight:400;opacity:.85}
-.ice-btn--primary{background:var(--accent);color:var(--ink-on-accent)}
-.ice-btn--primary:hover{background:var(--accent-hover)}
-.ice-btn--primary:active{background:var(--accent-active);transform:translateY(var(--press-shift))}
-.ice-btn--primary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.ice-btn--secondary{border:1px solid var(--hairline-strong);color:var(--ink)}
-.ice-btn--secondary:hover{background:var(--hover-wash)}
-.ice-btn--secondary:active{background:var(--well);transform:translateY(var(--press-shift))}
-.ice-btn--secondary:focus-visible{outline:none;border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
-/* For use on the one gradient card only. */
-.ice-btn--inverse{background:#fff;color:var(--accent-active)}
-.ice-btn--inverse:hover{background:rgb(255 255 255 / .88)}
-.ice-btn--inverse:active{background:rgb(255 255 255 / .8);transform:translateY(var(--press-shift))}
-.ice-btn--inverse:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.ice-btn:disabled,.ice-btn[aria-disabled=true]{background:transparent;border:1px solid var(--hairline);color:var(--ink-decor);cursor:not-allowed;transform:none}
-
-/* --- label (the app's signature eyebrow) -------------------------------- */
-/* 11pt semibold uppercase, +0.08em tracking — everywhere the app labels a
-   section, and everywhere this page needs small chrome text. The app's role
-   is text.tertiary, but at 11px on this backdrop that lands at 3.5:1; the
-   web page steps up one rung to text.secondary for WCAG AA. */
-.ice-eyebrow{font-family:var(--font-ui);font-size:var(--label);font-weight:var(--weight-strong);letter-spacing:var(--label-ls);text-transform:uppercase;color:var(--ink-muted)}
-
-/* --- chip (status / platform) ------------------------------------------- */
-/* State is chrome + the one accent, as in the app: neutral by default, an
-   accent tint for the live path. No page-only status hues. */
-.ice-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:var(--mono-xs);font-weight:500;padding:5px 12px;border-radius:var(--r-pill);background:var(--well);border:1px solid var(--hairline);color:var(--ink-muted)}
-.ice-badge--accent{background:rgb(52 120 246 / .18);border-color:rgb(52 120 246 / .5);color:var(--link)}
-
-/* --- content-type / relation chip --------------------------------------- */
-/* The app's chip recipe: the hue at ~18% fill, ~50% border, an 8px solid dot. */
-.ice-typechip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-ui);font-size:var(--mono-xs);font-weight:500;padding:4px 12px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--dot,var(--ink-dim)) 18%,transparent);border:1px solid color-mix(in srgb,var(--dot,var(--ink-dim)) 50%,transparent);color:var(--ink-body)}
-.ice-typechip::before{content:"";width:8px;height:8px;border-radius:var(--r-pill);background:var(--dot,var(--ink-dim));flex:none}
-.ice-typechip--note{--dot:var(--type-note)}
-.ice-typechip--journal{--dot:var(--type-journal)}
-.ice-typechip--book{--dot:var(--type-book)}
-.ice-typechip--capture{--dot:var(--type-capture)}
-/* A chip that is also a link (backlink chips traverse to the graph). */
-a.ice-typechip{text-decoration:none;transition:border-color var(--dur-hover) var(--ease),background var(--dur-hover) var(--ease)}
-a.ice-typechip:hover{border-color:color-mix(in srgb,var(--dot,var(--ink-dim)) 80%,transparent);background:color-mix(in srgb,var(--dot,var(--ink-dim)) 26%,transparent)}
-a.ice-typechip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.ice-typechip--supports{--dot:var(--rel-supports)}
-.ice-typechip--cites{--dot:var(--rel-cites)}
-
-/* --- section head -------------------------------------------------------- */
-/* Title + hairline. The app numbers nothing. */
-.ice-sechead{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--hairline);padding-bottom:12px}
-.ice-sechead__title{margin:0;font-family:var(--font-ui);font-size:var(--title-l);line-height:var(--title-l-lh);letter-spacing:var(--title-l-ls);font-weight:var(--weight-strong);color:var(--ink)}
-.ice-sechead__note{margin-left:auto;text-align:right}
-
-/* --- card --------------------------------------------------------------- */
-.ice-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:var(--gap-card)}
-
-/* --- feature card ------------------------------------------------------- */
-.ice-feature{background:var(--card);border:1px solid var(--border-card);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:var(--gap-card)}
-.ice-feature__title{margin:0;font-family:var(--font-ui);font-size:var(--title-s);font-weight:var(--weight-strong);line-height:1.3;color:var(--ink)}
-.ice-feature__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.6;color:var(--ink-muted)}
-
-/* --- callout ------------------------------------------------------------ */
-/* A raised card with a labeled eyebrow — no page-only status colors. Info and
-   ok speak in the accent family; the cautionary note keeps the eyebrow's
-   chrome gray. */
-.ice-callout{background:var(--card);border:1px solid var(--hairline-strong);border-radius:var(--r-card);padding:18px 20px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.ice-callout__label{flex:none}
-.ice-callout__body{margin:0;font-family:var(--font-ui);font-size:var(--body-xs);line-height:1.6;color:var(--ink-muted)}
-.ice-callout--info .ice-callout__label,.ice-callout--ok .ice-callout__label{color:var(--link)}
-
-/* --- note card (a note the way the app renders it — never as code) ------- */
-.ice-note{background:var(--card);border:1px solid var(--border-card);border-radius:var(--r-card);padding:var(--pad-card);display:flex;flex-direction:column;gap:10px;min-width:0}
-.ice-note__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.ice-note__title{margin:0;font-family:var(--font-ui);font-size:var(--title-s);font-weight:var(--weight-strong);color:var(--ink)}
-.ice-note__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.7;color:var(--ink-body);max-width:58ch}
-.ice-note__links{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-top:6px;border-top:1px solid var(--hairline);margin-top:6px}
-.ice-wikilink{color:var(--link);text-decoration:none}
-.ice-wikilink:hover{color:var(--link-hover)}
-
-/* --- CTA card (the ONE tinted gradient, spent as the app spends it) ------ */
-.ice-cta{background:var(--grad-insights);border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:var(--s-3);align-items:flex-start}
-.ice-cta__title{margin:0;font-family:var(--font-ui);font-size:24px;font-weight:var(--weight-strong);letter-spacing:-0.01em;color:#fff}
-.ice-cta__body{margin:0;font-family:var(--font-ui);font-size:var(--body-s);line-height:1.6;color:rgb(255 255 255 / .82);max-width:52ch}
-.ice-cta__actions{display:flex;flex-wrap:wrap;gap:var(--s-3);padding-top:var(--s-2)}
-
-/* --- graph vignette ------------------------------------------------------ */
-.ice-graph{display:block;width:100%;height:auto}
-.ice-graph__label{font-family:var(--font-ui);font-size:11px;font-weight:500;fill:var(--ink-muted);text-anchor:middle}
-.ice-graph__edge{stroke-width:2.5;stroke-linecap:round}
-/* Wikilinks elsewhere on the page land on a node; :target draws its ring —
-   the app's "open in graph", done with fragment navigation alone. */
-.ice-graph__node{scroll-margin-top:var(--s-16)}
-.ice-graph__node:target circle{stroke:var(--ink);stroke-width:2;stroke-opacity:.9}
-.ice-graph__node:target text{fill:var(--ink)}
-
-/* --- footer -------------------------------------------------------------- */
-.ice-footer{background:var(--well);border-top:1px solid var(--hairline);padding:28px var(--page-pad);display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap}
-.ice-footer__brand{display:flex;flex-direction:column;gap:var(--s-2)}
-.ice-footer__brand>img{display:block}
-.ice-footer__meta{font-family:var(--font-ui);font-size:var(--mono-xs);color:var(--ink-muted);line-height:1.7}
-.ice-footer__meta .ice-mono{font-family:var(--font-mono);font-size:var(--label)}
-.ice-footer__repo{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:var(--mono-xs);font-weight:500;color:var(--ink-muted);text-decoration:none;min-height:var(--target-min);transition:color var(--dur-hover) var(--ease)}
-.ice-footer__repo:hover{color:var(--link)}
-.ice-footer__cols{display:flex;gap:48px;margin-left:auto;font-family:var(--font-ui);font-size:var(--body-xs);flex-wrap:wrap}
-/* Links stack with no extra gap: each one's 44px minimum target supplies the
-   visual rhythm itself. */
-.ice-footer__col{display:flex;flex-direction:column;align-items:flex-start;gap:0}
-.ice-footer__head{margin-bottom:var(--s-1)}
-.ice-footer__link{display:inline-flex;align-items:center;min-height:var(--target-min);color:var(--ink-muted);text-decoration:none;transition:color var(--dur-hover) var(--ease)}
-.ice-footer__link:hover{color:var(--ink)}
-
-/* --- skip link ----------------------------------------------------------- */
-.ice-skiplink{position:absolute;left:-9999px;top:0;z-index:50}
-.ice-skiplink:focus{left:12px;top:12px;padding:10px 16px;border-radius:var(--r-pill);background:var(--accent);color:var(--ink-on-accent);font-family:var(--font-ui);font-size:var(--body-xs);font-weight:var(--weight-strong);text-decoration:none}
-
-
-*, *::before, *::after { box-sizing: border-box; }
-body, h1, h2, h3, p, ul, figure { margin: 0; }
-
-html { scroll-behavior: smooth; }
-body {
-  min-height: 100vh;
-  /* The berg artwork bleeds past the viewport edges, so the body clips
-     horizontally instead of growing a scrollbar. */
-  background: var(--grad-ground) no-repeat var(--backdrop-lo);
-  overflow-x: clip;
-  color: var(--ink);
-  font-family: var(--font-ui);
-  font-size: var(--body);
-  line-height: var(--body-lh);
-  -webkit-font-smoothing: antialiased;
-}
-
-.wrap { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 var(--page-pad); }
-
-main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding: var(--s-16) 0 var(--rhythm-section); }
-
-/* ---- the waterline — the page is the iceberg ----
-   The hero floats above this line; everything the product holds sits
-   below it. Sunlight scatters just under the surface, the faceted mass
-   descends behind the content, and the light is gone by the time the
-   scroll reaches the gradient CTA — the deepest point on the page.
-   z-index -1 keeps the whole drawing behind content but above the
-   body's ground. */
-.waterline { position: relative; z-index: -1; height: 0; }
-.waterline::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgb(122 162 255 / .5) 16% 84%, transparent);
-}
-.waterline::after {
-  content: ""; position: absolute; left: 0; right: 0; top: 1px; height: 200px;
-  background: linear-gradient(180deg, rgb(0 66 128 / .16), transparent);
-}
-.waterline__berg {
-  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-  display: block;
-  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
-  mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
-}
-
-/* ---- hero — copy beside the graph, the app's signature image ---- */
-.hero { padding: var(--rhythm-hero) 0 var(--s-16); }
-.hero .wrap {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
-  gap: var(--s-10); align-items: center;
-}
-.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-6); }
-/* Mark and wordmark on one row; the wordmark's line box is the mark's own height. */
-.mark { display: flex; align-items: center; gap: var(--s-3); }
-.mark img { display: block; width: 56px; height: 56px; flex: none; }
-.mark span {
-  font-size: var(--display-l); line-height: 56px; font-weight: var(--weight-strong);
-  letter-spacing: var(--display-l-ls);
-}
-.hero h1 {
-  font-size: clamp(var(--display-xl-mobile), 6vw, var(--display-hero));
-  line-height: var(--display-xl-lh); letter-spacing: var(--display-xl-ls);
-  font-weight: var(--weight-strong); max-width: 16ch;
-}
-.lead { font-size: var(--body-lead); line-height: var(--body-lead-lh); color: var(--ink-muted); max-width: var(--measure-lead); }
-.row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
-.row--tight { gap: var(--s-2); }
-
-/* ---- sections ---- */
-section { display: flex; flex-direction: column; gap: var(--s-6); }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: start; }
-/* Long lines scroll inside their own block instead of widening the column. */
-.grid-3 > *, .grid-2 > * { min-width: 0; }
-.stack { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
-.note-list {
-  margin: 0; padding-left: 18px; font-size: var(--body-s); line-height: 1.7;
-  color: var(--ink-muted); display: flex; flex-direction: column; gap: 6px;
-}
-.card-actions { margin-top: auto; padding-top: var(--s-1); display: flex; flex-wrap: wrap; gap: var(--s-2); }
-
-/* ---- responsive — the phone is the default, not the fallback ---- */
-@media (max-width: 1199px) { .wrap { padding: 0 var(--page-pad-md); } .ice-footer { padding-left: var(--page-pad-md); padding-right: var(--page-pad-md); } }
-@media (max-width: 1023px) {
-  .grid-3 { grid-template-columns: 1fr 1fr; }
-  /* Three equivalent cards on a two-column grid: the last one takes the
-     full row instead of sitting beside an empty cell. */
-  .grid-3 > :last-child { grid-column: 1 / -1; }
-  .grid-3 > :last-child .ice-feature__body { max-width: var(--measure-lead); }
-  .hero .wrap { grid-template-columns: 1fr; }
-  .hero-graph { max-width: 440px; }
-}
-@media (max-width: 767px) {
-  .wrap { padding: 0 var(--page-pad-sm); }
-  .ice-footer { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
-  main { gap: var(--rhythm-section-mobile); padding: var(--s-10) 0 var(--rhythm-section-mobile); }
-  .hero { padding: var(--s-16) 0 var(--s-10); }
-  .mark img { width: 40px; height: 40px; }
-  .mark span { font-size: var(--display-l-mobile); line-height: 40px; }
-  .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .ice-sechead__note { display: none; }
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:1ms !important;animation-iteration-count:1 !important;
+    transition-duration:1ms !important}
+  .beat{opacity:1}
+  .ramp__wave i{height:11px}
 }

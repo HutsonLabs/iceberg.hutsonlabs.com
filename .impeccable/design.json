@@ -1,0 +1,691 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17T00:00:00Z",
+  "title": "Design System: Iceberg",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal Blue",
+        "canonical": "#3478F6",
+        "note": "Transcribed from the app's DesignPalette. Means install; never decorative.",
+        "tonalRamp": [
+          "#0A1730",
+          "#122B58",
+          "#1A3F80",
+          "#2456C8",
+          "#3478F6",
+          "#7AA2FF",
+          "#A3BFFF",
+          "#D8E4FF"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Signal Blue Ink",
+        "canonical": "#2A67DD",
+        "note": "The accent rung that carries white text at 4.8:1. All accent surfaces with white text use this.",
+        "tonalRamp": [
+          "#08142C",
+          "#10214A",
+          "#183069",
+          "#2054A8",
+          "#2A67DD",
+          "#5B8DEF",
+          "#93B4F6",
+          "#CFDEFC"
+        ]
+      },
+      "accent-active": {
+        "role": "primary",
+        "displayName": "Signal Blue Active",
+        "canonical": "#2456C8",
+        "tonalRamp": [
+          "#07122A",
+          "#0F1E45",
+          "#172C63",
+          "#1E44A0",
+          "#2456C8",
+          "#4F7BE0",
+          "#8AA9F0",
+          "#C9D8FA"
+        ]
+      },
+      "link": {
+        "role": "primary",
+        "displayName": "Surfacing Blue",
+        "canonical": "#7AA2FF",
+        "tonalRamp": [
+          "#101A33",
+          "#1C2E55",
+          "#284278",
+          "#3F63B0",
+          "#5B82DE",
+          "#7AA2FF",
+          "#A3BFFF",
+          "#D6E2FF"
+        ]
+      },
+      "link-hover": {
+        "role": "primary",
+        "displayName": "Surfacing Blue Bright",
+        "canonical": "#A3BFFF",
+        "tonalRamp": [
+          "#141C33",
+          "#233055",
+          "#324578",
+          "#4C64AA",
+          "#7089DA",
+          "#A3BFFF",
+          "#C6D6FF",
+          "#E8EFFF"
+        ]
+      },
+      "insights-deep": {
+        "role": "primary",
+        "displayName": "Insights Deep",
+        "canonical": "#004280",
+        "note": "The deep stop of the app's Insights-card gradient. The closing panel's gradient is exactly two stops: accent-ink 0% to this at 100%.",
+        "tonalRamp": [
+          "#00101F",
+          "#001C36",
+          "#00294F",
+          "#003668",
+          "#004280",
+          "#2A73B4",
+          "#6FA6D8",
+          "#C4DDF2"
+        ]
+      },
+      "type-note": {
+        "role": "secondary",
+        "displayName": "Note Blue",
+        "canonical": "#5B8DEF",
+        "note": "Meaning-bearing: the app's Note content type.",
+        "tonalRamp": [
+          "#0C1730",
+          "#152551",
+          "#1E3675",
+          "#2F55AC",
+          "#4372D2",
+          "#5B8DEF",
+          "#94B4F6",
+          "#D3E0FD"
+        ]
+      },
+      "type-journal": {
+        "role": "secondary",
+        "displayName": "Journal Violet",
+        "canonical": "#8B7CF6",
+        "note": "Meaning-bearing: the app's Journal content type.",
+        "tonalRamp": [
+          "#16123A",
+          "#241E5C",
+          "#332B82",
+          "#4C40B4",
+          "#6B5CD8",
+          "#8B7CF6",
+          "#B4AAFA",
+          "#E1DCFE"
+        ]
+      },
+      "type-book": {
+        "role": "secondary",
+        "displayName": "Book Amber",
+        "canonical": "#F0A35E",
+        "note": "Meaning-bearing: the app's Book content type.",
+        "tonalRamp": [
+          "#2E1B08",
+          "#4A2C10",
+          "#6B4118",
+          "#9C5F22",
+          "#C87C36",
+          "#F0A35E",
+          "#F6C495",
+          "#FCE7D2"
+        ]
+      },
+      "type-capture": {
+        "role": "secondary",
+        "displayName": "Capture Teal",
+        "canonical": "#2FA79A",
+        "note": "Meaning-bearing: the app's Capture content type.",
+        "tonalRamp": [
+          "#062220",
+          "#0A3733",
+          "#0F4F49",
+          "#177268",
+          "#219084",
+          "#2FA79A",
+          "#6FC9BF",
+          "#C2EBE6"
+        ]
+      },
+      "audio": {
+        "role": "secondary",
+        "displayName": "Voice Lavender",
+        "canonical": "#A18DF0",
+        "note": "The app's voice-memo hue. Names a media affordance, not a content type: the voice on-ramp's glyph, waveform and running time only.",
+        "tonalRamp": [
+          "#1A1338",
+          "#2A1F5A",
+          "#3B2D80",
+          "#5744B4",
+          "#7A66D4",
+          "#A18DF0",
+          "#C6B8F7",
+          "#E9E3FD"
+        ]
+      },
+      "rel-supports": {
+        "role": "tertiary",
+        "displayName": "Supports Green",
+        "canonical": "#00B170",
+        "note": "Meaning-bearing: the typed relation 'supports'. Doubles as the live status dot.",
+        "tonalRamp": [
+          "#002517",
+          "#003B26",
+          "#005538",
+          "#007B51",
+          "#009A63",
+          "#00B170",
+          "#4FD2A2",
+          "#B6F0DA"
+        ]
+      },
+      "rel-cites": {
+        "role": "tertiary",
+        "displayName": "Cites Violet",
+        "canonical": "#9400C1",
+        "note": "Meaning-bearing: the typed relation 'cites'.",
+        "tonalRamp": [
+          "#20002A",
+          "#340043",
+          "#4B0061",
+          "#6D008F",
+          "#8300AB",
+          "#9400C1",
+          "#C455E0",
+          "#EDC7F6"
+        ]
+      },
+      "rel-contradicts": {
+        "role": "tertiary",
+        "displayName": "Contradicts Red",
+        "canonical": "#DF001D",
+        "note": "Meaning-bearing: the typed relation 'contradicts'. Also draws the refusal list's X mark.",
+        "tonalRamp": [
+          "#2E0006",
+          "#4A000A",
+          "#6B0010",
+          "#9C0017",
+          "#C1001A",
+          "#DF001D",
+          "#F2515F",
+          "#FBC4C9"
+        ]
+      },
+      "rel-related": {
+        "role": "tertiary",
+        "displayName": "Related Grey",
+        "canonical": "#565A66",
+        "note": "Meaning-bearing: the untyped relation 'related'.",
+        "tonalRamp": [
+          "#111318",
+          "#1C1F26",
+          "#282B34",
+          "#3B3F4A",
+          "#494D58",
+          "#565A66",
+          "#898D99",
+          "#CACDD4"
+        ]
+      },
+      "backdrop-hi": {
+        "role": "neutral",
+        "displayName": "Surface Water",
+        "canonical": "#14161D",
+        "tonalRamp": [
+          "#050609",
+          "#0A0B10",
+          "#0F1116",
+          "#14161D",
+          "#252833",
+          "#3B4050",
+          "#767C8E",
+          "#C7CAD3"
+        ]
+      },
+      "backdrop-lo": {
+        "role": "neutral",
+        "displayName": "Deep Water",
+        "canonical": "#08090C",
+        "tonalRamp": [
+          "#050609",
+          "#08090C",
+          "#0D0F14",
+          "#14161D",
+          "#232630",
+          "#3A3E4C",
+          "#757A8B",
+          "#C6C9D2"
+        ]
+      },
+      "abyss": {
+        "role": "neutral",
+        "displayName": "Abyss",
+        "canonical": "#050609",
+        "note": "The only value not transcribed from the app: backdrop-lo taken one rung down, to give the column a floor.",
+        "tonalRamp": [
+          "#020304",
+          "#050609",
+          "#0A0B0F",
+          "#121419",
+          "#212530",
+          "#383D4B",
+          "#73798A",
+          "#C5C8D1"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Ice",
+        "canonical": "#E8E9EC",
+        "tonalRamp": [
+          "#17181A",
+          "#2A2C30",
+          "#3E4045",
+          "#5C5F66",
+          "#8A8D98",
+          "#B4B7BE",
+          "#E8E9EC",
+          "#F7F8F9"
+        ]
+      },
+      "text-body": {
+        "role": "neutral",
+        "displayName": "Body",
+        "canonical": "#D5D8E0",
+        "tonalRamp": [
+          "#141519",
+          "#25272D",
+          "#383B43",
+          "#54585F",
+          "#7E828C",
+          "#AAAEB8",
+          "#D5D8E0",
+          "#F0F1F5"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#8A8D98",
+        "note": "Every text rung stops here or brighter; the app's text.tertiary (#6B6F7C) measures 3.6:1 on this ground and is not carried into the sheet.",
+        "tonalRamp": [
+          "#131418",
+          "#212328",
+          "#2F3138",
+          "#464a53",
+          "#6B6F7C",
+          "#8A8D98",
+          "#B5B8C0",
+          "#E2E3E8"
+        ]
+      },
+      "border-card": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#262933",
+        "tonalRamp": [
+          "#0B0C0F",
+          "#131419",
+          "#1B1D23",
+          "#262933",
+          "#373B47",
+          "#4E5361",
+          "#8A8E9B",
+          "#CFD1D8"
+        ],
+        "note": "Aliased --hairline-strong. Scrollbar thumb at rest and the beat's inactive rule."
+      },
+      "text-faint": {
+        "role": "neutral",
+        "displayName": "Faint",
+        "canonical": "#565A66",
+        "note": "Chrome only, never text: the scrollbar thumb's hover state. The one rung below Muted.",
+        "tonalRamp": [
+          "#101116",
+          "#1B1D22",
+          "#272A31",
+          "#3B3E47",
+          "#565A66",
+          "#7C8090",
+          "#A9ACB6",
+          "#DDDEE3"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero headline only. One per page; its second line is the page's one italic."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Station h2s, capped at 62ch with text-wrap: balance."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Scroll beats beside the graph stage and the closing panel's heading."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "Card headings: platform, refusal, capture and note titles."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The hero's supporting paragraph, max 52ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running copy at 17px (16px below 720px); measure capped 52-66ch by context."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Captions, fine print, footer links, button meta lines."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "The .lbl micro-heading: backlink counts, speaker attributions, footer column headings. Uppercase."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Machine facts only: URLs, clipped sources, platform specs, recorder timestamps. Tracking reset to 0."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-ambient",
+        "value": "0 24px 60px -28px rgb(0 0 0 / calc(.55 + var(--depth) * .08))",
+        "purpose": "The only structural shadow. Every floating glass panel; deepens with the station's depth."
+      },
+      {
+        "name": "glass-rim-inset",
+        "value": "inset 0 1px 0 rgb(255 255 255 / calc(var(--glass-rim) * .55))",
+        "purpose": "The specular top edge inside the glass fill; fades with depth."
+      },
+      {
+        "name": "primary-lift",
+        "value": "0 10px 26px -12px rgb(36 86 200 / .7), inset 0 1px 0 rgb(255 255 255 / .22)",
+        "purpose": "Color-matched glow under the primary install button."
+      },
+      {
+        "name": "dock",
+        "value": "0 26px 60px -24px rgb(0 0 0 / .85), inset 0 0 0 1px rgb(255 255 255 / .12), inset 0 1px 0 rgb(255 255 255 / .2)",
+        "purpose": "The summoned install pill; heaviest on the page because it is closest to the viewer."
+      },
+      {
+        "name": "close-panel",
+        "value": "0 40px 90px -40px rgb(52 120 246 / .55), inset 0 1px 0 rgb(255 255 255 / .28)",
+        "purpose": "The accent panel at the floor, lit by its own color."
+      },
+      {
+        "name": "inflight-card",
+        "value": "0 30px 46px -26px rgb(0 0 0 / .8)",
+        "purpose": "The web-clipper on-ramp while it is off the grid and falling."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.2,0,.2,1)",
+        "purpose": "State changes on controls."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "The page's one expressive curve: arrivals, departures, reveals."
+      },
+      {
+        "name": "dur",
+        "value": "160ms",
+        "purpose": "Button and chip state transitions."
+      },
+      {
+        "name": "dur-slow",
+        "value": "640ms",
+        "purpose": "Dock summon and retreat; hint fades."
+      },
+      {
+        "name": "dur-reveal",
+        "value": "420ms",
+        "purpose": "Graph node and edge reveal, beat rule activation."
+      },
+      {
+        "name": "inflight",
+        "value": "1500ms var(--ease-out) 260ms backwards",
+        "purpose": "Authored moment 1: the web clipper's single descent into the hero. Removed below 720px."
+      },
+      {
+        "name": "spring",
+        "value": "edge force (d - rest) * 0.010, integrated per rAF until energy < 0.06",
+        "purpose": "Authored moment 2: the graph's assembly and the arriving node's flight, performed by simulation rather than a keyframe."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 1ms; transition-duration: 1ms; scroll-behavior: auto",
+        "purpose": "Full opt-out. Staging never runs; the markup's finished state ships."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "content",
+        "value": "1180px",
+        "purpose": "Max content width and the first breakpoint."
+      },
+      {
+        "name": "lg",
+        "value": "1180px",
+        "purpose": "Gutters 40px to 32px; hero and graph column gaps compress."
+      },
+      {
+        "name": "md",
+        "value": "960px",
+        "purpose": "Single column everywhere; the graph stage becomes an opaque pinned headpiece capped at 34vh."
+      },
+      {
+        "name": "sm",
+        "value": "720px",
+        "purpose": "Gutters 20px, body 16px, one-up on-ramps, full-width buttons, dock reduced to a right-anchored pill."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The install affordance. Accent-ink so white text clears 4.8:1; carries an optional meta line naming the platform.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">Join the beta<span class=\"ds-btn-meta\">iPhone &amp; iPad</span></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; height:54px; padding:0 26px; font-family:'Avenir Next',-apple-system,sans-serif; font-size:16px; font-weight:600; letter-spacing:-.005em; border:0; border-radius:10px; text-decoration:none; white-space:nowrap; cursor:pointer; transition:background 160ms cubic-bezier(.2,0,.2,1),box-shadow 160ms cubic-bezier(.2,0,.2,1),transform 160ms cubic-bezier(.2,0,.2,1); } .ds-btn-meta { font-size:12px; font-weight:400; opacity:.72; letter-spacing:0; } .ds-btn-primary { background:var(--accent-ink,#2A67DD); color:#fff; box-shadow:0 10px 26px -12px rgb(36 86 200 / .7), inset 0 1px 0 rgb(255 255 255 / .22); } .ds-btn-primary:hover, .ds-btn-primary:active { background:var(--accent-active,#2456C8); } .ds-btn-primary:active { transform:translateY(1px); } .ds-btn-primary:focus-visible { outline:2px solid var(--link,#7AA2FF); outline-offset:3px; }"
+    },
+    {
+      "name": "Glass Button",
+      "kind": "button",
+      "refersTo": "button-glass",
+      "description": "The secondary on any dark ground: 7% white over a backdrop blur with a 1px inset rim.",
+      "html": "<a class=\"ds-btn ds-btn-glass\" href=\"#\">Join the beta<span class=\"ds-btn-meta\">Mac</span></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; height:54px; padding:0 26px; font-family:'Avenir Next',-apple-system,sans-serif; font-size:16px; font-weight:600; letter-spacing:-.005em; border:0; border-radius:10px; text-decoration:none; white-space:nowrap; cursor:pointer; transition:background 160ms cubic-bezier(.2,0,.2,1),transform 160ms cubic-bezier(.2,0,.2,1); } .ds-btn-meta { font-size:12px; font-weight:400; opacity:.72; letter-spacing:0; } .ds-btn-glass { color:var(--text-primary,#E8E9EC); background:rgb(255 255 255 / .07); -webkit-backdrop-filter:blur(14px) saturate(1.5); backdrop-filter:blur(14px) saturate(1.5); box-shadow:inset 0 0 0 1px rgb(255 255 255 / .16), inset 0 1px 0 rgb(255 255 255 / .16); } .ds-btn-glass:hover, .ds-btn-glass:active { background:rgb(255 255 255 / .12); } .ds-btn-glass:active { transform:translateY(1px); } .ds-btn-glass:focus-visible { outline:2px solid var(--link,#7AA2FF); outline-offset:3px; }"
+    },
+    {
+      "name": "Pre-launch Button",
+      "kind": "button",
+      "refersTo": "button-glass",
+      "description": "A link to a listing that does not exist yet: dimmed, rimmed, honest in its meta label, still keyboard-reachable. Deleting data-prelaunch at launch restores it.",
+      "html": "<a class=\"ds-btn ds-btn-sm ds-btn-glass ds-btn-prelaunch\" href=\"#\">App Store<span class=\"ds-btn-meta\">At launch</span></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:'Avenir Next',-apple-system,sans-serif; font-weight:600; border:0; border-radius:10px; text-decoration:none; white-space:nowrap; cursor:pointer; transition:opacity 160ms cubic-bezier(.2,0,.2,1); } .ds-btn-sm { height:44px; padding:0 18px; font-size:15px; } .ds-btn-meta { font-size:12px; font-weight:400; letter-spacing:0; } .ds-btn-glass { color:var(--text-primary,#E8E9EC); background:rgb(255 255 255 / .07); -webkit-backdrop-filter:blur(14px) saturate(1.5); backdrop-filter:blur(14px) saturate(1.5); } .ds-btn-prelaunch { opacity:.55; box-shadow:inset 0 0 0 1px rgb(255 255 255 / .1); } .ds-btn-prelaunch:hover { opacity:.72; } .ds-btn-prelaunch .ds-btn-meta { opacity:1; color:var(--text-secondary,#8A8D98); } .ds-btn-prelaunch:focus-visible { outline:2px solid var(--link,#7AA2FF); outline-offset:3px; }"
+    },
+    {
+      "name": "Semantic Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "One recipe for both content types and typed relations: the hue at 18% fill, 50% rim, an 8px solid dot. The hue arrives as --dot from a modifier.",
+      "html": "<span class=\"ds-chip ds-chip-note\">Note</span> <span class=\"ds-chip ds-chip-cites\">cites &rarr; Cal Newport, on tools</span> <span class=\"ds-chip ds-chip-contradicts\">contradicts &rarr; Second Brain</span>",
+      "css": ".ds-chip { display:inline-flex; align-items:center; gap:7px; font-family:'Avenir Next',-apple-system,sans-serif; font-size:12.5px; font-weight:500; line-height:1; padding:6px 12px; border-radius:999px; color:var(--text-body,#D5D8E0); white-space:nowrap; background:color-mix(in srgb, var(--dot) 18%, transparent); border:1px solid color-mix(in srgb, var(--dot) 50%, transparent); } .ds-chip::before { content:\"\"; width:8px; height:8px; border-radius:99px; background:var(--dot); flex:none; } .ds-chip-note { --dot:#5B8DEF; } .ds-chip-journal { --dot:#8B7CF6; } .ds-chip-book { --dot:#F0A35E; } .ds-chip-capture { --dot:#2FA79A; } .ds-chip-supports { --dot:#00B170; } .ds-chip-cites { --dot:#9400C1; } .ds-chip-contradicts { --dot:#DF001D; }"
+    },
+    {
+      "name": "Legend Chip (filter control)",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "The same chip as a real checkbox: unchecked drops fill and opacity, so state is never carried by hue alone.",
+      "html": "<label class=\"ds-legend-chip ds-legend-note\"><input type=\"checkbox\" checked>Note</label><label class=\"ds-legend-chip ds-legend-book\"><input type=\"checkbox\">Book</label>",
+      "css": ".ds-legend-chip { position:relative; display:inline-flex; align-items:center; gap:7px; font-family:'Avenir Next',-apple-system,sans-serif; font-size:12.5px; font-weight:500; line-height:1; padding:6px 12px; border-radius:999px; color:var(--text-body,#D5D8E0); cursor:pointer; user-select:none; background:color-mix(in srgb, var(--dot) 18%, transparent); border:1px solid color-mix(in srgb, var(--dot) 50%, transparent); transition:opacity 160ms cubic-bezier(.2,0,.2,1), background 160ms cubic-bezier(.2,0,.2,1); } .ds-legend-chip::before { content:\"\"; width:8px; height:8px; border-radius:99px; background:var(--dot); flex:none; } .ds-legend-chip input { position:absolute; opacity:0; width:0; height:0; } .ds-legend-chip:hover { background:color-mix(in srgb, var(--dot) 27%, transparent); } .ds-legend-chip:has(input:not(:checked)) { opacity:.38; background:transparent; } .ds-legend-chip:has(input:focus-visible) { outline:2px solid var(--link,#7AA2FF); outline-offset:3px; } .ds-legend-note { --dot:#5B8DEF; } .ds-legend-book { --dot:#F0A35E; }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "The one elevation material: fill, a masked 1px specular rim, a caustic in the fill, and a lens band that over-blurs at the border. Set --depth 0..4 to place it in the water.",
+      "html": "<article class=\"ds-glass\"><h3 class=\"ds-glass-title\">iPhone &amp; iPad</h3><p class=\"ds-glass-spec\">Native SwiftUI &middot; iOS &amp; iPadOS</p><p class=\"ds-glass-body\">Capture from anywhere, the daily journal, Home Screen widgets, and the full graph.</p></article>",
+      "css": ".ds-glass { --depth:1; --glass-rim:calc(.30 - var(--depth) * .045); --glass-blur:calc(26px - var(--depth) * 2px); position:relative; isolation:isolate; border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:12px; font-family:'Avenir Next',-apple-system,sans-serif; color:var(--text-body,#D5D8E0); background:radial-gradient(120% 90px at 22% -6%, rgb(255 255 255 / calc(var(--glass-rim) * .30)), transparent 72%), linear-gradient(178deg, rgb(255 255 255 / .045), rgb(255 255 255 / .012) 46%, rgb(0 0 0 / .05)); -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.7); backdrop-filter:blur(var(--glass-blur)) saturate(1.7); box-shadow:0 24px 60px -28px rgb(0 0 0 / calc(.55 + var(--depth) * .08)), inset 0 1px 0 rgb(255 255 255 / calc(var(--glass-rim) * .55)); } .ds-glass::before { content:\"\"; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none; z-index:2; background:linear-gradient(168deg, rgb(255 255 255 / var(--glass-rim)) 0%, rgb(255 255 255 / calc(var(--glass-rim) * .22)) 34%, rgb(122 162 255 / calc(var(--glass-rim) * .16)) 70%, rgb(255 255 255 / calc(var(--glass-rim) * .30)) 100%); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite:exclude; } .ds-glass::after { content:\"\"; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:1; padding:8px; -webkit-backdrop-filter:blur(4px) saturate(2.2) brightness(1.16); backdrop-filter:blur(4px) saturate(2.2) brightness(1.16); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite:exclude; } .ds-glass > * { position:relative; z-index:2; margin:0; } .ds-glass-title { font-size:24px; font-weight:600; letter-spacing:-.02em; color:var(--text-primary,#E8E9EC); } .ds-glass-spec { font-family:'Maple Mono',ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:0; color:var(--text-secondary,#8A8D98); } .ds-glass-body { font-size:15.5px; line-height:1.65; color:var(--text-secondary,#8A8D98); }"
+    },
+    {
+      "name": "Install Dock",
+      "kind": "nav",
+      "refersTo": "dock",
+      "description": "A summoned install affordance, not a header: a glass pill fixed bottom-right that retreats on scroll-down, returns on scroll-up, compacts over the graph stage, and drops to a pill on phones.",
+      "html": "<div class=\"ds-dock\"><span class=\"ds-dock-brand\"></span><p class=\"ds-dock-line\">Beta open on TestFlight</p><div class=\"ds-dock-actions\"><a class=\"ds-dock-btn ds-dock-btn-primary\" href=\"#\">iPhone &amp; iPad</a><a class=\"ds-dock-btn ds-dock-btn-glass\" href=\"#\">Mac</a></div></div>",
+      "css": ".ds-dock { display:inline-flex; align-items:center; gap:16px; padding:9px 9px 9px 20px; border-radius:999px; font-family:'Avenir Next',-apple-system,sans-serif; background:rgb(20 22 29 / .72); -webkit-backdrop-filter:blur(30px) saturate(1.9); backdrop-filter:blur(30px) saturate(1.9); box-shadow:0 26px 60px -24px rgb(0 0 0 / .85), inset 0 0 0 1px rgb(255 255 255 / .12), inset 0 1px 0 rgb(255 255 255 / .2); transition:opacity 640ms cubic-bezier(.16,1,.3,1), transform 640ms cubic-bezier(.16,1,.3,1); } .ds-dock-brand { width:26px; height:26px; border-radius:7px; background:linear-gradient(160deg, rgb(255 255 255 / .5), rgb(122 162 255 / .35)); flex:none; } .ds-dock-line { margin:0; font-size:14px; font-weight:500; color:var(--text-primary,#E8E9EC); white-space:nowrap; } .ds-dock-actions { display:flex; gap:8px; } .ds-dock-btn { display:inline-flex; align-items:center; height:40px; padding:0 15px; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none; transition:background 160ms cubic-bezier(.2,0,.2,1); } .ds-dock-btn-primary { background:#2A67DD; color:#fff; box-shadow:0 10px 26px -12px rgb(36 86 200 / .7), inset 0 1px 0 rgb(255 255 255 / .22); } .ds-dock-btn-primary:hover { background:#2456C8; } .ds-dock-btn-glass { color:var(--text-primary,#E8E9EC); background:rgb(255 255 255 / .07); box-shadow:inset 0 0 0 1px rgb(255 255 255 / .16); } .ds-dock-btn-glass:hover { background:rgb(255 255 255 / .12); } .ds-dock-btn:focus-visible { outline:2px solid #7AA2FF; outline-offset:3px; }"
+    },
+    {
+      "name": "Knowledge Graph Node & Edge",
+      "kind": "custom",
+      "refersTo": "stage-glass",
+      "description": "The graph's atoms: nodes filled with their content-type hue, edges stroked in their relation hue, labels carrying a dark paint-order stroke so they stay legible over edges. Authored in HTML so the graph renders complete with JS blocked.",
+      "html": "<svg class=\"ds-graph\" viewBox=\"0 0 260 140\" role=\"img\" aria-label=\"A capture cites a note, which contradicts a second note.\"><g class=\"ds-graph-edges\" fill=\"none\"><line x1=\"40\" y1=\"40\" x2=\"130\" y2=\"78\" stroke=\"#9400C1\"/><line class=\"lit\" x1=\"130\" y1=\"78\" x2=\"218\" y2=\"36\" stroke=\"#DF001D\" style=\"color:#DF001D\"/></g><g class=\"ds-graph-nodes\"><g transform=\"translate(40 40)\"><circle r=\"16\" fill=\"#2FA79A\"/><text y=\"34\">Clipping</text></g><g class=\"lit\" transform=\"translate(130 78)\"><circle r=\"24\" fill=\"#5B8DEF\"/><text y=\"44\">Tools for Thought</text></g><g transform=\"translate(218 36)\"><circle r=\"18\" fill=\"#5B8DEF\"/><text y=\"-28\">Second Brain</text></g></g></svg>",
+      "css": ".ds-graph { width:100%; height:auto; overflow:visible; } .ds-graph-edges line { stroke-width:2.5; stroke-linecap:round; opacity:.85; transition:opacity 420ms cubic-bezier(.16,1,.3,1), stroke-width 160ms cubic-bezier(.2,0,.2,1); } .ds-graph-edges line.lit { stroke-width:4.5; opacity:1; filter:drop-shadow(0 0 6px currentColor); } .ds-graph-nodes g { cursor:grab; transition:opacity 420ms cubic-bezier(.16,1,.3,1); } .ds-graph-nodes g:active { cursor:grabbing; } .ds-graph-nodes text { font-family:'Avenir Next',-apple-system,sans-serif; font-size:11.5px; font-weight:500; fill:var(--text-secondary,#8A8D98); text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:rgb(8 9 12 / .8); stroke-width:3px; } .ds-graph-nodes g.lit text { fill:var(--text-primary,#E8E9EC); font-weight:600; } .ds-graph-nodes g.lit circle { stroke:#fff; stroke-width:2.5; filter:drop-shadow(0 0 9px rgb(255 255 255 / .55)); }"
+    },
+    {
+      "name": "Scroll Beat",
+      "kind": "custom",
+      "refersTo": "stage-glass",
+      "description": "The narration beside the sticky stage. Active state is carried by the 1px rule alone; the copy never dims, because dimmed body text is a contrast failure wearing a scroll effect.",
+      "html": "<div class=\"ds-beat active\"><h3>It assembles itself.</h3><p>Every capture lands as a typed node and finds its neighbours.</p><p class=\"ds-beat-cue\">The clipping from the top of this page is in there. &rarr;</p></div>",
+      "css": ".ds-beat { position:relative; display:flex; flex-direction:column; gap:16px; padding-left:24px; font-family:'Avenir Next',-apple-system,sans-serif; } .ds-beat::before { content:\"\"; position:absolute; left:0; top:.2em; bottom:.4em; width:1px; background:var(--border-card,#262933); transition:background 420ms cubic-bezier(.16,1,.3,1); } .ds-beat.active::before { background:var(--text-secondary,#8A8D98); } .ds-beat h3 { margin:0; font-size:clamp(24px,2.5vw,32px); line-height:1.15; letter-spacing:-.022em; font-weight:600; color:var(--text-primary,#E8E9EC); text-wrap:balance; } .ds-beat p { margin:0; font-size:17px; line-height:1.65; color:var(--text-secondary,#8A8D98); max-width:56ch; } .ds-beat .ds-beat-cue { font-size:14px; color:var(--link,#7AA2FF); }"
+    },
+    {
+      "name": "Closing Accent Panel",
+      "kind": "card",
+      "refersTo": "close-panel",
+      "description": "The floor of the descent: the one saturated surface on the page, a two-stop gradient from accent-ink to the app's Insights deep, with a corner caustic and the berg's mass bleeding off the right edge.",
+      "html": "<section class=\"ds-close\"><h3>Start below the surface tonight.</h3><p>Install the beta, write one note, link it to a second.</p><div class=\"ds-close-actions\"><a class=\"ds-close-btn ds-close-btn-inverse\" href=\"#\">iPhone &amp; iPad</a><a class=\"ds-close-btn ds-close-btn-outline\" href=\"#\">Mac</a></div></section>",
+      "css": ".ds-close { position:relative; overflow:hidden; border-radius:22px; padding:48px 40px; display:flex; flex-direction:column; gap:16px; align-items:flex-start; font-family:'Avenir Next',-apple-system,sans-serif; background:linear-gradient(135deg, var(--accent-ink,#2A67DD) 0%, var(--insights-deep,#004280) 100%); box-shadow:0 40px 90px -40px rgb(52 120 246 / .55), inset 0 1px 0 rgb(255 255 255 / .28); } .ds-close::after { content:\"\"; position:absolute; inset:0; pointer-events:none; background:radial-gradient(80% 200px at 12% -10%, rgb(255 255 255 / .22), transparent 70%); } .ds-close > * { position:relative; z-index:1; margin:0; } .ds-close h3 { font-size:clamp(24px,2.8vw,34px); font-weight:600; letter-spacing:-.024em; line-height:1.15; color:#fff; text-wrap:balance; } .ds-close p { font-size:16px; line-height:1.6; color:rgb(255 255 255 / .94); max-width:56ch; } .ds-close-actions { display:flex; flex-wrap:wrap; gap:12px; padding-top:8px; } .ds-close-btn { display:inline-flex; align-items:center; height:54px; padding:0 26px; border-radius:10px; font-size:16px; font-weight:600; text-decoration:none; transition:background 160ms cubic-bezier(.2,0,.2,1); } .ds-close-btn-inverse { background:#fff; color:#2456C8; box-shadow:0 12px 30px -14px rgb(0 0 0 / .6); } .ds-close-btn-inverse:hover { background:rgb(255 255 255 / .9); } .ds-close-btn-outline { color:#fff; box-shadow:inset 0 0 0 1px rgb(255 255 255 / .45); } .ds-close-btn-outline:hover { background:rgb(255 255 255 / .12); } .ds-close-btn:focus-visible { outline:2px solid #fff; outline-offset:3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Descent",
+    "overview": "The page is not a surface with sections on it; it is a column of water the visitor falls through. Light, contrast, surface fill and shadow all fall off together as you scroll, so a card near the floor is the same card as one near the waterline, just deeper. Everything floats: glass panels with a specular top edge, a backdrop blur that saturates what is behind them, and a lens band at their border that bends the submerged iceberg drawn behind every station.\n\nThe system is dark-only and almost entirely achromatic. Saturated color is rationed and almost always load-bearing: the four content-type hues and the typed-relation hues are transcriptions of app data, and blue accent carries exactly one job - install. Type is a single family (Avenir Next, self-hosted) worked hard: negative tracking that tightens as size grows, one demibold weight doing all the emphasis, and a mono face reserved for machine facts. The build refuses the PKM-landing-page defaults it was drawn against: no three-icon card row, no screenshot carousel, no feature grid.\n\nDensity is generous but never decorative. Every panel on the page is a thing wearing its own chrome - a share sheet has a grabber, a viewfinder has corners, a recorder meters - rather than a generic card with an icon in it.",
+    "keyCharacteristics": [
+      "Dark-only, depth-graded: one ramp spans the document, not the viewport.",
+      "Liquid Glass as the only elevation material; no drawn borders standing in for it.",
+      "Saturated color means something; grey means chrome.",
+      "One type family, one accent, two authored motion moments on the whole page.",
+      "Every station renders complete with JavaScript blocked."
+    ],
+    "rules": [
+      {
+        "name": "The Mirrored Palette Rule",
+        "body": "Don't invent a hex for this site. Extend the app's palette (DesignPalette.swift, ContentTypeColor.swift) first, then mirror the value here. Every :root color traces to the app; --abyss is the single sanctioned extension and its derivation is written next to it. The rule is enforced by the sheet, not merely asserted: the audit is grep for a hex outside :root, and the only two that may come back are #000 and #fff, which are mask stops and inverse-surface text rather than palette. Everything else is var(--token) or an rgb() / color-mix() derivation of one - and that includes gradient mid-stops, which are interpolations between app values, never new ones. A token also earns its keep: one that nothing references is not a system entry, it is dead weight, and it goes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Meaning-Bearing Color Rule",
+        "body": "The four content-type hues and the four relation hues encode facts about the app. They are semantics, not palette. If a new surface has no note, journal, book, capture or typed relation on it, it gets none of these colors.",
+        "section": "colors"
+      },
+      {
+        "name": "The Rung-Up Rule",
+        "body": "Text steps one rung brighter than the app's mapping, because the app's text.tertiary (#6B6F7C) measures 3.6:1 on this ground. --ink-dim and --ink-muted both resolve to --text-secondary, and tertiary is not carried into the sheet at all. Likewise, accent surfaces carrying white text use --accent-ink, never --accent.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Accent Job Rule",
+        "body": "Blue accent means install. Links are the link hue; everything else is water and grey.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tracking-With-Size Rule",
+        "body": "The bigger the type, the tighter the track: -0.03em at display, -0.022em at title, 0 at body, +0.08em only at 11px label. Never letterspace body copy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono-Means-Machine Rule",
+        "body": "The mono face marks something a machine produced or consumes - a URL, a build spec, a duration. It is never used for emphasis or texture.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Hierarchy is size, weight and tracking. Do not introduce a second display face; the page ships its own woff2 files and no CDN.",
+        "section": "typography"
+      },
+      {
+        "name": "The Depth-Is-Data Rule",
+        "body": "A new section declares data-depth; it never hand-tunes fill, blur or shadow. If it looks wrong at its depth, the ramp is wrong, not the section.",
+        "section": "layout"
+      },
+      {
+        "name": "The Document-Ramp Rule",
+        "body": "The body gradient spans the document and must not be background-attachment: fixed. A fixed ramp re-runs identically on every screen and the page never actually gets deeper.",
+        "section": "layout"
+      },
+      {
+        "name": "The Glass-Is-A-Material Rule",
+        "body": "The glass primitive is three layers and all three are required: a 1px gradient rim drawn with mask-composite: exclude on ::before, a caustic folded into the fill, and a lens band on ::after carrying its own backdrop-filter so the boundary over-blurs and over-saturates what's behind it. A rim highlight alone reads as a drawn outline, not as glass.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No-Substitute-Border Rule",
+        "body": "Elevation is fill, rim and blur. Never add a solid 1px border to a glass panel to define it, and never use a hard, offset or double shadow - the page has one soft ambient family.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Chrome-Belongs-To-The-Thing Rule",
+        "body": "A panel representing a real surface wears that surface's chrome: the share sheet gets a grabber bar, the scanner gets viewfinder corners, the recorder gets a metering waveform and a running time, the widget gets a streak strip. Don't render five different affordances as five identical cards with icons.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Two Moments Rule",
+        "body": "The page authors exactly two moments of motion: the web clipper's single descent into the hero (@keyframes inflight, 1500ms, once, and dropped entirely below 720px), and the graph's assembly with the arriving node's flight - which is performed by the spring simulation itself, not by a keyframe. Anything else that moves is a response to input or is in-content. Do not add a third entrance.",
+        "section": "components"
+      },
+      {
+        "name": "The Full Opt-Out Rule",
+        "body": "prefers-reduced-motion: reduce collapses every animation and transition to 1ms, disables smooth scrolling, and freezes the recorder's waveform at a static height. Staging never runs at all under reduced motion - the markup's finished state is what the visitor gets.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do declare data-depth on a new section and let the ramp compute its glass; that is what makes it part of the column.",
+      "Do mirror the app's palette before adding any color, and record the derivation in a comment when you extend it (as --abyss does).",
+      "Do use --accent-ink for any accent surface carrying white text (4.8:1), and keep every text rung at --text-secondary or brighter.",
+      "Do author interactive content - nodes, edges, coordinates, labels - in the HTML and let the module adopt it, so the section is complete with JS blocked.",
+      "Do give each panel the chrome of the real thing it represents.",
+      "Do keep the page to two authored motion moments and make every animation opt out under prefers-reduced-motion.",
+      "Do cap measure per context (52-66ch) and let text-wrap: balance handle headings.",
+      "Do keep interactive targets at 44px (--target) or larger."
+    ],
+    "donts": [
+      "Don't use background-attachment: fixed on the depth ramp, or re-tune glass values per section instead of setting a depth.",
+      "Don't spend a content-type or relation hue on anything that isn't that content type or that relation.",
+      "Don't write a literal hex anywhere outside :root; #000 and #fff are the only two allowed, and only as mask stops and inverse-surface text.",
+      "Don't reintroduce the app's text.tertiary (#6B6F7C) as a text rung; it is 3.6:1 on this ground. --text-faint is chrome only.",
+      "Don't add a hard, offset or double shadow, or a solid border to a glass panel; there is one soft ambient family and the rim is the border.",
+      "Don't dim body copy to indicate an inactive state - move the indicator to a rule, a dot or a stroke.",
+      "Don't signal state with color alone; the legend chips change fill, opacity and carry a text label.",
+      "Don't introduce a second type family, a webfont CDN, an icon font, or a raster icon; icons are 19px inline SVG strokes at 1.5px.",
+      "Don't hide content behind an entrance animation the module has to undo, and never stage anything when reduced motion is requested.",
+      "Don't add a persistent top navigation bar; the descent is the navigation."
+    ]
+  }
+}

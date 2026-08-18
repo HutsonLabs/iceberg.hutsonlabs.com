@@ -1,2 +1,5 @@
 scratchpad.md
 *DS*
+# Impeccable scratch: review captures and the local screenshot driver
+.impeccable/review/
+.impeccable/*.mjs
