@@ -6,7 +6,10 @@ points people at the TestFlight beta now and the App Store listings at launch.
 
 ## Layout
 
-- `site/` — the whole site: `index.html`, `styles.css`, `app.js`, `assets/`.
+- `site/` — the whole site: `index.html`, `styles.css`, `app.js`, `assets/`, plus
+  `privacy.html`, `support.html` and `terms.html` — the App Store listing's Privacy
+  Policy, Support and License URLs (their copy is mirrored from `site/` in the
+  iceberg repo; change data practices there, in the app, and in App Store Connect together).
   Static, no build step. `app.js` is one dependency-free ES module (the install
   dock, the graph's spring simulation and drag/filter behaviour, and the beat
   observer that drives it). The page renders and reads with JavaScript off; the
